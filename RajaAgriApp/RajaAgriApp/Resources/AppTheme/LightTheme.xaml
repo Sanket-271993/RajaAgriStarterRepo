@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary  xmlns="http://xamarin.com/schemas/2014/forms"            
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     x:Class="RajaAgriApp.Resources.AppTheme.LightTheme">
+
+
+    <Color x:Key="LightGreen">#00feb9</Color>
+    <Color x:Key="NormalLightGreen">#3EA84A</Color>
+    <Color x:Key="RoyalBlue">#000028</Color>
+    <Color x:Key="marine_blue">#003355</Color>
+    <Color x:Key="navy_blue">#00192a</Color>
+    
+    <!--Blue-->
+    <Color x:Key="PrimaryColor">#3377BB</Color>
+    <!--Dark Blue-->
+    <Color x:Key="PrimaryDarkColor">#303F9F</Color>
+    <!--Black-->
+    <Color x:Key="PrimaryTintColor">#000000</Color>
+    <!--White-->
+    <Color x:Key="PageBackgroundColor">#FFFFFF</Color>
+    <!--Green-->
+    <!--  <Color x:Key="NavigationBarColor">#3377BB</Color>-->
+    <!--Dark Grey-->
+    <!-- <Color x:Key="PrimaryTextColor">#3f3f3f</Color>-->
+    <!--Mid Grey-->
+    <Color x:Key="SecondaryTextColor">#515151</Color> 
+    <Color x:Key="TransprantGrayTextColor">#515151BF</Color>
+    <Color x:Key="SecondGrayTextColor">#585858</Color>
+    <Color x:Key="GrayBorderColor">#707070</Color>
+    <Color x:Key="GrayLineColor">#B7B7B7</Color>
+    <Color x:Key="LightGrayLineColor">#E0E0E0</Color>
+    <Color x:Key="ExtraLightGrayLineColor">#f6f6f6</Color>
+    
+    <!--Mid-Light Grey-->
+    <Color x:Key="SubTextColor">#969696</Color> 
+    <!--White-->
+    <Color x:Key="OverlayTextColor">#FFFFFF</Color>
+    <!--Transperant Black-->
+    <Color x:Key="TransperantBackgroundColor">#56000000</Color>
+    <Color x:Key="TransperantBlueColor">#d3e4f5</Color>
+   
+    <!--Silver Light Grey-->
+    <Color x:Key="SeparatorLineColor">#ececec</Color>
+    <Color x:Key="BorderColor">#515151</Color>
+    <Color x:Key="Black">#000000</Color>
+ 
+    <!--White-->
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Red">#e62828</Color>
+    <Color x:Key="Orange">#fc792c</Color>
+    <Color x:Key="OrangeYellow">#ffbb11</Color>
+    <Color x:Key="CerisePink">#ea118d</Color>
+    <Color x:Key="Skyblue">#00aaee</Color>
+    <Color x:Key="Pinkish">#e39f7a</Color>
+    
+</ResourceDictionary>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<page:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:page="http://rotorgames.com"
+              x:Class="RajaAgriApp.PopUpPages.LoadingPopupPage"
+              CloseWhenBackgroundIsClicked="False">
+    <Frame  
+        CornerRadius="10"
+        HeightRequest="120"
+        WidthRequest="100"
+        Padding="20"
+        BackgroundColor="{StaticResource White}"
+        VerticalOptions="CenterAndExpand"
+        HorizontalOptions="CenterAndExpand">
+        <ActivityIndicator
+            Color="{StaticResource PrimaryColor}"
+            IsRunning="True"
+            IsEnabled="True"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            HeightRequest="70"
+            WidthRequest="70"/>
+    </Frame>
+    
+</page:PopupPage>
