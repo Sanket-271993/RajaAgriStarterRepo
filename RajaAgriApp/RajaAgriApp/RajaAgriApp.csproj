@@ -10,6 +10,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Font\Siemens_Sans_Bold.ttf" />
+    <None Remove="Resources\Font\Siemens_Sans_Roman.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Font\Siemens_Sans_Bold.ttf" />
+    <EmbeddedResource Include="Resources\Font\Siemens_Sans_Roman.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="6.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
@@ -26,6 +36,7 @@
 
   <ItemGroup>
     <Folder Include="DataBase\Repo\" />
+    <Folder Include="AppResource\" />
     <Folder Include="Views\" />
   </ItemGroup>
 </Project>

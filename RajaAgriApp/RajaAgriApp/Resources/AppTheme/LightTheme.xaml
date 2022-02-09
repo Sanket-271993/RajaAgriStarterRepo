@@ -5,7 +5,11 @@
 
 
     <Color x:Key="LightGreen">#00feb9</Color>
-    <Color x:Key="NormalLightGreen">#3EA84A</Color>
+    <Color x:Key="TransprentGreen">#d1fff2</Color>
+    <Color x:Key="peacockGreen">#009999</Color>
+    
+
+    <Color x:Key="NormalLightGreen">#00d7a0</Color>
     <Color x:Key="RoyalBlue">#000028</Color>
     <Color x:Key="marine_blue">#003355</Color>
     <Color x:Key="navy_blue">#00192a</Color>
@@ -26,8 +30,9 @@
     <Color x:Key="SecondaryTextColor">#515151</Color> 
     <Color x:Key="TransprantGrayTextColor">#515151BF</Color>
     <Color x:Key="SecondGrayTextColor">#585858</Color>
+    <Color x:Key="LightGrayTextColor">#9999a9</Color>
     <Color x:Key="GrayBorderColor">#707070</Color>
-    <Color x:Key="GrayLineColor">#B7B7B7</Color>
+    <Color x:Key="GrayLineColor">#B7B7B7</Color> 
     <Color x:Key="LightGrayLineColor">#E0E0E0</Color>
     <Color x:Key="ExtraLightGrayLineColor">#f6f6f6</Color>
     

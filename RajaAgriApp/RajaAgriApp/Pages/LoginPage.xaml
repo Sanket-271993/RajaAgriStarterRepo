@@ -8,15 +8,127 @@
              Shell.NavBarHasShadow="False"
              Title="Login"
              x:Class="RajaAgriApp.Pages.LoginPage">
-  
-   
-    <ContentPage.Content>
-        <StackLayout>
-            
-            <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-                <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
-            </StackLayout>
+
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal"
+                     Margin="20,0,20,0">
+            <Label Text="Login" 
+                   Style="{StaticResource LargeBoldLabelStyle}" 
+                   HorizontalOptions="Start" 
+                   VerticalOptions="Center"/>
+            <Image Source="ic_translate"
+                   VerticalOptions="Center"
+                   HeightRequest="25"
+                   WidthRequest="25"
+                   HorizontalOptions="EndAndExpand">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding }"/>
+                </Image.GestureRecognizers>
+            </Image>
         </StackLayout>
-      
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <ScrollView>
+
+                <StackLayout>
+
+                    <StackLayout Margin="0,50" Spacing="15">
+                        <Label Text="Welcome to RAJA" 
+                           Style="{StaticResource LargeBoldLabelStyle}" 
+                           HorizontalOptions="Start" 
+                           VerticalOptions="Center"/>
+                        <Label Text="Kindly enter your mobile number below to get OTP" 
+                           Style="{StaticResource MediumGrayRomanLabelStyle}" 
+                           HorizontalOptions="Start" 
+                           VerticalOptions="Center">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" 
+                                             Binding="{Binding IsOTPVerify}"
+                                             Value="True">
+                                    <Setter Property="Text" Value="Kindly enter the OTP below"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </StackLayout>
+
+
+
+                    <StackLayout Spacing="0" Padding="0" BackgroundColor="{StaticResource TransprentGreen}">
+                        <Label Margin="10"
+                           Text="*Enter your mobile NO" 
+                           Style="{StaticResource MediumGrayRomanLabelStyle}" 
+                           HorizontalOptions="Start" 
+                           VerticalOptions="Center">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" 
+                                             Binding="{Binding IsOTPVerify}"
+                                             Value="True">
+                                    <Setter Property="Text" Value="*Verify  (OTP)"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+
+                        <Entry Keyboard="Telephone"
+                           x:Name="phoneNumberEntry"
+                           MaxLength="10"
+                           Margin="0,0,0,-2"
+                           HorizontalOptions="FillAndExpand"/>
+                        <Frame Padding="0"
+                           Margin="0,-5,0,0"
+                           BackgroundColor="{StaticResource White}"
+                           HasShadow="False"
+                           CornerRadius="0"
+                           HeightRequest="7"
+                           HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                    <StackLayout   Margin="0,50,0,0" 
+                                   Orientation="Horizontal" 
+                                   VerticalOptions="Center">
+                        <Label 
+                            IsVisible="{Binding IsOTPVerify}"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Resend OTP -"
+                                          Style="{StaticResource MediumBlackRomanLabelStyle}" />
+                                    <Span Text="30"
+                                          Style="{StaticResource MediumBlackRomanLabelStyle}"
+                                          TextColor="{StaticResource peacockGreen}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <StackLayout HorizontalOptions="EndAndExpand"
+                                 Padding="20"
+                                 BackgroundColor="{StaticResource LightGreen}"
+                                 WidthRequest="170">
+
+                            <Label Text="Get OTP" 
+                             Style="{StaticResource LargeBoldLabelStyle}" 
+                             HorizontalOptions="Center" 
+                             VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" 
+                                             Binding="{Binding IsOTPVerify}"
+                                             Value="True">
+                                        <Setter Property="Text" Value="verify"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GetOTPCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                    
+                </StackLayout>
+
+               
+            </ScrollView>
+        </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

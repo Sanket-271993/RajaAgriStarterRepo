@@ -7,10 +7,25 @@
     -->
     <Application.Resources>
         <ResourceDictionary Source="Resources/AppTheme/LightTheme.xaml" />
-        <ResourceDictionary>
+       
+
            
-            <Color x:Key="Primary">#2196F3</Color>
-           
-        </ResourceDictionary>        
+            <Style x:Key="LargeBoldLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="TextColor" Value="{DynamicResource RoyalBlue}"/>
+                <Setter Property="FontFamily" Value="SiemensBold"/>
+            </Style>
+            <Style x:Key="MediumGrayRomanLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="{DynamicResource LightGrayTextColor}"/>
+                <Setter Property="FontFamily" Value="SiemensRoman"/>
+            </Style>
+           <Style x:Key="MediumBlackRomanLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="{DynamicResource Black}"/>
+               <Setter Property="FontFamily" Value="SiemensRoman"/>
+           </Style>
+
+
     </Application.Resources>
 </Application>

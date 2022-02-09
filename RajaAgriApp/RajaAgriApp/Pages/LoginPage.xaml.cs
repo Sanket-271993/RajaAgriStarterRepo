@@ -17,5 +17,11 @@ namespace RajaAgriApp.Pages
             InitializeComponent();
             this.BindingContext = new LoginViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            phoneNumberEntry.Focus();
+        }
     }
 }
