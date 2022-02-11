@@ -12,11 +12,15 @@
   <ItemGroup>
     <None Remove="Resources\Font\Siemens_Sans_Bold.ttf" />
     <None Remove="Resources\Font\Siemens_Sans_Roman.ttf" />
+    <None Remove="Resources\Font\Siemens_Slab_Bold.ttf" />
+    <None Remove="Resources\Font\Siemens_Slab_Roman.ttf" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Font\Siemens_Sans_Bold.ttf" />
     <EmbeddedResource Include="Resources\Font\Siemens_Sans_Roman.ttf" />
+    <EmbeddedResource Include="Resources\Font\Siemens_Slab_Bold.ttf" />
+    <EmbeddedResource Include="Resources\Font\Siemens_Slab_Roman.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,14 +33,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Pages\BaseView\BaseView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="PopUpPages\LoadingPopupPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PopUpPages\OTPSuccessPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DataBase\Repo\" />
-    <Folder Include="AppResource\" />
     <Folder Include="Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\BaseView\BaseView.xaml.cs">
+      <DependentUpon>BaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="PopUpPages\OTPSuccessPage.xaml.cs">
+      <DependentUpon>OTPSuccessPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

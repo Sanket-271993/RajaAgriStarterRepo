@@ -4,24 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace RajaAgriApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class BaseView : ContentPage
     {
-        public LoginPage()
+        public BaseView()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            phoneNumberEntry.Focus();
+            this.BindingContext = new BaseViewModel();
         }
     }
 }
