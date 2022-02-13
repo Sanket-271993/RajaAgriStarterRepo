@@ -1,5 +1,6 @@
 ﻿using RajaAgriApp.Pages;
 using RajaAgriApp.PopUpPages;
+using RajaAgriApp.Resources;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Windows.Input;
@@ -53,7 +54,7 @@ namespace RajaAgriApp.ViewModels
         
         public LoginViewModel()
         {
-           
+            Title = AppResource.LoginTitle;
             InitCommand();
             SetdefultAsLogin();
         }

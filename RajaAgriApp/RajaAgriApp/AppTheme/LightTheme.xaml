@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary  xmlns="http://xamarin.com/schemas/2014/forms"            
                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                     x:Class="RajaAgriApp.Resources.AppTheme.LightTheme">
+                     x:Class="RajaAgriApp.AppTheme.LightTheme">
 
 
     <Color x:Key="LightGreen">#00feb9</Color>
@@ -13,6 +13,8 @@
     <Color x:Key="RoyalBlue">#000028</Color>
     <Color x:Key="marine_blue">#003355</Color>
     <Color x:Key="navy_blue">#00192a</Color>
+
+    <Color x:Key="TransprentSkyBlue">#ebf7f8</Color>
     
     <!--Blue-->
     <Color x:Key="PrimaryColor">#3377BB</Color>

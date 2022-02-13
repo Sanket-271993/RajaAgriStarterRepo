@@ -3,6 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:RajaAgriApp.Pages"
        Title="RajaAgriApp"
+       Shell.FlyoutBehavior="Disabled"
        BackgroundColor="{DynamicResource LightGreen}"
        x:Class="RajaAgriApp.AppShell">
     <!--
@@ -15,7 +16,7 @@
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{DynamicResource LightGreen}" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.ForegroundColor" Value="{DynamicResource RoyalBlue}" />
                 <Setter Property="Shell.TitleColor" Value="{DynamicResource RoyalBlue}" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
@@ -79,7 +80,7 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     <FlyoutItem Title="About" Icon="icon_about.png">
-        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:LoginPage}" />
+        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:HomePage}" />
     </FlyoutItem>
     
 

@@ -1,6 +1,7 @@
 ﻿using NavistarOCCApp.Common;
 using RajaAgriApp.AppDependencyService;
 using RajaAgriApp.PopUpPages;
+using RajaAgriApp.Resources;
 using System.Globalization;
 
 using System.Threading;
@@ -17,22 +18,22 @@ namespace RajaAgriApp
 
             DependencyService.Get<IStatusBarColor>().SetColoredStatusBar("#00feb9");
             ProjectSetup.Instance.AppSetup();
-
+            SetUpLang();
 
             MainPage = new AppShell();
             //MainPage = new OTPSuccessPage();
         }
 
 
-        private void SetLang()
+        private void SetUpLang()
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
 
-            CultureInfo language = new CultureInfo("ta");
+            CultureInfo language = new CultureInfo("gu");
             Thread.CurrentThread.CurrentUICulture = language;
    
 
-          //  RajaAgriApp..Culture = language;
+             AppResource.Culture = language;
         }
 
         protected override void OnStart()

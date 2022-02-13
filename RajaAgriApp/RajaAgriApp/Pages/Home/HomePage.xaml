@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:BaseView  xmlns:pages="clr-namespace:RajaAgriApp.Pages" 
+                 xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:resources="clr-namespace:RajaAgriApp.Resources" xmlns:models="clr-namespace:RajaAgriApp.Models"
+                 x:Class="RajaAgriApp.Pages.HomePage"
+                 x:Name="homePage">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem IconImageSource="ic_search"
+                     Order = "Primary"
+                     Command="{Binding SearchCommand}" />
+        <ToolbarItem IconImageSource="ic_bell"
+                     Order = "Primary"
+                     Command="{Binding NotificationCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="ProductDataTemplate" >
+                <StackLayout Padding="10"
+                             x:DataType="models:ProductModel">
+                    <StackLayout HeightRequest="160"
+                             WidthRequest="160"
+                             Padding="12"
+                             BackgroundColor="{StaticResource TransprentSkyBlue}">
+                        <Image Source="{Binding ImageName}"
+                            Aspect="AspectFit"/>
+                    </StackLayout>
+                    <Label 
+                        Margin="0,10,0,0"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding ProductName}"
+                        Style="{StaticResource MediumRoyalBlueRomanLabelStyle}"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.ItemCommand,
+                            Source={x:Reference homePage} }" CommandParameter="{Binding .}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="20,10,20,0">
+            <Frame HorizontalOptions="FillAndExpand"
+                   Padding="15"
+                   CornerRadius="25"
+                   BorderColor="{StaticResource peacockGreen}">
+
+                <Label 
+                    HorizontalOptions="StartAndExpand"
+                    Margin="15,0,0,0"
+                    Text="{x:Static resources:AppResource.LabelLocation}"
+                    Style="{StaticResource MediumPeacockRomanLabelStyle}"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SearchCommand}"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+            <StackLayout >
+
+                <CollectionView ItemsSource="{Binding Products}"
+                                ItemTemplate="{StaticResource ProductDataTemplate}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="2" />
+                    </CollectionView.ItemsLayout>
+                    
+                </CollectionView>
+            </StackLayout>
+          
+        </StackLayout>
+    </ContentPage.Content>
+</pages:BaseView>

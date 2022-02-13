@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RajaAgriApp.Pages;
+using System;
 using Xamarin.Forms;
 
 namespace RajaAgriApp
@@ -8,7 +9,7 @@ namespace RajaAgriApp
         public AppShell()
         {
             InitializeComponent();
-            //Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
+            Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
            // Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
         }
 

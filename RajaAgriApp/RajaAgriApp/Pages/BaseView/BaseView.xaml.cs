@@ -18,5 +18,17 @@ namespace RajaAgriApp.Pages
             InitializeComponent();
             this.BindingContext = new BaseViewModel();
         }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            if (Shell.Current.FlyoutBehavior == FlyoutBehavior.Disabled)
+            {
+                Shell.Current.FlyoutIsPresented = true;
+            }
+            else
+            {
+                Shell.Current.FlyoutIsPresented = false;
+            }
+        }
     }
 }

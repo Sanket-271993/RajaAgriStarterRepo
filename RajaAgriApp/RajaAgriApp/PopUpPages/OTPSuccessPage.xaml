@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <page:PopupPage  xmlns:page="http://rotorgames.com" 
                  xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:resources="clr-namespace:RajaAgriApp.Resources"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                  x:Class="RajaAgriApp.PopUpPages.OTPSuccessPage"
                   CloseWhenBackgroundIsClicked="False">
@@ -15,13 +16,13 @@
         HorizontalOptions="FillAndExpand">
             
             <StackLayout>
-                <Label Text="OTP verified"
+                <Label Text="{x:Static resources:AppResource.LabelOTPVerified}"
                        Margin="0,10"
                    HorizontalOptions="CenterAndExpand"
                    TextTransform="Uppercase"
                    Style="{StaticResource MediumBlackBoldLabelStyle}"/>
                 <Image Source="ic_otp_success"/>
-                <Label Text="successful"
+                <Label Text="{x:Static resources:AppResource.LabelSuccessful}"
                    HorizontalOptions="CenterAndExpand"
                    TextTransform="Uppercase"
                    Style="{StaticResource LargeGreenSiemensSlabBoldLabelStyle}"/>
@@ -29,7 +30,7 @@
                 <Frame Margin="20,30,30,0" 
                        HasShadow="False"
                        BorderColor="{StaticResource peacockGreen}">
-                    <Label Text="OK"
+                    <Label Text="{x:Static resources:AppResource.LabelOk}"
                       HorizontalOptions="CenterAndExpand"
                       TextTransform="Uppercase"
                       Style="{StaticResource LargePeacockGreenBoldLabelStyle}"/>

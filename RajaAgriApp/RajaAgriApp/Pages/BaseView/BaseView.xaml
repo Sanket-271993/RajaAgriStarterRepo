@@ -1,11 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.FlyoutBehavior="Disabled"
              x:Class="RajaAgriApp.Pages.BaseView">
+   
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal"
+                     Spacing="15"
                      Margin="20,0,20,0">
-            <Label Text="Login" 
+            <Image Source="ic_menu"  
+                   IsVisible="{Binding IsMenuVisable}"
+                   HorizontalOptions="Start" 
+                   VerticalOptions="CenterAndExpand">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="{Binding Title}" 
                    Style="{StaticResource LargeBoldLabelStyle}" 
                    HorizontalOptions="Start" 
                    VerticalOptions="Center"/>
@@ -13,6 +24,7 @@
                    VerticalOptions="Center"
                    HeightRequest="25"
                    WidthRequest="25"
+                   IsVisible="{Binding IsTranslateVisable}"
                    HorizontalOptions="EndAndExpand">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding MultiLanguageCommand}"/>

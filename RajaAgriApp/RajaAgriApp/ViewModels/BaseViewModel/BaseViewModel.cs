@@ -19,6 +19,20 @@ namespace RajaAgriApp.ViewModels
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
         }
+        bool _isMenuVisable = false;
+        public bool IsMenuVisable
+        {
+            get { return _isMenuVisable; }
+            set { SetProperty(ref _isMenuVisable, value); }
+        }
+
+        bool _isTranslateVisable = true;
+        public bool IsTranslateVisable
+        {
+            get { return _isTranslateVisable; }
+            set { SetProperty(ref _isTranslateVisable, value); }
+        }
+
 
         string title = string.Empty;
         public string Title

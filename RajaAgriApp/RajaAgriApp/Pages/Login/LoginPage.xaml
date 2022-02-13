@@ -2,6 +2,7 @@
 <pages:BaseView  xmlns:pages="clr-namespace:RajaAgriApp.Pages" 
                  xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:RajaAgriApp.Resources"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
@@ -19,11 +20,11 @@
             <ScrollView>
                 <StackLayout>
                     <StackLayout Margin="0,50" Spacing="15">
-                        <Label Text="Welcome to RAJA" 
+                        <Label Text="{x:Static resources:AppResource.WelcomeToRAJA}" 
                            Style="{StaticResource LargeBoldLabelStyle}" 
                            HorizontalOptions="Start" 
                            VerticalOptions="Center"/>
-                        <Label Text="Kindly enter your mobile number below to get OTP" 
+                        <Label Text="{x:Static resources:AppResource.LabelKindlyEnterYourMobileNo}" 
                            Style="{StaticResource MediumGrayRomanLabelStyle}" 
                            HorizontalOptions="Start" 
                            VerticalOptions="Center">
@@ -31,7 +32,7 @@
                                 <DataTrigger TargetType="Label" 
                                              Binding="{Binding IsOTPVerify}"
                                              Value="True">
-                                    <Setter Property="Text" Value="Kindly enter the OTP below"/>
+                                    <Setter Property="Text" Value="{x:Static resources:AppResource.LabelKindlyEnterTheOTPBelow}"/>
                                 </DataTrigger>
                             </Label.Triggers>
                         </Label>
@@ -51,7 +52,7 @@
                                 <DataTrigger TargetType="Label" 
                                              Binding="{Binding IsOTPVerify}"
                                              Value="True">
-                                    <Setter Property="Text" Value="*Verify  (OTP)"/>
+                                    <Setter Property="Text" Value="{x:Static resources:AppResource.LabelVerifyOTP}"/>
                                 </DataTrigger>
                             </Label.Triggers>
                         </Label>
