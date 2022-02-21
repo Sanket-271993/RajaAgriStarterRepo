@@ -9,9 +9,10 @@ namespace RajaAgriApp
         public AppShell()
         {
             InitializeComponent();
-            
+            Routing.RegisterRoute(nameof(MultiLanguage), typeof(MultiLanguage));
+            Routing.RegisterRoute(nameof(RegistrationPage), typeof(RegistrationPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
-           
             Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
             Routing.RegisterRoute(nameof(ProductDetailsPage), typeof(ProductDetailsPage));
             // Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));

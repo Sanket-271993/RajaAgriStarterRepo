@@ -66,15 +66,6 @@ namespace RajaAgriApp.Pages
             addharStackLayout.BackgroundColor = Color.FromHex("#ebf7f8");
             AadharCardlabel.TextColor = Color.FromHex("#4c4c68");
         }
-
-        private async void ToolbarItem_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MultiLanguage());
-        }
-
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new LoginPage());
-        }
+   
     }
 }

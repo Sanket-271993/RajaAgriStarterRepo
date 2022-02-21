@@ -1,4 +1,5 @@
-﻿using RajaAgriApp.Pages;
+﻿using NavistarOCCApp.Common;
+using RajaAgriApp.Pages;
 using RajaAgriApp.PopUpPages;
 using RajaAgriApp.Resources;
 using Rg.Plugins.Popup.Services;
@@ -13,7 +14,7 @@ namespace RajaAgriApp.ViewModels
         private System.Timers.Timer _timer;
         private int _countSeconds=30;
         private string _recentOTP;
-        public event EventHandler<EventArgs> LoginEvent;
+     
         private bool _isOTPVerify;
         public bool IsOTPVerify
         {
@@ -49,7 +50,7 @@ namespace RajaAgriApp.ViewModels
             set { SetProperty(ref _resendSecond, value); }
         }
 
-        public ICommand LoginCommand { get; set; }
+      
         public ICommand GetOTPCommand { get; set; }
         
         public LoginViewModel()
@@ -61,21 +62,15 @@ namespace RajaAgriApp.ViewModels
 
         private void InitCommand()
         {
-            LoginCommand = new Command(OnLoginClicked);
             GetOTPCommand = new Command(OnGetOTPClick);
-           
         }
 
-        private void SetdefultAsLogin()
+        public void SetdefultAsLogin()
         {
             IsOTPVerify = false;
             IsPhoneNumber = true;
-
-        }
-
-        private void OnMultiLanguageClick(object obj)
-        {
-            //
+            PhoneNumber =-1;
+            OTP = -1;
         }
 
         /// <summary>
@@ -98,6 +93,7 @@ namespace RajaAgriApp.ViewModels
         {
             IsOTPVerify = true;
             IsPhoneNumber = false;
+            OTP = -1;
 
             GenreateOTP();
             SetResendSecond();
@@ -107,6 +103,7 @@ namespace RajaAgriApp.ViewModels
         {
             if(_recentOTP==OTP.ToString())
             {
+                PhoneNumber = -1;
                 SetOTPSuccessFullPopup();
             }
             else
@@ -123,10 +120,9 @@ namespace RajaAgriApp.ViewModels
             await PopupNavigation.Instance.PushAsync(popup);
         }
 
-        private void Popup_OkClick(object sender, EventArgs e)
+        private async void Popup_OkClick(object sender, EventArgs e)
         {
-            LoginEvent.Invoke(this, e);
-            //Navigation new page
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(RegistrationPage)}");
         }
 
         private void GenreateOTP()
@@ -138,12 +134,6 @@ namespace RajaAgriApp.ViewModels
             //Console.WriteLine("New Genreated OTP:" + _recentOTP);
         }
 
-
-        private async void OnLoginClicked(object obj)
-        {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-           await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
-        }
 
        /// <summary>
        /// Set Resend OTP Second

@@ -6,59 +6,76 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             NavigationPage.HasBackButton="False"
-             Title="Login"
+             Shell.NavBarIsVisible="False"
+           
              BackgroundColor="White"
              xmlns:behavior="clr-namespace:RajaAgriApp.Behavior"
              x:Class="RajaAgriApp.Pages.LoginPage">
-    <ContentPage.Resources>
-        <ResourceDictionary >
-            <behavior:EntryLengthValidator x:Key="EntryLengthValidator"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+  
     <ContentPage.Content>
-        <StackLayout Margin="20">
-            <ScrollView>
-                <StackLayout>
-                    <StackLayout Margin="0,50" Spacing="15">
-                        <Label Text="{x:Static resources:AppResource.WelcomeToRAJA}" 
+
+        <StackLayout>
+            <StackLayout Orientation="Horizontal"
+                     Spacing="15"
+                     BackgroundColor="{DynamicResource LightGreen}"
+                     Padding="20,25,20,25">
+                <Label Text="{Binding Title}" 
+                   Style="{StaticResource LargeBoldLabelStyle}" 
+                   HorizontalOptions="Start" 
+                   VerticalOptions="Center"/>
+                <Image Source="ic_translate"
+                   VerticalOptions="Center"
+                   HeightRequest="25"
+                   WidthRequest="25"
+                   IsVisible="{Binding IsTranslateVisable}"
+                   HorizontalOptions="EndAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MultiLanguageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <StackLayout Margin="20">
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout Margin="0,50" Spacing="15">
+                            <Label Text="{x:Static resources:AppResource.WelcomeToRAJA}" 
                            Style="{StaticResource LargeBoldLabelStyle}" 
                            HorizontalOptions="Start" 
                            VerticalOptions="Center"/>
-                        <Label Text="{x:Static resources:AppResource.LabelKindlyEnterYourMobileNo}" 
+                            <Label Text="{x:Static resources:AppResource.LabelKindlyEnterYourMobileNo}" 
                            Style="{StaticResource MediumGrayRomanLabelStyle}" 
                            HorizontalOptions="Start" 
                            VerticalOptions="Center">
-                            <Label.Triggers>
-                                <DataTrigger TargetType="Label" 
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" 
                                              Binding="{Binding IsOTPVerify}"
                                              Value="True">
-                                    <Setter Property="Text" Value="{x:Static resources:AppResource.LabelKindlyEnterTheOTPBelow}"/>
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>
-                    </StackLayout>
+                                        <Setter Property="Text" Value="{x:Static resources:AppResource.LabelKindlyEnterTheOTPBelow}"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </StackLayout>
 
 
 
-                    <StackLayout Spacing="0" 
+                        <StackLayout Spacing="0" 
                                  Padding="0" 
                                  BackgroundColor="{StaticResource TransprentGreen}">
-                        <Label Margin="10"
+                            <Label Margin="10"
                            Text="*Enter your mobile NO" 
                            Style="{StaticResource MediumGrayRomanLabelStyle}" 
                            HorizontalOptions="Start" 
                            VerticalOptions="Center">
-                            <Label.Triggers>
-                                <DataTrigger TargetType="Label" 
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" 
                                              Binding="{Binding IsOTPVerify}"
                                              Value="True">
-                                    <Setter Property="Text" Value="{x:Static resources:AppResource.LabelVerifyOTP}"/>
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>
+                                        <Setter Property="Text" Value="{x:Static resources:AppResource.LabelVerifyOTP}"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
 
-                        <Entry Keyboard="Telephone"
+                            <Entry Keyboard="Telephone"
                            x:Name="phoneNumberEntry"
                            MaxLength="10"
                            IsVisible="{Binding IsPhoneNumber}"
@@ -66,17 +83,17 @@
                            Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
                            Margin="0,0,0,-2"
                            HorizontalOptions="FillAndExpand">
-                            <Entry.Behaviors>
-                                <behavior:EntryLengthValidator MaxLength="10" />
-                            </Entry.Behaviors>
-                            <Entry.Triggers>
-                                <DataTrigger TargetType="Entry" Binding="{Binding PhoneNumber,Mode=TwoWay}"
+                                <Entry.Behaviors>
+                                    <behavior:EntryLengthValidator MaxLength="10" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry" Binding="{Binding PhoneNumber,Mode=TwoWay}"
                                              Value="-1">
-                                    <Setter Property="Text" Value=""/>
-                                </DataTrigger>
-                            </Entry.Triggers>
-                        </Entry>
-                        <Entry Keyboard="Numeric"
+                                        <Setter Property="Text" Value=""/>
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                            <Entry Keyboard="Numeric"
                            x:Name="otpEntry"
                            MaxLength="10"
                            IsVisible="{Binding IsOTPVerify}"
@@ -84,93 +101,96 @@
                            Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
                            Margin="0,0,0,-2"
                            HorizontalOptions="FillAndExpand">
-                            <Entry.Behaviors>
-                                <behavior:EntryLengthValidator MaxLength="4" />
-                            </Entry.Behaviors>
-                            <Entry.Triggers>
-                                <DataTrigger TargetType="Entry" Binding="{Binding OTP,Mode=TwoWay}"
+                                <Entry.Behaviors>
+                                    <behavior:EntryLengthValidator MaxLength="4" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry" Binding="{Binding OTP,Mode=TwoWay}"
                                              Value="-1">
-                                    <Setter Property="Text" Value=""/>
-                                </DataTrigger>
-                            </Entry.Triggers>
-                        </Entry>
-                        <Frame Padding="0"
+                                        <Setter Property="Text" Value=""/>
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                            <Frame Padding="0"
                            Margin="0,-5,0,0"
                            BackgroundColor="{StaticResource White}"
                            HasShadow="False"
                            CornerRadius="0"
                            HeightRequest="7"
                            HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                    <StackLayout Margin="0,50,0,0" 
+                        </StackLayout>
+                        <StackLayout Margin="0,50,0,0" 
                                  Orientation="Horizontal" 
                                  VerticalOptions="Center">
-                        <Label 
+                            <Label 
                             IsVisible="{Binding IsOTPVerify}"
                             VerticalTextAlignment="Center"
                             HorizontalOptions="Start" 
                             VerticalOptions="Center">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Resend OTP -"
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static resources:AppResource.LabelResendOTP}"
                                           Style="{StaticResource MediumBlackRomanLabelStyle}" />
-                                    <Span Text="{Binding ResendSecond,Mode=TwoWay}"
+                                        <Span Text="{Binding ResendSecond,Mode=TwoWay}"
                                           Style="{StaticResource MediumBlackRomanLabelStyle}"
                                           TextColor="{StaticResource peacockGreen}"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <StackLayout HorizontalOptions="EndAndExpand"
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout HorizontalOptions="EndAndExpand"
                                  Padding="20"
                                  IsEnabled="False"
                                  Opacity="0.5"
                                  BackgroundColor="{StaticResource LightGreen}"
                                  WidthRequest="170">
-                            <Label Text="Get OTP" 
+                                <Label Text="Get OTP" 
                                  Style="{StaticResource LargeBoldLabelStyle}" 
                                  HorizontalOptions="Center" 
                                  VerticalOptions="Center">
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label" 
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" 
                                              Binding="{Binding IsOTPVerify}"
                                              Value="True">
-                                        <Setter Property="Text" Value="verify"/>
-                                        <Setter Property="IsEnabled" Value="False"/>
-                                        <Setter Property="Opacity" Value="0.5"/>
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                            </StackLayout.GestureRecognizers>
-                            <StackLayout.Triggers>
-                                <DataTrigger TargetType="StackLayout"  
+                                            <Setter Property="Text" Value="verify"/>
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                            <Setter Property="Opacity" Value="0.5"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer  Command="{Binding GetOTPCommand}"/>
+                                </StackLayout.GestureRecognizers>
+                                <StackLayout.Triggers>
+                                    <DataTrigger TargetType="StackLayout"  
                                              Binding="{Binding Source={x:Reference phoneNumberEntry},
                                              Path=Text.Length}" 
                                              Value="10">
-                                    <Setter Property="IsEnabled" Value="True"/>
-                                    <Setter Property="Opacity" Value="1"/>
-                                </DataTrigger>
-                                <MultiTrigger TargetType="StackLayout">
-                                    <MultiTrigger.Conditions>
-                                        <BindingCondition Binding="{Binding Source={x:Reference otpEntry},
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </DataTrigger>
+                                    <MultiTrigger TargetType="StackLayout">
+                                        <MultiTrigger.Conditions>
+                                            <BindingCondition Binding="{Binding Source={x:Reference otpEntry},
                                       Path=Text.Length}"
                                       Value="4" />
-                                        <BindingCondition  Binding="{Binding IsOTPVerify}"
+                                            <BindingCondition  Binding="{Binding IsOTPVerify}"
                                              Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <Setter Property="IsEnabled" Value="True"/>
-                                    <Setter Property="Opacity" Value="1"/>
-                                </MultiTrigger>
-                            </StackLayout.Triggers>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </MultiTrigger>
+                                </StackLayout.Triggers>
+                            </StackLayout>
                         </StackLayout>
+
                     </StackLayout>
 
-                </StackLayout>
 
-
-            </ScrollView>
+                </ScrollView>
+            </StackLayout>
         </StackLayout>
+            
+     
 
     </ContentPage.Content>
 </ContentPage>

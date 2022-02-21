@@ -11,7 +11,10 @@
         <Style x:Key="languageButtonStyle" TargetType="Button">
             <Setter Property="BorderColor" Value="#000028" />
             <Setter Property="CornerRadius" Value="22" />
-            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="{DynamicResource RoyalBlue}"/>
+            <Setter Property="FontFamily" Value="SiemensRoman"/>
         </Style>
         <Style x:Key="ExtraLargePeacockGreenBoldLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="28"/>

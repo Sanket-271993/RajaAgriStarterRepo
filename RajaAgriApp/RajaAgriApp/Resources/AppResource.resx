@@ -156,6 +156,9 @@
   <data name="LabelOTPVerified" xml:space="preserve">
     <value>OTP verified</value>
   </data>
+  <data name="LabelResendOTP" xml:space="preserve">
+    <value>Resend OTP -</value>
+  </data>
   <data name="LabelReview" xml:space="preserve">
     <value>Review</value>
   </data>
@@ -173,6 +176,12 @@
   </data>
   <data name="TitleHome" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="TitleLanguagePage" xml:space="preserve">
+    <value>Select your App language</value>
+  </data>
+  <data name="TitleRegistrationPage" xml:space="preserve">
+    <value>Registration Page</value>
   </data>
   <data name="WelcomeToRAJA" xml:space="preserve">
     <value>Welcome to RAJA</value>

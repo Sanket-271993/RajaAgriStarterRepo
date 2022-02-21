@@ -8,29 +8,48 @@
              mc:Ignorable="d"
              BackgroundColor="white"
              Title="Registration Page"
-             NavigationPage.HasBackButton="False"
+             Shell.NavBarIsVisible="False"
              xmlns:behavior="clr-namespace:RajaAgriApp.Behavior"
              x:Class="RajaAgriApp.Pages.RegistrationPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="ToolbarItem_Clicked" IconImageSource="ic_translate"/>
-    </ContentPage.ToolbarItems>
+   
     <ContentPage.Content>
+
         <StackLayout>
-            <ScrollView>
-                <StackLayout Padding="20">
-                    <StackLayout Spacing="0" 
+            <StackLayout Orientation="Horizontal"
+                     Spacing="15"
+                     BackgroundColor="{DynamicResource LightGreen}"
+                     Padding="20,25,20,25">
+                <Label Text="{Binding Title}" 
+                   Style="{StaticResource LargeBoldLabelStyle}" 
+                   HorizontalOptions="Start" 
+                   VerticalOptions="Center"/>
+                <Image Source="ic_translate"
+                   VerticalOptions="Center"
+                   HeightRequest="25"
+                   WidthRequest="25"
+                   IsVisible="{Binding IsTranslateVisable}"
+                   HorizontalOptions="EndAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MultiLanguageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <StackLayout>
+                <ScrollView>
+                    <StackLayout Padding="20">
+                        <StackLayout Spacing="0" 
                          Padding="0" 
                          x:Name="nameStackLayout"
                          BackgroundColor="{StaticResource ExtraTransprentGreen}">
-                        <Label Margin="10"
-                       x:Name="namelabel"
+                            <Label Margin="10"
+                            x:Name="namelabel"
                            Text="{x:Static resources:AppResource.LabelEnterYourName}" 
                            Style="{StaticResource SmallPurpalRomanLabelStyle}" 
                            HorizontalOptions="Start" 
                            VerticalOptions="Center"/>
 
 
-                        <Entry 
+                            <Entry 
                            x:Name="nameEntry"
                            MaxLength="10"
                            ReturnType="Next"
@@ -41,26 +60,26 @@
                            Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
                            Margin="0,0,0,-2"
                            HorizontalOptions="FillAndExpand"/>
-                        <Frame Padding="0"
+                            <Frame Padding="0"
                            Margin="0,-5,0,0"
                            BackgroundColor="{StaticResource White}"
                            HasShadow="False"
                            CornerRadius="0"
                            HeightRequest="7"
                            HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                    <StackLayout Spacing="0" 
-                          x:Name="pinCodeStackLayout"
+                        </StackLayout>
+                        <StackLayout Spacing="0" 
+                                x:Name="pinCodeStackLayout"
                                  Padding="0" 
                                  BackgroundColor="{StaticResource ExtraTransprentGreen}">
-                        <Label Margin="10"
-                       x:Name="pincodelabel"
+                            <Label Margin="10"
+                            x:Name="pincodelabel"
                            Text="{x:Static resources:AppResource.LabelEnterPinCode}" 
                            Style="{StaticResource SmallPurpalRomanLabelStyle}" 
                            HorizontalOptions="Start" 
                            VerticalOptions="Center"/>
 
-                        <Entry 
+                            <Entry 
                            x:Name="pinCodeEntry"
                            ReturnType="Next"
                            Focused="pinCodeEntry_Focused"
@@ -70,30 +89,30 @@
                            Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
                            Margin="0,0,0,-2"
                            HorizontalOptions="FillAndExpand">
-                            <Entry.Behaviors>
-                                <behavior:EntryPinCodeValidator MaxLength="5" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Frame Padding="0"
+                                <Entry.Behaviors>
+                                    <behavior:EntryPinCodeValidator MaxLength="5" />
+                                </Entry.Behaviors>
+                            </Entry>
+                            <Frame Padding="0"
                            Margin="0,-5,0,0"
                            BackgroundColor="{StaticResource White}"
                            HasShadow="False"
                            CornerRadius="0"
                            HeightRequest="7"
                            HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                    <StackLayout Spacing="0" 
+                        </StackLayout>
+                        <StackLayout Spacing="0" 
                          x:Name="landMarkStackLayout"
                          Padding="0" 
                          BackgroundColor="{StaticResource ExtraTransprentGreen}">
-                        <Label Margin="10"
+                            <Label Margin="10"
                            x:Name="landMarklabel"
                            Text="{x:Static resources:AppResource.LabelLandmark}" 
                            Style="{StaticResource SmallPurpalRomanLabelStyle}" 
                            HorizontalOptions="Start" 
                            VerticalOptions="Center"/>
 
-                        <Entry 
+                            <Entry 
                            x:Name="landMarkEntry"
                            ReturnType="Next"
                            Focused="landMarkEntry_Focused"
@@ -103,65 +122,67 @@
                            Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
                            Margin="0,0,0,-2"
                            HorizontalOptions="FillAndExpand"/>
-                        <Frame Padding="0"
+                            <Frame Padding="0"
                            Margin="0,-5,0,0"
                            BackgroundColor="{StaticResource White}"
                            HasShadow="False"
                            CornerRadius="0"
                            HeightRequest="7"
                            HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                    <StackLayout Spacing="0" 
+                        </StackLayout>
+                        <StackLayout Spacing="0" 
                          x:Name="addharStackLayout"
                          Padding="0" 
                          BackgroundColor="{StaticResource ExtraTransprentGreen}">
-                        <Label Margin="10"
+                            <Label Margin="10"
                            x:Name="AadharCardlabel"
                            Text="{x:Static resources:AppResource.LabelAadharCardAddress}" 
                            Style="{StaticResource SmallPurpalRomanLabelStyle}" 
                            HorizontalOptions="Start" 
                            VerticalOptions="Center"/>
 
-                        <Editor 
+                            <Editor 
                            x:Name="adharCardAddressEditor"
                            HeightRequest="150"
+                               
                            Focused="adharCardAddressEditor_Focused"
                            Unfocused="adharCardAddressEditor_Unfocused"
-                           
                            Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
                            Margin="0,0,0,-2"
                            HorizontalOptions="FillAndExpand"/>
 
-                        <Frame Padding="0"
+                            <Frame Padding="0"
                            Margin="0,-5,0,0"
                            BackgroundColor="{StaticResource White}"
                            HasShadow="False"
                            CornerRadius="0"
                            HeightRequest="7"
                            HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                    <Image Source="ic_camera"
-                   Margin="0,10"
-                   HorizontalOptions="FillAndExpand" 
-                   HeightRequest="150">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding FilePickerCommand}"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                    <StackLayout  HorizontalOptions="FillAndExpand"
+                        </StackLayout>
+                        <Image Source="ic_camera"
+                           Margin="0,10"
+                           HorizontalOptions="FillAndExpand" 
+                           HeightRequest="150">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding FilePickerCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <StackLayout  HorizontalOptions="FillAndExpand"
                                       VerticalOptions="EndAndExpand" 
                                       Padding="20"
                                       Margin="0,20,0,0"
                                       BackgroundColor="{StaticResource LightGreen}" >
-                        <Label Text="{x:Static resources:AppResource.ButtonSubmit}"
+                            <Label Text="{x:Static resources:AppResource.ButtonSubmit}"
                                    HorizontalTextAlignment="Center" 
                                    Style="{StaticResource LargeBoldLabelStyle}"/>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                        </StackLayout.GestureRecognizers>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OnSubmitCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-            </ScrollView>
+                </ScrollView>
+            </StackLayout>
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

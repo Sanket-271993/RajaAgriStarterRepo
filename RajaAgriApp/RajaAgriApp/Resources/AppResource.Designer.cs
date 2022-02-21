@@ -178,6 +178,15 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resend OTP -.
+        /// </summary>
+        public static string LabelResendOTP {
+            get {
+                return ResourceManager.GetString("LabelResendOTP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Review.
         /// </summary>
         public static string LabelReview {
@@ -228,6 +237,24 @@ namespace RajaAgriApp.Resources {
         public static string TitleHome {
             get {
                 return ResourceManager.GetString("TitleHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select your App language.
+        /// </summary>
+        public static string TitleLanguagePage {
+            get {
+                return ResourceManager.GetString("TitleLanguagePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration Page.
+        /// </summary>
+        public static string TitleRegistrationPage {
+            get {
+                return ResourceManager.GetString("TitleRegistrationPage", resourceCulture);
             }
         }
         

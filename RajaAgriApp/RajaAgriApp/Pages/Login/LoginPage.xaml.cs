@@ -17,32 +17,29 @@ namespace RajaAgriApp.Pages
         {
             InitializeComponent();
             loginViewModel= new LoginViewModel();
-            loginViewModel.LoginEvent += LoginViewModel_LoginEvent;
+         
             this.BindingContext = loginViewModel;
         }
 
-        private async void LoginViewModel_LoginEvent(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new HomePage());
-        }
-
+        
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            loginViewModel.SetdefultAsLogin();
             phoneNumberEntry.Focus();
             otpEntry.Focus();
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+
+        protected override bool OnBackButtonPressed()
         {
-            if (!loginViewModel.IsOTPVerify)
+            if(loginViewModel.IsOTPVerify)
             {
-                loginViewModel.GetOTP();
+                loginViewModel.SetdefultAsLogin();
+                return true;
             }
-            else
-            {
-                loginViewModel.VerifyOTP();
-            }
+
+            return base.OnBackButtonPressed();
         }
     }
 }

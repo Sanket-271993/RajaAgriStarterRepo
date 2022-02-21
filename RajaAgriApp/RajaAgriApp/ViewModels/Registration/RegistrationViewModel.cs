@@ -1,5 +1,8 @@
-﻿using Plugin.FilePicker;
+﻿using NavistarOCCApp.Common;
+using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
+using RajaAgriApp.Pages;
+using RajaAgriApp.Resources;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,12 +17,9 @@ namespace RajaAgriApp.ViewModels
         public  ICommand FilePickerCommand { get; set; }
         public ICommand OnSubmitCommand { get; set; }
 
-        public new ICommand MultiLanguageCommand { get; set; }
-
-        
         public RegistrationViewModel()
         {
-            Title = "Registration Page";
+            Title = AppResource.TitleRegistrationPage;
             InitCommand();
         }
 
@@ -27,17 +27,12 @@ namespace RajaAgriApp.ViewModels
         {
             FilePickerCommand = new Command(FilePickerClick);
             OnSubmitCommand=new Command(OnSubmitClick);
-            MultiLanguageCommand = new Command(OnMultiLangClick);
         }
 
-        private void OnMultiLangClick(object obj)
+        
+        private async void OnSubmitClick(object obj)
         {
-           //
-        }
-
-        private void OnSubmitClick(object obj)
-        {
-           //
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(HomePage)}");
         }
 
         private void FilePickerClick(object obj)

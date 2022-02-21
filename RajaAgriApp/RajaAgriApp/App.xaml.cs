@@ -21,10 +21,10 @@ namespace RajaAgriApp
             ProjectSetup.Instance.AppSetup();
            // SetUpLang();
 
-           //MainPage = new AppShell();
-           MainPage =new NavigationPage(new SplashPage());
-            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.FromHex("#00feb9");
-            ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.FromHex("#000028");
+           MainPage = new AppShell();
+          // MainPage =new NavigationPage(new SplashPage());
+           // ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.FromHex("#00feb9");
+           // ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.FromHex("#000028");
         }
 
 

@@ -1,4 +1,6 @@
-﻿using RajaAgriApp.Models;
+﻿using NavistarOCCApp.Common;
+using RajaAgriApp.Models;
+using RajaAgriApp.Pages;
 using RajaAgriApp.Services;
 using System;
 using System.Collections.Generic;
@@ -11,8 +13,6 @@ namespace RajaAgriApp.ViewModels
 {
     public class BaseViewModel : BaseNotifyPropertyChanged
     {
-       
-
         bool isBusy = false;
         public bool IsBusy
         {
@@ -53,9 +53,9 @@ namespace RajaAgriApp.ViewModels
             MultiLanguageCommand = new Command(OnMultiLanguageClick);
         }
 
-        private void OnMultiLanguageClick(object obj)
+        private async void OnMultiLanguageClick(object obj)
         {
-            //
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(MultiLanguage)}");
         }
     }
 
