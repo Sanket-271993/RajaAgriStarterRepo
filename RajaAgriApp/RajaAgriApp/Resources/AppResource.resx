@@ -117,11 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ButtonGetdealers" xml:space="preserve">
+    <value>Get dealers</value>
+  </data>
+  <data name="ButtonSubmit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="LabelAadharCardAddress" xml:space="preserve">
+    <value>Aadhar card address:</value>
+  </data>
+  <data name="LabelDownload" xml:space="preserve">
+    <value>*Download</value>
+  </data>
+  <data name="LabelEnterPinCode" xml:space="preserve">
+    <value>*Enter Pin code</value>
+  </data>
+  <data name="LabelEnterYourMobileNo" xml:space="preserve">
+    <value>*Enter your mobile NO</value>
+  </data>
+  <data name="LabelEnterYourName" xml:space="preserve">
+    <value>*Enter your name</value>
+  </data>
   <data name="LabelKindlyEnterTheOTPBelow" xml:space="preserve">
     <value>Kindly enter the OTP below</value>
   </data>
   <data name="LabelKindlyEnterYourMobileNo" xml:space="preserve">
     <value>Kindly enter your mobile number below to get OTP</value>
+  </data>
+  <data name="LabelLandmark" xml:space="preserve">
+    <value>*Landmark:</value>
   </data>
   <data name="LabelLocation" xml:space="preserve">
     <value>Location...</value>
@@ -132,6 +156,9 @@
   <data name="LabelOTPVerified" xml:space="preserve">
     <value>OTP verified</value>
   </data>
+  <data name="LabelReview" xml:space="preserve">
+    <value>Review</value>
+  </data>
   <data name="LabelSuccessful" xml:space="preserve">
     <value>successful</value>
   </data>
@@ -140,6 +167,9 @@
   </data>
   <data name="LoginTitle" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="PlaceHolderInput" xml:space="preserve">
+    <value>Input</value>
   </data>
   <data name="TitleHome" xml:space="preserve">
     <value>Home</value>

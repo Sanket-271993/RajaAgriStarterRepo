@@ -10,12 +10,20 @@ using Xamarin.Forms.Xaml;
 namespace RajaAgriApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : BaseView
+    public partial class LoginPage : ContentPage
     {
+        LoginViewModel loginViewModel;
         public LoginPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
+            loginViewModel= new LoginViewModel();
+            loginViewModel.LoginEvent += LoginViewModel_LoginEvent;
+            this.BindingContext = loginViewModel;
+        }
+
+        private async void LoginViewModel_LoginEvent(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new HomePage());
         }
 
         protected override void OnAppearing()
@@ -23,6 +31,18 @@ namespace RajaAgriApp.Pages
             base.OnAppearing();
             phoneNumberEntry.Focus();
             otpEntry.Focus();
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            if (!loginViewModel.IsOTPVerify)
+            {
+                loginViewModel.GetOTP();
+            }
+            else
+            {
+                loginViewModel.VerifyOTP();
+            }
         }
     }
 }

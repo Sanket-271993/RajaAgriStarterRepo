@@ -8,8 +8,26 @@
     <Application.Resources>
         <ResourceDictionary Source="AppTheme/LightTheme.xaml" />
 
-
-
+        <Style x:Key="languageButtonStyle" TargetType="Button">
+            <Setter Property="BorderColor" Value="#000028" />
+            <Setter Property="CornerRadius" Value="22" />
+            <Setter Property="BorderWidth" Value="1" />
+        </Style>
+        <Style x:Key="ExtraLargePeacockGreenBoldLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="TextColor" Value="{DynamicResource peacockGreen}"/>
+            <Setter Property="FontFamily" Value="SiemensBold"/>
+        </Style>
+        <Style x:Key="DoubleExtraLargeWhiteRommanLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="48"/>
+            <Setter Property="TextColor" Value="{DynamicResource White}"/>
+            <Setter Property="FontFamily" Value="SiemensRoman"/>
+        </Style>
+        <Style x:Key="ExtraLargeWhiteRommanLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="TextColor" Value="{DynamicResource White}"/>
+            <Setter Property="FontFamily" Value="SiemensRoman"/>
+        </Style>
         <Style x:Key="LargeBoldLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="TextColor" Value="{DynamicResource RoyalBlue}"/>
@@ -19,6 +37,17 @@
         <Style x:Key="MediumBlackBoldLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="TextColor" Value="{DynamicResource Black}"/>
+            <Setter Property="FontFamily" Value="SiemensBold"/>
+        </Style>
+
+        <Style x:Key="MediumRoyalBlueBoldLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextColor" Value="{DynamicResource RoyalBlue}"/>
+            <Setter Property="FontFamily" Value="SiemensBold"/>
+        </Style>
+        <Style x:Key="MediumSkyBlueBoldLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextColor" Value="{DynamicResource Skyblue}"/>
             <Setter Property="FontFamily" Value="SiemensBold"/>
         </Style>
         <Style x:Key="LargeGreenBoldLabelStyle" TargetType="Label">
@@ -53,6 +82,17 @@
             <Setter Property="FontFamily" Value="SiemensRoman"/>
         </Style>
 
+        <Style x:Key="SmallRoyalBlueRomanLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextColor" Value="{DynamicResource RoyalBlue}"/>
+            <Setter Property="FontFamily" Value="SiemensRoman"/>
+        </Style>
+        <Style x:Key="SmallPurpalRomanLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextColor" Value="{DynamicResource LightPurpal}"/>
+            <Setter Property="FontFamily" Value="SiemensRoman"/>
+        </Style>
+
         <Style x:Key="MediumPeacockRomanLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="TextColor" Value="{DynamicResource peacockGreen}"/>
@@ -64,12 +104,13 @@
             <Setter Property="TextColor" Value="{DynamicResource Black}"/>
             <Setter Property="FontFamily" Value="SiemensRoman"/>
         </Style>
+        
         <Style x:Key="MediumRoyalBlueRomanLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="TextColor" Value="{DynamicResource RoyalBlue}"/>
             <Setter Property="FontFamily" Value="SiemensRoman"/>
         </Style>
-
+        
 
     </Application.Resources>
 </Application>

@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<pages:BaseView  xmlns:pages="clr-namespace:RajaAgriApp.Pages" 
+<ContentPage  xmlns:pages="clr-namespace:RajaAgriApp.Pages" 
                  xmlns="http://xamarin.com/schemas/2014/forms"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                  xmlns:resources="clr-namespace:RajaAgriApp.Resources" xmlns:models="clr-namespace:RajaAgriApp.Models"
                  x:Class="RajaAgriApp.Pages.HomePage"
+                 IconImageSource="ic_menu"
+                 BackgroundColor="White" 
+              Title="Home"
+                 NavigationPage.HasBackButton="False"
                  x:Name="homePage">
     <ContentPage.ToolbarItems>
 
@@ -32,8 +36,9 @@
                         Text="{Binding ProductName}"
                         Style="{StaticResource MediumRoyalBlueRomanLabelStyle}"/>
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding BindingContext.ItemCommand,
-                            Source={x:Reference homePage} }" CommandParameter="{Binding .}"/>
+                       <!-- <TapGestureRecognizer Command="{Binding BindingContext.ItemCommand,
+                            Source={x:Reference homePage} }" CommandParameter="{Binding .}"/>-->
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
             </DataTemplate>
@@ -69,4 +74,4 @@
           
         </StackLayout>
     </ContentPage.Content>
-</pages:BaseView>
+</ContentPage>

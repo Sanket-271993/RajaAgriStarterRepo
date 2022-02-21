@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="RajaAgriApp.Pages.MultiLanguage"
+    Title="Select your App language"
+    NavigationPage.HasBackButton="False"
+    BackgroundColor="White"
+   
+    Shell.FlyoutBehavior="Disabled">
+    
+    <ContentPage.Content>
+         <Grid Padding="40,50,40,30" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0"
+                    x:Name="englishbtn"
+                    Text="English"
+                    Style="{StaticResource languageButtonStyle}"
+                    Clicked="englishbtn_Clicked"/>
+            
+             <Button Grid.Row="1"
+                     Text="हिन्दी"
+                     x:Name="hindibtn"
+                     Style="{StaticResource languageButtonStyle}"
+                     Clicked="hindibtn_Clicked"/>
+
+             <Button Grid.Row="2"
+                     x:Name="punjabibtn"
+                     Text="ਪੰਜਾਬੀ"
+                     Style="{StaticResource languageButtonStyle}"
+                     Clicked="punjabibtn_Clicked"/>
+
+             <Button Grid.Row="3"
+                     x:Name="marathibtn"
+                     Text="मराठी"
+                     Style="{StaticResource languageButtonStyle}"
+                     Clicked="marathibtn_Clicked"/>
+
+             <Button Grid.Row="4"
+                     Text="ગુજરાતી"
+                     x:Name="gujratibtn"
+                     Style="{StaticResource languageButtonStyle}"
+                     Clicked="gujratibtn_Clicked"/>
+
+           <StackLayout Grid.Row="7" Padding="10,0,10,0" VerticalOptions="Center">
+                <Button VerticalOptions="Center"
+                        Text="Submit"
+                        BackgroundColor="#00feb9"
+                        Clicked="Button_Clicked"
+                        HeightRequest="60" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

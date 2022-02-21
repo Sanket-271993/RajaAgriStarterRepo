@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:models="clr-namespace:RajaAgriApp.Models"
+             x:Class="RajaAgriApp.Pages.ProductDetailsPage"
+             xmlns:resource="clr-namespace:RajaAgriApp.Resources"
+             x:Name="productDetailsPage"
+             Title="Details"
+             BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="ProductImageTemplate">
+                <StackLayout
+                   
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Padding="20,0,20,0" 
+                    x:DataType="models:ProductDetailsModel">
+                    <Image Source="{Binding ImageName}"
+                           HeightRequest="250"
+                           WidthRequest="250"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="FillAndExpand"/>
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="DropDownItemTemplate">
+                <StackLayout Spacing="0"
+                    Padding="20,10,20,10" 
+                    x:DataType="models:DropDownModel">
+                    <Label Text="{Binding ItemName}" 
+                           Style="{StaticResource MediumRoyalBlueRomanLabelStyle}"
+                           HorizontalOptions="Start"  />
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" 
+                                     Binding="{Binding IsSelectedItem}" 
+                                     Value="True">
+                            <Setter Property="BackgroundColor" Value="{StaticResource ExtraLightGreen}"/>
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.OnDropDownItemCommand, Source={x:Reference productDetailsPage}}"
+                                              CommandParameter="{Binding .}" />
+                    </StackLayout.GestureRecognizers>
+                    
+                </StackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Spacing="0">
+                    <Grid HeightRequest="350" >
+                        <StackLayout>
+                            <CarouselView ItemsSource="{Binding Products}"
+                              Loop="False"
+                              Position="{Binding Postion}"
+                              ItemTemplate="{StaticResource ProductImageTemplate}"
+                              IndicatorView="indicatorView"/>
+                            <IndicatorView x:Name="indicatorView"
+                       IndicatorColor="LightGray"
+                       IndicatorsShape="Circle"
+                       SelectedIndicatorColor="#4c4c68"
+                       HorizontalOptions="Center" />
+                        </StackLayout>
+
+                        <Frame HeightRequest="20" 
+                               WidthRequest="20"
+                               Padding="10"
+                               HasShadow="False"
+                               Margin="20,0,0,0"
+                               BackgroundColor="{StaticResource LightGreen}"
+                               CornerRadius="25"
+                               HorizontalOptions="Start" 
+                               VerticalOptions="Center">
+                            <Path Data="M17.77,3.77l-1.77,-1.77l-10,10l10,10l1.77,-1.77l-8.23,-8.23z"
+                                  Aspect="Uniform"
+                                  HeightRequest="20"
+                                  WidthRequest="20"
+                                  Fill="{StaticResource RoyalBlue}"
+                                  HorizontalOptions="CenterAndExpand" />
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OnLeftArrowCommand}" />
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame HeightRequest="20" 
+                               WidthRequest="20"
+                               Padding="10"
+                               HasShadow="False"
+                               Margin="0,0,20,0"
+                               BackgroundColor="{StaticResource LightGreen}"
+                               CornerRadius="25"
+                               HorizontalOptions="End" 
+                               VerticalOptions="Center">
+                            <Path Data="M5.88,4.12L13.76,12l-7.88,7.88L8,22l10,-10L8,2z"
+                                  Aspect="Uniform"
+                                  HeightRequest="20"
+                                  WidthRequest="20"
+                                  Fill="{StaticResource RoyalBlue}"
+                                  HorizontalOptions="CenterAndExpand" />
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OnRightArrowCommand}" />
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </Grid>
+                    <StackLayout Spacing="0" Padding="20,0,20,0">
+                        <Label Text="{Binding ProductName}" 
+                           Style="{StaticResource MediumRoyalBlueBoldLabelStyle}"
+                           HorizontalOptions="Start" />
+                        <Label Text="{Binding ProductDescription}" 
+                           Style="{StaticResource MediumGrayRomanLabelStyle}"
+                           HorizontalOptions="Start" />
+                        <Grid>
+                            
+                            <!--Review And DropDown-->
+                            <StackLayout 
+                                Orientation="Horizontal"
+                                 Margin="0,20,0,0">
+                                <Label Text="{x:Static resource:AppResource.LabelReview}" 
+                               Style="{StaticResource MediumSkyBlueBoldLabelStyle}"
+                               HorizontalOptions="Start" />
+                                <StackLayout HorizontalOptions="EndAndExpand" 
+                                 Orientation="Vertical"
+                                 WidthRequest="200"
+                                 BackgroundColor="{StaticResource TransprentGreen}">
+                                    <StackLayout
+                                    Padding="10,20,10,20"
+                                    Orientation="Horizontal">
+                                        <Label Text="{x:Static resource:AppResource.LabelDownload}" 
+                                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                                           HorizontalOptions="Start" />
+                                        <Path Data="M7,10l5,5 5,-5z"
+                                          Aspect="Uniform"
+                                          Fill="#4c4c68"
+                                          HorizontalOptions="EndAndExpand" />
+                                    </StackLayout>
+                                    <BoxView HeightRequest="2"
+                                         BackgroundColor="{StaticResource NormalLightGreen}"
+                                         HorizontalOptions="FillAndExpand">
+                                        <BoxView.Triggers>
+                                            <DataTrigger TargetType="BoxView" Binding="{Binding IsDropDownOpen}" Value="True">
+                                                <Setter Property="HeightRequest" Value="0.5"/>
+                                                <Setter Property="BackgroundColor" Value="{StaticResource peacockGreen}"/>
+                                            </DataTrigger>
+                                        </BoxView.Triggers>
+                                    </BoxView>
+                                    
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding OnDropDownCommand}"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </StackLayout>
+                            <!--End-->
+                          
+                              
+
+                        </Grid>
+                        <Grid RowSpacing="0" >
+                            <!--Get Delear -->
+                            <StackLayout  HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="EndAndExpand" 
+                                      Padding="20"
+                                      Margin="0,80,0,0"
+                                      BackgroundColor="{StaticResource LightGreen}" >
+                                <Label Text="{x:Static resource:AppResource.ButtonGetdealers}"
+                                   HorizontalTextAlignment="Center" 
+                                   Style="{StaticResource LargeBoldLabelStyle}"/>
+                            </StackLayout>
+                            <!--End-->
+                            <StackLayout HorizontalOptions="EndAndExpand"
+                                         VerticalOptions="Start"
+                                             WidthRequest="200"
+                                             IsVisible="false"
+                                             Spacing="0"
+                                             BackgroundColor="{StaticResource TransprentGreen}"
+                                             BindableLayout.ItemsSource="{Binding DropDownDataList}"
+                                             BindableLayout.ItemTemplate="{StaticResource DropDownItemTemplate}">
+                                <StackLayout.Triggers>
+                                    <DataTrigger TargetType="StackLayout" Binding="{Binding IsDropDownOpen}" Value="True">
+                                        <Setter Property="IsVisible" Value="True"/>
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+                            </StackLayout>
+                           
+                           
+                            
+                        </Grid>
+                        
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

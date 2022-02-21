@@ -26,6 +26,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="pt.Xamarin.Plugin.FilePicker" Version="1.3.11" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />  
@@ -39,7 +40,16 @@
     <EmbeddedResource Update="Pages\Home\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ProductDetails\ProductDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Registration\RegistrationPage .xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\Search\SearchPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Splash\SplashPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="PopUpPages\LoadingPopupPage.xaml">

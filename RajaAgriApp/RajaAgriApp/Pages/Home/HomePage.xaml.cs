@@ -11,12 +11,17 @@ using Xamarin.Forms.Xaml;
 namespace RajaAgriApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomePage : BaseView
+    public partial class HomePage : ContentPage
     {
         public HomePage()
         {
             InitializeComponent();
             this.BindingContext = new HomeViewModel();
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ProductDetailsPage());
         }
     }
 }

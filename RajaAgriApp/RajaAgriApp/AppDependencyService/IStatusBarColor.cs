@@ -7,5 +7,7 @@ namespace RajaAgriApp.AppDependencyService
     public interface IStatusBarColor
     {
         void SetColoredStatusBar(string hexColor);
+        void HideStatusBar();
+        void ShowStatusBar();
     }
 }

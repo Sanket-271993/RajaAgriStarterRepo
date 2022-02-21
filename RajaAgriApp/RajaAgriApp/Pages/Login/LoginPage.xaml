@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<pages:BaseView  xmlns:pages="clr-namespace:RajaAgriApp.Pages" 
-                 xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns:pages="clr-namespace:RajaAgriApp.Pages" 
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resources="clr-namespace:RajaAgriApp.Resources"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             NavigationPage.HasBackButton="False"
+             Title="Login"
+             BackgroundColor="White"
              xmlns:behavior="clr-namespace:RajaAgriApp.Behavior"
-             Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarHasShadow="False"
              x:Class="RajaAgriApp.Pages.LoginPage">
     <ContentPage.Resources>
         <ResourceDictionary >
@@ -140,7 +141,7 @@
                                 </Label.Triggers>
                             </Label>
                             <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding GetOTPCommand}"/>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                             </StackLayout.GestureRecognizers>
                             <StackLayout.Triggers>
                                 <DataTrigger TargetType="StackLayout"  
@@ -172,4 +173,4 @@
         </StackLayout>
 
     </ContentPage.Content>
-</pages:BaseView>
+</ContentPage>

@@ -8,7 +8,7 @@ namespace RajaAgriApp.Behavior
     public class EntryLengthValidator:Behavior<Entry>
     {
         public int MaxLength { get; set; }
-        public int MinLength { get; set; } = 0;
+       
 
         protected override void OnAttachedTo(Entry bindable)
         {
@@ -45,6 +45,4 @@ namespace RajaAgriApp.Behavior
                     ((Entry)sender).TextColor = Color.Black;
         }
     }
-
-    
 }

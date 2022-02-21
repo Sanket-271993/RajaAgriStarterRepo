@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="RajaAgriApp.Pages.SplashPage">
+    <ContentPage.Content>
+        <StackLayout Padding="45" BackgroundColor="White">
+
+            <StackLayout Padding="12,25,12,25"
+                         HorizontalOptions="StartAndExpand"
+                         BackgroundColor="{StaticResource SmokeyWhite}">
+                <Label Text="SIEMENS" 
+                       TextTransform="Uppercase"
+                       Style="{StaticResource ExtraLargePeacockGreenBoldLabelStyle}"
+                       FontSize="38"/>
+            </StackLayout>
+
+            <Image Source="ic_splash_logo" 
+                   HeightRequest="150"
+                   WidthRequest="200"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand"/>
+
+            <StackLayout Padding="12,25,12,25"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{StaticResource SmokeyWhite}">
+                <Label Text="RAJA" 
+                       TextTransform="Uppercase"
+                       Style="{StaticResource DoubleExtraLargeWhiteRommanLabelStyle}"/>
+
+                <Label Text="Agriculture Starter" 
+                       TextTransform="Uppercase"
+                       Style="{StaticResource ExtraLargeWhiteRommanLabelStyle}"
+                       FontSize="22"/>
+                <StackLayout.Background>
+                    
+                        <!-- StartPoint defaults to (0,0) -->
+                        <LinearGradientBrush EndPoint="1,1">
+                        <GradientStop Color="#00d7a0"
+                          Offset="0.1" />
+                        <GradientStop Color="#00bedc"
+                          Offset="1.0" />
+                        </LinearGradientBrush>
+                  
+                </StackLayout.Background>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

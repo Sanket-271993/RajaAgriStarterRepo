@@ -17,6 +17,22 @@ namespace RajaAgriApp.Droid.DependencyService
 {
     public class StatusBarImplement: IStatusBarColor
     {
+        WindowManagerFlags _originalFlags;
+        public void HideStatusBar()
+        {
+           var currentWindow = GetCurrentWindow();
+            var attrs = currentWindow.Attributes;
+            _originalFlags = attrs.Flags;
+            attrs.Flags |= Android.Views.WindowManagerFlags.Fullscreen;
+            currentWindow.Attributes = attrs;
+        }
+        public void ShowStatusBar()
+        {
+            var currentWindow = GetCurrentWindow();
+            var attrs = currentWindow.Attributes;
+            attrs.Flags = _originalFlags;
+            currentWindow.Attributes = attrs;
+        }
         public void SetColoredStatusBar(string hexColor)
         {
             if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
@@ -34,6 +50,8 @@ namespace RajaAgriApp.Droid.DependencyService
                 });
             }
         }
+
+      
 
         Window GetCurrentWindow()
         {

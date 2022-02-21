@@ -38,7 +38,15 @@ namespace RajaAgriApp.iOS.DependencyService
                 GetCurrentViewController().SetNeedsStatusBarAppearanceUpdate();
             });
         }
+        public void HideStatusBar()
+        {
+            UIApplication.SharedApplication.StatusBarHidden = true;
+        }
 
+        public void ShowStatusBar()
+        {
+            UIApplication.SharedApplication.StatusBarHidden = false;
+        }
         UIViewController GetCurrentViewController()
         {
             var window = UIApplication.SharedApplication.KeyWindow;

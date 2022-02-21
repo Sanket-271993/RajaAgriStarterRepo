@@ -13,6 +13,8 @@
     <!--<item name="colorPrimaryDark">#1976D2</item>-->
     <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
+    
+    <item name="colorControlNormal">#4c4c68</item>
     <item name="colorAccent">#00d7a0</item>
     <item name="android:actionMenuTextColor">#000028</item>
   </style>

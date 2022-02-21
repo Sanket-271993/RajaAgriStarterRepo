@@ -13,7 +13,7 @@ namespace RajaAgriApp.ViewModels
         private System.Timers.Timer _timer;
         private int _countSeconds=30;
         private string _recentOTP;
-
+        public event EventHandler<EventArgs> LoginEvent;
         private bool _isOTPVerify;
         public bool IsOTPVerify
         {
@@ -94,7 +94,7 @@ namespace RajaAgriApp.ViewModels
             }
            
         }
-        private void GetOTP()
+        public void GetOTP()
         {
             IsOTPVerify = true;
             IsPhoneNumber = false;
@@ -103,7 +103,7 @@ namespace RajaAgriApp.ViewModels
             SetResendSecond();
         }
 
-        private void VerifyOTP()
+        public void VerifyOTP()
         {
             if(_recentOTP==OTP.ToString())
             {
@@ -125,15 +125,17 @@ namespace RajaAgriApp.ViewModels
 
         private void Popup_OkClick(object sender, EventArgs e)
         {
+            LoginEvent.Invoke(this, e);
             //Navigation new page
         }
 
         private void GenreateOTP()
         {
-            Random generator = new Random();
-            String randomotp = generator.Next(0, 9999).ToString("D4");
-            _recentOTP = randomotp;
-            Console.WriteLine("New Genreated OTP:" + _recentOTP);
+            //Random generator = new Random();
+            //String randomotp = generator.Next(0, 9999).ToString("D4");
+            //_recentOTP = randomotp;
+            _recentOTP = "1234";
+            //Console.WriteLine("New Genreated OTP:" + _recentOTP);
         }
 
 

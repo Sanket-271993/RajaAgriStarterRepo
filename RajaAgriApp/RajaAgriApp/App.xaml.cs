@@ -1,5 +1,6 @@
 ﻿using NavistarOCCApp.Common;
 using RajaAgriApp.AppDependencyService;
+using RajaAgriApp.Pages;
 using RajaAgriApp.PopUpPages;
 using RajaAgriApp.Resources;
 using System.Globalization;
@@ -18,10 +19,12 @@ namespace RajaAgriApp
 
             DependencyService.Get<IStatusBarColor>().SetColoredStatusBar("#00feb9");
             ProjectSetup.Instance.AppSetup();
-            SetUpLang();
+           // SetUpLang();
 
-            MainPage = new AppShell();
-            //MainPage = new OTPSuccessPage();
+           //MainPage = new AppShell();
+           MainPage =new NavigationPage(new SplashPage());
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.FromHex("#00feb9");
+            ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.FromHex("#000028");
         }
 
 

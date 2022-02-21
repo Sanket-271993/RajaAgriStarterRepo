@@ -61,6 +61,69 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Get dealers.
+        /// </summary>
+        public static string ButtonGetdealers {
+            get {
+                return ResourceManager.GetString("ButtonGetdealers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit.
+        /// </summary>
+        public static string ButtonSubmit {
+            get {
+                return ResourceManager.GetString("ButtonSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aadhar card address:.
+        /// </summary>
+        public static string LabelAadharCardAddress {
+            get {
+                return ResourceManager.GetString("LabelAadharCardAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Download.
+        /// </summary>
+        public static string LabelDownload {
+            get {
+                return ResourceManager.GetString("LabelDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Enter Pin code.
+        /// </summary>
+        public static string LabelEnterPinCode {
+            get {
+                return ResourceManager.GetString("LabelEnterPinCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Enter your mobile NO.
+        /// </summary>
+        public static string LabelEnterYourMobileNo {
+            get {
+                return ResourceManager.GetString("LabelEnterYourMobileNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Enter your name.
+        /// </summary>
+        public static string LabelEnterYourName {
+            get {
+                return ResourceManager.GetString("LabelEnterYourName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kindly enter the OTP below.
         /// </summary>
         public static string LabelKindlyEnterTheOTPBelow {
@@ -75,6 +138,15 @@ namespace RajaAgriApp.Resources {
         public static string LabelKindlyEnterYourMobileNo {
             get {
                 return ResourceManager.GetString("LabelKindlyEnterYourMobileNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Landmark:.
+        /// </summary>
+        public static string LabelLandmark {
+            get {
+                return ResourceManager.GetString("LabelLandmark", resourceCulture);
             }
         }
         
@@ -106,6 +178,15 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Review.
+        /// </summary>
+        public static string LabelReview {
+            get {
+                return ResourceManager.GetString("LabelReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to successful.
         /// </summary>
         public static string LabelSuccessful {
@@ -129,6 +210,15 @@ namespace RajaAgriApp.Resources {
         public static string LoginTitle {
             get {
                 return ResourceManager.GetString("LoginTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input.
+        /// </summary>
+        public static string PlaceHolderInput {
+            get {
+                return ResourceManager.GetString("PlaceHolderInput", resourceCulture);
             }
         }
         
