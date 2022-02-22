@@ -75,7 +75,7 @@ namespace RajaAgriApp.ViewModels
 
         private void OnRightArrowClick(object obj)
         {
-           if(Postion<=Products.Count)
+           if(Postion<(Products.Count-1))
             {
                 Postion++;
             }

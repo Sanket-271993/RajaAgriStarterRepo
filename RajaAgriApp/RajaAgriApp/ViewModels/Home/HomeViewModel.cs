@@ -40,9 +40,9 @@ namespace RajaAgriApp.ViewModels
             ItemCommand = new Command<ProductModel>(OnItemClick);
         }
 
-        private void OnItemClick(ProductModel  product)
+        private async void OnItemClick(ProductModel  product)
         {
-           //
+           await ShellRoutingService.Instance.NavigateTo(nameof(ProductDetailsPage));
         }
 
         private void OnNotificationClick(object obj)

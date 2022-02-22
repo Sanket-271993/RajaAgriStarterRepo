@@ -19,9 +19,16 @@ namespace RajaAgriApp.Pages
             this.BindingContext = new HomeViewModel();
         }
 
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ProductDetailsPage());
+            if (Shell.Current.FlyoutBehavior == FlyoutBehavior.Disabled)
+            {
+                Shell.Current.FlyoutIsPresented = true;
+            }
+            else
+            {
+                Shell.Current.FlyoutIsPresented = false;
+            }
         }
     }
 }

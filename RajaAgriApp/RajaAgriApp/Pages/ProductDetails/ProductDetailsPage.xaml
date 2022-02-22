@@ -48,7 +48,7 @@
     <ContentPage.Content>
         <StackLayout>
             <ScrollView>
-                <StackLayout Spacing="0">
+                <StackLayout Spacing="0" Margin="0,0,0,60">
                     <Grid HeightRequest="350" >
                         <StackLayout>
                             <CarouselView ItemsSource="{Binding Products}"
@@ -109,12 +109,12 @@
                         <Label Text="{Binding ProductDescription}" 
                            Style="{StaticResource MediumGrayRomanLabelStyle}"
                            HorizontalOptions="Start" />
-                        <Grid>
+                        <Grid >
                             
                             <!--Review And DropDown-->
                             <StackLayout 
                                 Orientation="Horizontal"
-                                 Margin="0,20,0,0">
+                                 Margin="0,20,50,0">
                                 <Label Text="{x:Static resource:AppResource.LabelReview}" 
                                Style="{StaticResource MediumSkyBlueBoldLabelStyle}"
                                HorizontalOptions="Start" />
@@ -155,11 +155,12 @@
                               
 
                         </Grid>
-                        <Grid RowSpacing="0" >
+                        <Grid RowSpacing="0"  Margin="0,0,0,30"  >
                             <!--Get Delear -->
                             <StackLayout  HorizontalOptions="FillAndExpand"
-                                      VerticalOptions="EndAndExpand" 
+                                     
                                       Padding="20"
+                                         
                                       Margin="0,80,0,0"
                                       BackgroundColor="{StaticResource LightGreen}" >
                                 <Label Text="{x:Static resource:AppResource.ButtonGetdealers}"
