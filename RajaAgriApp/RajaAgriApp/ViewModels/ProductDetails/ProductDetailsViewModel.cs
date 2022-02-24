@@ -1,4 +1,6 @@
-﻿using RajaAgriApp.Models;
+﻿using NavistarOCCApp.Common;
+using RajaAgriApp.Models;
+using RajaAgriApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,7 +50,9 @@ namespace RajaAgriApp.ViewModels
 
         public ICommand OnRightArrowCommand { get; set; }
         public ICommand OnLeftArrowCommand { get; set; }
-      
+
+        public ICommand OnGetDealerCommand { get; set; }
+
         public ProductDetailsViewModel()
         {
             InitCommand();
@@ -63,6 +67,12 @@ namespace RajaAgriApp.ViewModels
             OnDropDownItemCommand = new Command<DropDownModel>(OnDropDownItemClick);
             OnRightArrowCommand = new Command(OnRightArrowClick);
             OnLeftArrowCommand = new Command(OnLeftArrowClick);
+            OnGetDealerCommand = new Command(OnGetDealerClick);
+        }
+
+        private async  void OnGetDealerClick(object obj)
+        {
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(DealerPage)}");
         }
 
         private void OnLeftArrowClick(object obj)

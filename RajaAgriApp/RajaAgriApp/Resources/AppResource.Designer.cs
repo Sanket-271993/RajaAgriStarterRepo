@@ -313,6 +313,15 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dealers.
+        /// </summary>
+        public static string TitleDealers {
+            get {
+                return ResourceManager.GetString("TitleDealers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string TitleHome {

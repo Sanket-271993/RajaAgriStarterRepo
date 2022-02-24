@@ -19,6 +19,8 @@ namespace RajaAgriApp.ViewModels
         public ICommand NotificationCommand { get; set; }
         public ICommand ItemCommand { get; set; }
 
+        public ICommand OnMenuCommand { get; set; }
+
         public HomeViewModel()
         {
             SetMenuAndTitle();
@@ -38,6 +40,12 @@ namespace RajaAgriApp.ViewModels
             SearchCommand = new Command(OnSearchClicked);
             NotificationCommand = new Command(OnNotificationClick);
             ItemCommand = new Command<ProductModel>(OnItemClick);
+            OnMenuCommand = new Command<ProductModel>(OnMenuClick);
+        }
+
+        private async void OnMenuClick(ProductModel obj)
+        {
+            await ShellRoutingService.Instance.NavigateTo(nameof(ProfilePage));
         }
 
         private async void OnItemClick(ProductModel  product)

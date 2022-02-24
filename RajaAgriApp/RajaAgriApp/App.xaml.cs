@@ -1,11 +1,8 @@
 ﻿using NavistarOCCApp.Common;
 using RajaAgriApp.AppDependencyService;
 using RajaAgriApp.Pages;
-using RajaAgriApp.Pages.Profile;
-using RajaAgriApp.PopUpPages;
 using RajaAgriApp.Resources;
 using System.Globalization;
-
 using System.Threading;
 using Xamarin.Forms;
 
@@ -22,8 +19,8 @@ namespace RajaAgriApp
             ProjectSetup.Instance.AppSetup();
            // SetUpLang();
 
-           //MainPage = new AppShell();
-            MainPage = new ProfilePage();
+           MainPage = new AppShell();
+           //MainPage = new DealerPage();
         }
 
 

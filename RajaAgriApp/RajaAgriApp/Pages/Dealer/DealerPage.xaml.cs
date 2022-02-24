@@ -11,12 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace RajaAgriApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProfilePage : BaseView
+    public partial class DealerPage : BaseView
     {
-        public ProfilePage()
+        public DealerPage()
         {
             InitializeComponent();
-            this.BindingContext = new ProfileViewModel();
+            this.BindingContext = new DealerViewModel();
         }
     }
 }

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Page:BaseView  xmlns:Page="clr-namespace:RajaAgriApp.Pages" 
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:resources="clr-namespace:RajaAgriApp.Resources" 
+                xmlns:models="clr-namespace:RajaAgriApp.Models"
+                xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"  
+                xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                BackgroundColor="White"
+                x:Name="dealerPage"
+                x:Class="RajaAgriApp.Pages.DealerPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="DealerTemplete">
+                <Grid ColumnDefinitions="Auto,*" 
+                      Margin="10,15,10,0"
+                      RowDefinitions="Auto,1">
+                    <StackLayout Grid.Column="0" 
+                                 Grid.Row="0">
+                        <ff:CachedImage Source="ic_defult_user" 
+                                        HorizontalOptions="Start"
+                                        WidthRequest="80" >
+                            <ff:CachedImage.Transformations>
+                                <ffTransformations:CircleTransformation />
+                            </ff:CachedImage.Transformations>
+                        </ff:CachedImage>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1" 
+                                 Spacing="5">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="RamKumar" 
+                                   HorizontalOptions="Start"
+                                   Style="{StaticResource MediumRoyalBlueBoldLabelStyle}"/>
+                            <Label Text="23/KM" 
+                                   HorizontalOptions="EndAndExpand"
+                                   Style="{StaticResource SmallPeacockGreenRomanLabelStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="+91 9902632148" 
+                                   HorizontalOptions="Start"
+                                   Style="{StaticResource MediumLightGrayRomanLabelStyle}"/>
+                            <Label Text="RamKumar" 
+                                   HorizontalOptions="EndAndExpand"
+                                   Style="{StaticResource SmallPeacockGreenRomanLabelStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" 
+                                     Padding="20,10,0,10"
+                                     BackgroundColor="{StaticResource TransprantLightGreen}">
+                                <Label Text="Get direction" 
+                                       HorizontalOptions="CenterAndExpand"
+                                       Style="{StaticResource MediamGreenBoldLabelStyle}"/>
+                                <Path Data="M5.88,4.12L13.76,12l-7.88,7.88L8,22l10,-10L8,2z"
+                                      Aspect="Uniform"
+                                      HeightRequest="20"
+                                      WidthRequest="20"
+                                      Fill="{StaticResource DarkPeacockGreen}"
+                                      HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                    <BoxView HorizontalOptions="FillAndExpand" 
+                             HeightRequest="1" 
+                             Grid.Row="1"
+                             Grid.ColumnSpan="2"
+                             BackgroundColor="{StaticResource LightGrayLineColor}"/>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.OnItemCommand,Source={x:Reference dealerPage}}" 
+                                              CommandParameter="{Binding .}"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        
+        <StackLayout>
+            <StackLayout Padding="20,10,20,10">
+                <Frame HorizontalOptions="FillAndExpand"
+                   Padding="15"
+                   CornerRadius="25"
+                   BorderColor="{StaticResource peacockGreen}">
+                    <Label 
+                    HorizontalOptions="StartAndExpand"
+                    Margin="15,0,0,0"
+                    Text="Jodhpur"
+                    Style="{StaticResource MediumPeacockRomanLabelStyle}"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SearchCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+            </StackLayout>
+            <StackLayout Margin="10,15,10,0">
+                <CollectionView ItemsSource="{Binding Dealers}"
+                                ItemTemplate="{StaticResource DealerTemplete}"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</Page:BaseView>

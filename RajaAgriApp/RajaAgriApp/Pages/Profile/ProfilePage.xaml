@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<Page:BaseView  xmlns:Page="clr-namespace:RajaAgriApp.Pages" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resources="clr-namespace:RajaAgriApp.Resources"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"  
              xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              BackgroundColor="White"
-             x:Class="RajaAgriApp.Pages.Profile.ProfilePage">
+             x:Class="RajaAgriApp.Pages.ProfilePage">
     <ContentPage.Content>
         <StackLayout>
             <Grid ColumnDefinitions="*,Auto"
@@ -160,4 +160,4 @@
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</Page:BaseView>

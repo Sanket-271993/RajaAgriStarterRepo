@@ -201,6 +201,9 @@
   <data name="TitleBack" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="TitleDealers" xml:space="preserve">
+    <value>Dealers</value>
+  </data>
   <data name="TitleHome" xml:space="preserve">
     <value>Home</value>
   </data>

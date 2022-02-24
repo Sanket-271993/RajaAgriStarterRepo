@@ -40,7 +40,7 @@
                         <TapGestureRecognizer Command="{Binding BindingContext.OnDropDownItemCommand, Source={x:Reference productDetailsPage}}"
                                               CommandParameter="{Binding .}" />
                     </StackLayout.GestureRecognizers>
-                    
+
                 </StackLayout>
             </DataTemplate>
         </ResourceDictionary>
@@ -110,7 +110,6 @@
                            Style="{StaticResource MediumGrayRomanLabelStyle}"
                            HorizontalOptions="Start" />
                         <Grid >
-                            
                             <!--Review And DropDown-->
                             <StackLayout 
                                 Orientation="Horizontal"
@@ -143,7 +142,7 @@
                                             </DataTrigger>
                                         </BoxView.Triggers>
                                     </BoxView>
-                                    
+
 
                                     <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding OnDropDownCommand}"/>
@@ -151,25 +150,23 @@
                                 </StackLayout>
                             </StackLayout>
                             <!--End-->
-                          
-                              
-
                         </Grid>
                         <Grid RowSpacing="0"  Margin="0,0,0,30"  >
                             <!--Get Delear -->
-                            <StackLayout  HorizontalOptions="FillAndExpand"
-                                     
-                                      Padding="20"
-                                         
-                                      Margin="0,80,0,0"
-                                      BackgroundColor="{StaticResource LightGreen}" >
+                             <StackLayout HorizontalOptions="FillAndExpand"
+                                          Padding="20"
+                                          Margin="0,80,0,0"
+                                          BackgroundColor="{StaticResource LightGreen}" >
                                 <Label Text="{x:Static resource:AppResource.ButtonGetdealers}"
-                                   HorizontalTextAlignment="Center" 
-                                   Style="{StaticResource LargeBoldLabelStyle}"/>
+                                       HorizontalTextAlignment="Center" 
+                                       Style="{StaticResource LargeBoldLabelStyle}"/>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OnGetDealerCommand}"/>
+                                </StackLayout.GestureRecognizers>
                             </StackLayout>
                             <!--End-->
-                            <StackLayout HorizontalOptions="EndAndExpand"
-                                         VerticalOptions="Start"
+                                <StackLayout HorizontalOptions="EndAndExpand"
+                                             VerticalOptions="Start"
                                              WidthRequest="200"
                                              IsVisible="false"
                                              Spacing="0"
@@ -182,11 +179,7 @@
                                     </DataTrigger>
                                 </StackLayout.Triggers>
                             </StackLayout>
-                           
-                           
-                            
                         </Grid>
-                        
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

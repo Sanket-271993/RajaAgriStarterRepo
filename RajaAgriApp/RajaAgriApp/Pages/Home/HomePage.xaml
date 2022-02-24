@@ -46,7 +46,7 @@
                    HorizontalOptions="Start" 
                    VerticalOptions="CenterAndExpand">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        <TapGestureRecognizer Command="{Binding OnMenuCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
                 <Label Text="{Binding Title}" 
