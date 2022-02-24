@@ -71,7 +71,11 @@
             <Setter Property="FontFamily" Value="SiemensSlabBold"/>
         </Style>
 
-
+        <Style x:Key="LargeBlackBoldLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="{DynamicResource Black}"/>
+            <Setter Property="FontFamily" Value="SiemensSlabBold"/>
+        </Style>
         <Style x:Key="LargeRoyalBlueRomanLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="TextColor" Value="{DynamicResource RoyalBlue}"/>

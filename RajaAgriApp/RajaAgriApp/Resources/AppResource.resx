@@ -129,6 +129,9 @@
   <data name="LabelDownload" xml:space="preserve">
     <value>*Download</value>
   </data>
+  <data name="LabelEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="LabelEnterPinCode" xml:space="preserve">
     <value>*Enter Pin code</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="LabelEnterYourName" xml:space="preserve">
     <value>*Enter your name</value>
+  </data>
+  <data name="LabelFAQ" xml:space="preserve">
+    <value>FAQ</value>
   </data>
   <data name="LabelKindlyEnterTheOTPBelow" xml:space="preserve">
     <value>Kindly enter the OTP below</value>
@@ -147,20 +153,38 @@
   <data name="LabelLandmark" xml:space="preserve">
     <value>*Landmark:</value>
   </data>
+  <data name="LabelLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
   <data name="LabelLocation" xml:space="preserve">
     <value>Location...</value>
+  </data>
+  <data name="LabelLogout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="LabelNotification" xml:space="preserve">
+    <value>Notification</value>
   </data>
   <data name="LabelOk" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="LabelOrderHistory" xml:space="preserve">
+    <value>Order History</value>
+  </data>
   <data name="LabelOTPVerified" xml:space="preserve">
     <value>OTP verified</value>
+  </data>
+  <data name="LabelProductRegistration" xml:space="preserve">
+    <value>Product Registration</value>
   </data>
   <data name="LabelResendOTP" xml:space="preserve">
     <value>Resend OTP -</value>
   </data>
   <data name="LabelReview" xml:space="preserve">
     <value>Review</value>
+  </data>
+  <data name="LabelServiceRequest" xml:space="preserve">
+    <value>Service Request</value>
   </data>
   <data name="LabelSuccessful" xml:space="preserve">
     <value>successful</value>
@@ -173,6 +197,9 @@
   </data>
   <data name="PlaceHolderInput" xml:space="preserve">
     <value>Input</value>
+  </data>
+  <data name="TitleBack" xml:space="preserve">
+    <value>Back</value>
   </data>
   <data name="TitleHome" xml:space="preserve">
     <value>Home</value>

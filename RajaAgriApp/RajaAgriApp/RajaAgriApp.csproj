@@ -29,6 +29,8 @@
     <PackageReference Include="pt.Xamarin.Plugin.FilePicker" Version="1.3.11" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
   </ItemGroup>
@@ -43,7 +45,10 @@
     <EmbeddedResource Update="Pages\ProductDetails\ProductDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Registration\RegistrationPage .xaml">
+    <EmbeddedResource Update="Pages\Profile\ProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Registration\RegistrationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Search\SearchPage.xaml">
@@ -72,6 +77,9 @@
   <ItemGroup>
     <Compile Update="Pages\BaseView\BaseView.xaml.cs">
       <DependentUpon>BaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Registration\RegistrationPage.xaml.cs">
+      <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="PopUpPages\OTPSuccessPage.xaml.cs">
       <DependentUpon>OTPSuccessPage.xaml</DependentUpon>

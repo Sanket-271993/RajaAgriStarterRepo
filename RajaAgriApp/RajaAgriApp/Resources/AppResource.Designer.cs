@@ -97,6 +97,15 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string LabelEdit {
+            get {
+                return ResourceManager.GetString("LabelEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to *Enter Pin code.
         /// </summary>
         public static string LabelEnterPinCode {
@@ -120,6 +129,15 @@ namespace RajaAgriApp.Resources {
         public static string LabelEnterYourName {
             get {
                 return ResourceManager.GetString("LabelEnterYourName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FAQ.
+        /// </summary>
+        public static string LabelFAQ {
+            get {
+                return ResourceManager.GetString("LabelFAQ", resourceCulture);
             }
         }
         
@@ -151,11 +169,38 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string LabelLanguage {
+            get {
+                return ResourceManager.GetString("LabelLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Location....
         /// </summary>
         public static string LabelLocation {
             get {
                 return ResourceManager.GetString("LabelLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string LabelLogout {
+            get {
+                return ResourceManager.GetString("LabelLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification.
+        /// </summary>
+        public static string LabelNotification {
+            get {
+                return ResourceManager.GetString("LabelNotification", resourceCulture);
             }
         }
         
@@ -169,11 +214,29 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order History.
+        /// </summary>
+        public static string LabelOrderHistory {
+            get {
+                return ResourceManager.GetString("LabelOrderHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OTP verified.
         /// </summary>
         public static string LabelOTPVerified {
             get {
                 return ResourceManager.GetString("LabelOTPVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Registration.
+        /// </summary>
+        public static string LabelProductRegistration {
+            get {
+                return ResourceManager.GetString("LabelProductRegistration", resourceCulture);
             }
         }
         
@@ -192,6 +255,15 @@ namespace RajaAgriApp.Resources {
         public static string LabelReview {
             get {
                 return ResourceManager.GetString("LabelReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service Request.
+        /// </summary>
+        public static string LabelServiceRequest {
+            get {
+                return ResourceManager.GetString("LabelServiceRequest", resourceCulture);
             }
         }
         
@@ -228,6 +300,15 @@ namespace RajaAgriApp.Resources {
         public static string PlaceHolderInput {
             get {
                 return ResourceManager.GetString("PlaceHolderInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string TitleBack {
+            get {
+                return ResourceManager.GetString("TitleBack", resourceCulture);
             }
         }
         

@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:RajaAgriApp.Resources"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"  
+             xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             BackgroundColor="White"
+             x:Class="RajaAgriApp.Pages.Profile.ProfilePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid ColumnDefinitions="*,Auto"
+                  RowDefinitions="120"
+                  Padding="20">
+                <StackLayout Spacing="10" VerticalOptions="CenterAndExpand" >
+                    <Label Text="{Binding UserName}" 
+                           HorizontalOptions="Start"
+                           Style="{StaticResource MediumRoyalBlueBoldLabelStyle}"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="ic_phone"/>
+                        <Label Text="{Binding PhoneNumber}" 
+                           HorizontalOptions="Start"
+                           Style="{StaticResource MediumBlackRomanLabelStyle}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" 
+                                 Margin="0,15,0,0">
+                        <Image Source="ic_blue_marker" />
+                        <Label Text="{Binding Address}" 
+                           HorizontalOptions="Start"
+                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"/>
+                    </StackLayout>
+                   
+                </StackLayout>
+                <StackLayout VerticalOptions="CenterAndExpand" 
+                             Spacing="5" 
+                             Grid.Column="1" >
+                    <ff:CachedImage Source="{Binding UserImage,FallbackValue='ic_defult_user'}" 
+                                    WidthRequest="80" >
+                        <ff:CachedImage.Transformations>
+                            <ffTransformations:CircleTransformation />
+                        </ff:CachedImage.Transformations>
+                    </ff:CachedImage>
+                    <Label Text="{x:Static resources:AppResource.LabelEdit}" 
+                           HorizontalOptions="Center"
+                           Style="{StaticResource MediumPeacockRomanLabelStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OnProfilePicEditCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                         
+                </StackLayout>
+            </Grid>
+            <StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             BackgroundColor="{StaticResource ExtraTransprentGreen}"
+                             Padding="20,15,20,15">
+                    <Image Source="ic_bell"
+                           HeightRequest="25"
+                           WidthRequest="25"/>
+                    <Label Text="{x:Static resources:AppResource.LabelNotification}" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Style="{StaticResource LargeBlackBoldLabelStyle}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnNotificationCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             BackgroundColor="{StaticResource ExtraTransprentGreen}"
+                             Padding="20,15,20,15">
+                    <Image Source="ic_box"
+                           HeightRequest="25"
+                           WidthRequest="25"/>
+                    <Label Text="{x:Static resources:AppResource.LabelProductRegistration}" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Style="{StaticResource LargeBlackBoldLabelStyle}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnProductRegistrationCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             BackgroundColor="{StaticResource ExtraTransprentGreen}"
+                             Padding="20,15,20,15">
+                    <Image Source="ic_checklist"
+                           HeightRequest="25"
+                           WidthRequest="25"/>
+                    <Label Text="{x:Static resources:AppResource.LabelOrderHistory}" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Style="{StaticResource LargeBlackBoldLabelStyle}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnOrderHistoryCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             BackgroundColor="{StaticResource ExtraTransprentGreen}"
+                             Padding="20,15,20,15">
+                    <Image Source="ic_translate"
+                           HeightRequest="25"
+                           WidthRequest="25"/>
+                    <Label Text="{x:Static resources:AppResource.LabelLanguage}" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Style="{StaticResource LargeBlackBoldLabelStyle}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnLanguageCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             BackgroundColor="{StaticResource ExtraTransprentGreen}"
+                             Padding="20,15,20,15">
+                    <Image Source="ic_faq"
+                           HeightRequest="25"
+                           WidthRequest="25"/>
+                    <Label Text="{x:Static resources:AppResource.LabelFAQ}" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Style="{StaticResource LargeBlackBoldLabelStyle}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnFAQCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             BackgroundColor="{StaticResource ExtraTransprentGreen}"
+                             Padding="20,15,20,15">
+                    <Image Source="ic_help"
+                           HeightRequest="25"
+                           WidthRequest="25"/>
+                    <Label Text="{x:Static resources:AppResource.LabelServiceRequest}" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Style="{StaticResource LargeBlackBoldLabelStyle}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnServiceRequestCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             Spacing="20"
+                             Margin="0,0,0,30"
+                             VerticalOptions="EndAndExpand"
+                             BackgroundColor="{StaticResource ExtraTransprentGreen}"
+                             Padding="20,15,20,15">
+                <Image Source="ic_log_out"
+                           HeightRequest="25"
+                           WidthRequest="25"/>
+                <Label Text="{x:Static resources:AppResource.LabelLogout}" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Style="{StaticResource LargeBlackBoldLabelStyle}" />
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OnLogOutCommand}"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

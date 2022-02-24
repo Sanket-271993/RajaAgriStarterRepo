@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using FFImageLoading.Forms.Platform;
 using Foundation;
 using UIKit;
 
@@ -24,6 +24,8 @@ namespace RajaAgriApp.iOS
         {
             Rg.Plugins.Popup.Popup.Init();
             global::Xamarin.Forms.Forms.Init();
+            CachedImageRenderer.Init();
+          //  CachedImageRenderer.InitImageSourceHandler();
             LoadApplication(new App());
             app.StatusBarStyle = UIStatusBarStyle.LightContent;
             return base.FinishedLaunching(app, options);
