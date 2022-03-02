@@ -50,7 +50,6 @@ namespace RajaAgriApp.ViewModels
 
         public ICommand OnRightArrowCommand { get; set; }
         public ICommand OnLeftArrowCommand { get; set; }
-
         public ICommand OnGetDealerCommand { get; set; }
 
         public ProductDetailsViewModel()

@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Page:BaseView  xmlns:Page="clr-namespace:RajaAgriApp.Pages" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resource="clr-namespace:RajaAgriApp.Resources" 
+             xmlns:models="clr-namespace:RajaAgriApp.Models" xmlns:view="clr-namespace:RajaAgriApp.Views" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" xmlns:customcontrol="clr-namespace:RajaAgriApp.CustomControl" x:DataType="viewmodels:ProductRegistrationViewModel"
+             x:Name="productRegistrationPage"
+             BackgroundColor="White"
+             x:Class="RajaAgriApp.Pages.ProductRegistrationPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Margin="20" Spacing="20">
+                    <!--Product Name-->
+                        <StackLayout  HorizontalOptions="FillAndExpand" 
+                                 Orientation="Vertical"
+                                 HeightRequest="70"
+                                 BackgroundColor="{StaticResource ExtraTransprentGreen}">
+                            <StackLayout
+                                    Padding="10,20,10,20"
+                                    Orientation="Horizontal">
+                            <Label Text="{Binding ProductName}" 
+                                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                                           HorizontalOptions="Start" />
+                            <Path Data="M7,10l5,5 5,-5z"
+                                          Aspect="Uniform"
+                                          Fill="{StaticResource LightPurpal}"
+                                          HorizontalOptions="EndAndExpand" >
+                                <Path.Triggers>
+                                    <DataTrigger TargetType="Path" Binding="{Binding IsProductNameDDOpen}" Value="True">
+                                        <Setter Property="Data" Value="M7,14l5,-5 5,5z"/>
+                                    </DataTrigger>
+                                </Path.Triggers>
+                            </Path>
+                        </StackLayout>
+                            <BoxView HeightRequest="1"
+                                         BackgroundColor="{StaticResource LightPurpal}"
+                                         HorizontalOptions="FillAndExpand">
+                                <BoxView.Triggers>
+                                    <DataTrigger TargetType="BoxView" Binding="{Binding IsProductNameDDOpen}" Value="True">
+                                        <Setter Property="HeightRequest" Value="0.5"/>
+                                        <Setter Property="BackgroundColor" Value="{StaticResource peacockGreen}"/>
+                                    </DataTrigger>
+                                </BoxView.Triggers>
+                            </BoxView>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OnProductNameDropDownCommand}" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    <!--End-->
+                    <!--Product Type-->
+                       <StackLayout  HorizontalOptions="FillAndExpand" 
+                                 Orientation="Vertical"
+                                 HeightRequest="70"
+                                 BackgroundColor="{StaticResource ExtraTransprentGreen}">
+                            <StackLayout
+                                    Padding="10,20,10,20"
+                                    Orientation="Horizontal">
+                            <Label Text="{Binding ProductType}" 
+                                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                                           HorizontalOptions="Start" />
+                            <Path Data="M7,10l5,5 5,-5z"
+                                          Aspect="Uniform"
+                                          Fill="{StaticResource LightPurpal}"
+                                          HorizontalOptions="EndAndExpand" >
+                                <Path.Triggers>
+                                    <DataTrigger TargetType="Path" Binding="{Binding IsProductTypeDDOpen}" Value="True">
+                                        <Setter Property="Data" Value="M7,14l5,-5 5,5z"/>
+                                    </DataTrigger>
+                                </Path.Triggers>
+                            </Path>
+                        </StackLayout>
+                            <BoxView HeightRequest="1"
+                                         BackgroundColor="{StaticResource LightPurpal}"
+                                         HorizontalOptions="FillAndExpand">
+                                <BoxView.Triggers>
+                                <DataTrigger TargetType="BoxView" Binding="{Binding IsProductTypeDDOpen}" Value="True">
+                                        <Setter Property="HeightRequest" Value="0.5"/>
+                                        <Setter Property="BackgroundColor" Value="{StaticResource peacockGreen}"/>
+                                    </DataTrigger>
+                                </BoxView.Triggers>
+                            </BoxView>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OnProductTypeDropDownCommand}" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    <!--End-->
+                    <!--Electrical shops-->
+                    <StackLayout HorizontalOptions="FillAndExpand" 
+                                 Orientation="Vertical"
+                                 HeightRequest="70"
+                                 BackgroundColor="{StaticResource ExtraTransprentGreen}">
+                        <StackLayout
+                                    Padding="10,20,10,20"
+                                    Orientation="Horizontal">
+                            <Label Text="{Binding ElectricalShops}" 
+                                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                                           HorizontalOptions="Start" />
+                            <Path Data="M7,10l5,5 5,-5z"
+                                          Aspect="Uniform"
+                                          Fill="{StaticResource LightPurpal}"
+                                          HorizontalOptions="EndAndExpand" >
+                                <Path.Triggers>
+                                    <DataTrigger TargetType="Path" Binding="{Binding IsElectricalShopsDDOpen}" Value="True">
+                                        <Setter Property="Data" Value="M7,14l5,-5 5,5z"/>
+                                    </DataTrigger>
+                                </Path.Triggers>
+                            </Path>
+                        </StackLayout>
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="{StaticResource LightPurpal}"
+                                 HorizontalOptions="FillAndExpand">
+                            <BoxView.Triggers>
+                                <DataTrigger TargetType="BoxView" Binding="{Binding IsElectricalShopsDDOpen}" Value="True">
+                                    <Setter Property="HeightRequest" Value="0.5"/>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource peacockGreen}"/>
+                                </DataTrigger>
+                            </BoxView.Triggers>
+                        </BoxView>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OnElectricalShopsDropDownCommand}" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <!--End-->
+                    <!--Product Serial number-->
+                    <StackLayout Spacing="0" 
+                         x:Name="SerialNaumberStackLayout"
+                        
+                                
+                         BackgroundColor="{StaticResource ExtraTransprentGreen}">
+                       
+                        <customcontrol:TransprantEntry  
+                            ReturnType="Next"
+                             Margin="5,15,5,15"
+                            Text="{Binding SerialNumber,Mode=TwoWay}"
+                            Placeholder="{x:Static resource:AppResource.LabelStarProductSerialNumber}"
+                            PlaceholderColor="{StaticResource LightPurpal}"
+                            x:Name="entrySerialNumber"
+                            Style="{StaticResource LargeLightPurpalRomanLabelStyle}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="FillAndExpand"/>
+                        
+                        <Frame Padding="0"
+                           Margin="0,0,0,0"
+                           BackgroundColor="{StaticResource LightPurpal}"
+                           HasShadow="False"
+                           CornerRadius="0"
+                           HeightRequest="1"
+                           HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                    <!--End-->
+                    <StackLayout HorizontalOptions="FillAndExpand" 
+                                 Orientation="Vertical"
+                                 HeightRequest="70"
+                                 BackgroundColor="{StaticResource ExtraTransprentGreen}">
+                        <StackLayout
+                                    Padding="10,20,10,20"
+                                    Orientation="Horizontal">
+                            <Label Text="{Binding InvoiceDate,StringFormat='{0:dd/MM/yyyy}'}" 
+                                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                                           HorizontalOptions="Start" />
+                            <DatePicker HorizontalOptions="Start" 
+                                        MinimumDate="01/01/2000"
+                                        MaximumDate="12/31/2050"
+                                        IsVisible="False"
+                                        x:Name="invoiceDatePicker"
+                                        Date="{Binding InvoiceDate}"/>
+
+                        </StackLayout>
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="{StaticResource LightPurpal}"
+                                 HorizontalOptions="FillAndExpand"/>
+
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="{x:Static resource:AppResource.LabelInvoiceCopy}" 
+                                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                                           HorizontalOptions="Start" />
+                        <Image Source="ic_camera"
+                           Margin="0,10"
+                           HorizontalOptions="FillAndExpand" 
+                           HeightRequest="150">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding FilePickerCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+
+                        <StackLayout  HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="EndAndExpand" 
+                                      Padding="20"
+                                      Margin="0,20,0,30"
+                                      BackgroundColor="{StaticResource LightGreen}" >
+                            <Label Text="{x:Static resource:AppResource.ButtonSubmit}"
+                                   HorizontalTextAlignment="Center" 
+                                   Style="{StaticResource LargeBoldLabelStyle}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OnSubmitCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</Page:BaseView>

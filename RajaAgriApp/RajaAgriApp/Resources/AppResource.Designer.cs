@@ -106,6 +106,15 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Electrical shops.
+        /// </summary>
+        public static string LabelElectricalShops {
+            get {
+                return ResourceManager.GetString("LabelElectricalShops", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to *Enter Pin code.
         /// </summary>
         public static string LabelEnterPinCode {
@@ -133,11 +142,38 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Existing request.
+        /// </summary>
+        public static string LabelExistingRequest {
+            get {
+                return ResourceManager.GetString("LabelExistingRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to FAQ.
         /// </summary>
         public static string LabelFAQ {
             get {
                 return ResourceManager.GetString("LabelFAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Images.
+        /// </summary>
+        public static string LabelImages {
+            get {
+                return ResourceManager.GetString("LabelImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Invoice Copy.
+        /// </summary>
+        public static string LabelInvoiceCopy {
+            get {
+                return ResourceManager.GetString("LabelInvoiceCopy", resourceCulture);
             }
         }
         
@@ -196,6 +232,15 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Request.
+        /// </summary>
+        public static string LabelNewRequest {
+            get {
+                return ResourceManager.GetString("LabelNewRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification.
         /// </summary>
         public static string LabelNotification {
@@ -232,11 +277,47 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Product Invoice Date.
+        /// </summary>
+        public static string LabelProductInvoiceDate {
+            get {
+                return ResourceManager.GetString("LabelProductInvoiceDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Product Name.
+        /// </summary>
+        public static string LabelProductName {
+            get {
+                return ResourceManager.GetString("LabelProductName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Product Registration.
         /// </summary>
         public static string LabelProductRegistration {
             get {
                 return ResourceManager.GetString("LabelProductRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Serial number.
+        /// </summary>
+        public static string LabelProductSerialNumber {
+            get {
+                return ResourceManager.GetString("LabelProductSerialNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Product Type.
+        /// </summary>
+        public static string LabelProductType {
+            get {
+                return ResourceManager.GetString("LabelProductType", resourceCulture);
             }
         }
         
@@ -259,6 +340,15 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select the Product.
+        /// </summary>
+        public static string LabelSelectTheProduct {
+            get {
+                return ResourceManager.GetString("LabelSelectTheProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Service Request.
         /// </summary>
         public static string LabelServiceRequest {
@@ -268,11 +358,29 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Product Serial number.
+        /// </summary>
+        public static string LabelStarProductSerialNumber {
+            get {
+                return ResourceManager.GetString("LabelStarProductSerialNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to successful.
         /// </summary>
         public static string LabelSuccessful {
             get {
                 return ResourceManager.GetString("LabelSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type of problem.
+        /// </summary>
+        public static string LabelTypeOfProblem {
+            get {
+                return ResourceManager.GetString("LabelTypeOfProblem", resourceCulture);
             }
         }
         
@@ -340,11 +448,38 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Service Request.
+        /// </summary>
+        public static string TitleNewServiceRequest {
+            get {
+                return ResourceManager.GetString("TitleNewServiceRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Registration.
+        /// </summary>
+        public static string TitleProductRegistration {
+            get {
+                return ResourceManager.GetString("TitleProductRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Registration Page.
         /// </summary>
         public static string TitleRegistrationPage {
             get {
                 return ResourceManager.GetString("TitleRegistrationPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service Request.
+        /// </summary>
+        public static string TitleServiceRequest {
+            get {
+                return ResourceManager.GetString("TitleServiceRequest", resourceCulture);
             }
         }
         

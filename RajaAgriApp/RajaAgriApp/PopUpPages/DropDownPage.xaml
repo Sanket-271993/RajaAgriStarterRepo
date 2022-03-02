@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<page:PopupPage  xmlns:page="http://rotorgames.com" 
+                 xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                 xmlns:models="clr-namespace:RajaAgriApp.Models"
+                 BackgroundColor="Transparent" 
+                 CloseWhenBackgroundIsClicked="true"
+                 xmlns:converter="clr-namespace:RajaAgriApp.Converter" xmlns:local="clr-namespace:RajaAgriApp.TempleteSelector"
+                 x:Name="dropDown"
+                 x:Class="RajaAgriApp.PopUpPages.DropDownPage">
+    <ContentPage.Resources>
+        
+        <ResourceDictionary>
+            <converter:MarginConverter x:Key="MarginConverter"/>
+           
+           
+            <DataTemplate x:Key="DropDownItemTemplate">
+                <StackLayout Spacing="0"
+                    Padding="20,10,20,10" 
+                             Orientation="Horizontal"
+                    x:DataType="models:DropDownModel">
+                    
+                    <Label Text="{Binding ItemName}" 
+                           Style="{StaticResource MediumRoyalBlueRomanLabelStyle}"
+                           HorizontalOptions="Start"  VerticalOptions="Center"  />
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" 
+                                     Binding="{Binding IsSelectedItem}" 
+                                     Value="True">
+                            <Setter Property="BackgroundColor" Value="{StaticResource ExtraLightGreen}"/>
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                    </StackLayout.GestureRecognizers>
+
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="CheckBoxItemTemplate">
+                <Grid 
+                    Padding="5,10,20,10" 
+                          
+                    x:DataType="models:DropDownModel">
+                    <Grid>
+                    <CheckBox  IsEnabled="False" IsTabStop="False">
+                        <CheckBox.Triggers>
+                            <DataTrigger TargetType="CheckBox" Binding="{Binding IsSelectedItem}" Value="True">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                         </CheckBox.Triggers>
+                    </CheckBox>
+                    <Label Padding="30,0,0,0" Text="{Binding ItemName}" 
+                           Style="{StaticResource MediumRoyalBlueRomanLabelStyle}"
+                           HorizontalOptions="Start" VerticalOptions="Center" />
+                    </Grid>
+                    <Grid.Triggers>
+                        <DataTrigger TargetType="Grid" 
+                                     Binding="{Binding IsSelectedItem,Mode=TwoWay}" 
+                                     Value="True">
+                            <Setter Property="BackgroundColor" Value="{StaticResource ExtraLightGreen}"/>
+                        </DataTrigger>
+                    </Grid.Triggers>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                    </Grid.GestureRecognizers>
+
+                </Grid>
+            </DataTemplate>
+            <local:DropDownTempleteSelector x:Key="dropDownTempleteSelector"
+                CheckBoxItemTemplate="{StaticResource CheckBoxItemTemplate}"
+                DropDownItemTemplate="{StaticResource DropDownItemTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Frame  
+       
+        Margin="{Binding BindingContext.Margin,Converter={StaticResource MarginConverter}}"
+        HasShadow="False"
+        Padding="0"
+        BackgroundColor="{StaticResource White}"
+        VerticalOptions="StartAndExpand"
+        HorizontalOptions="FillAndExpand">
+
+            
+                <StackLayout  HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="Start"
+                                             IsVisible="true"
+                                             Spacing="0"
+                                             BackgroundColor="{StaticResource TransprentGreen}"
+                                             BindableLayout.ItemsSource="{Binding DropDownDataList}"
+                                             BindableLayout.ItemTemplateSelector="{StaticResource dropDownTempleteSelector}">
+                   
+                </StackLayout>
+            
+        </Frame>
+    </ContentPage.Content>
+</page:PopupPage>

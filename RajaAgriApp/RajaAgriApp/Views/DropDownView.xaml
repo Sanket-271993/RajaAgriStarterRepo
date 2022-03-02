@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:models="clr-namespace:RajaAgriApp.Models"
+             xmlns:resource="clr-namespace:RajaAgriApp.Resources" 
+             x:Name="dropDownView"
+             x:Class="RajaAgriApp.Views.DropDownView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="DropDownItemTemplate">
+                <StackLayout Spacing="0"
+                    Padding="20,10,20,10" 
+                    x:DataType="models:DropDownModel">
+                    <Label Text="{Binding ItemName}" 
+                           Style="{StaticResource MediumRoyalBlueRomanLabelStyle}"
+                           HorizontalOptions="Start"  />
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" 
+                                     Binding="{Binding IsSelectedItem}" 
+                                     Value="True">
+                            <Setter Property="BackgroundColor" Value="{StaticResource ExtraLightGreen}"/>
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                  <!--  <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.OnDropDownItemCommand, Source={x:Reference productRegistrationPage}}"
+                                              CommandParameter="{Binding .}" />
+                    </StackLayout.GestureRecognizers>-->
+
+                </StackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+      <StackLayout>
+            <Grid >
+                <!--Product Name And DropDown-->
+
+
+                <Grid RowSpacing="0">
+                    <StackLayout Margin="0,70,0,0" HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="Start"
+                                             IsVisible="false"
+                                             Spacing="0"
+                                             BackgroundColor="{StaticResource Orange}"
+                                             BindableLayout.ItemsSource="{Binding Source={x:Reference dropDownView}, Path=Products}"
+                                             BindableLayout.ItemTemplate="{StaticResource DropDownItemTemplate}">
+                        <StackLayout.Triggers>
+                            <DataTrigger TargetType="StackLayout" Binding="{Binding Source={x:Reference dropDownView}, Path=IsDropDownOpen}" Value="True">
+                                <Setter Property="IsVisible" Value="True"/>
+                            </DataTrigger>
+                        </StackLayout.Triggers>
+                    </StackLayout>
+                    
+
+                </Grid>
+                <StackLayout>
+                    <StackLayout  HorizontalOptions="FillAndExpand" 
+                                 Orientation="Vertical"
+                                 HeightRequest="70"
+                                 BackgroundColor="{StaticResource OrangeYellow}">
+                        <StackLayout
+                                    Padding="10,20,10,20"
+                                    Orientation="Horizontal">
+                            <Label Text="{x:Static resource:AppResource.LabelDownload}" 
+                                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                                           HorizontalOptions="Start" />
+                            <Path Data="M7,10l5,5 5,-5z"
+                                          Aspect="Uniform"
+                                          Fill="{StaticResource LightPurpal}"
+                                          HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                        <BoxView HeightRequest="2"
+                                         BackgroundColor="{StaticResource LightPurpal}"
+                                         HorizontalOptions="FillAndExpand">
+                            <BoxView.Triggers>
+                                <DataTrigger TargetType="BoxView" Binding="{Binding Source={x:Reference dropDownView}, Path=IsDropDownOpen}" Value="True">
+                                    <Setter Property="HeightRequest" Value="0.5"/>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource peacockGreen}"/>
+                                </DataTrigger>
+                            </BoxView.Triggers>
+                        </BoxView>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference dropDownView}, Path=DropDownCommand}" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+              
+                </StackLayout>
+
+            </Grid>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

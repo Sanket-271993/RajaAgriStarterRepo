@@ -18,9 +18,10 @@
     <Color x:Key="RoyalBlue">#000028</Color>
     <Color x:Key="marine_blue">#003355</Color>
     <Color x:Key="navy_blue">#00192a</Color>
-
+    
     <Color x:Key="TransprentSkyBlue">#ebf7f8</Color>
     <Color x:Key="SkyBlue">#0087be</Color>
+    <Color x:Key="DarkSkyBlue">#199fff</Color>
     <Color x:Key="LightPurpal">#4c4c68</Color>
     <Color x:Key="DarkPeacockGreen">#005159</Color>
    

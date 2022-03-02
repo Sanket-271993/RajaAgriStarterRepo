@@ -1,5 +1,7 @@
-﻿using Plugin.FilePicker;
+﻿using NavistarOCCApp.Common;
+using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
+using RajaAgriApp.Pages;
 using RajaAgriApp.Resources;
 using System;
 using System.Collections.Generic;
@@ -85,9 +87,9 @@ namespace RajaAgriApp.ViewModels
             
         }
 
-        private void OnServiceRequestClick(object obj)
+        private async void OnServiceRequestClick(object obj)
         {
-           
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(ServiceRequestPage)}");
         }
 
         private void OnFAQClick(object obj)
@@ -104,9 +106,9 @@ namespace RajaAgriApp.ViewModels
         {
         }
 
-        private void OnProductRegistrationClick(object obj)
+        private async void OnProductRegistrationClick(object obj)
         {
-            
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(ProductRegistrationPage)}");
         }
 
         private void OnNotificationClick(object obj)

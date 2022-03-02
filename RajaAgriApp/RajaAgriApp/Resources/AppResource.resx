@@ -132,6 +132,9 @@
   <data name="LabelEdit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="LabelElectricalShops" xml:space="preserve">
+    <value>*Electrical shops</value>
+  </data>
   <data name="LabelEnterPinCode" xml:space="preserve">
     <value>*Enter Pin code</value>
   </data>
@@ -141,8 +144,17 @@
   <data name="LabelEnterYourName" xml:space="preserve">
     <value>*Enter your name</value>
   </data>
+  <data name="LabelExistingRequest" xml:space="preserve">
+    <value>Existing request</value>
+  </data>
   <data name="LabelFAQ" xml:space="preserve">
     <value>FAQ</value>
+  </data>
+  <data name="LabelImages" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="LabelInvoiceCopy" xml:space="preserve">
+    <value>*Invoice Copy</value>
   </data>
   <data name="LabelKindlyEnterTheOTPBelow" xml:space="preserve">
     <value>Kindly enter the OTP below</value>
@@ -162,6 +174,9 @@
   <data name="LabelLogout" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="LabelNewRequest" xml:space="preserve">
+    <value>New Request</value>
+  </data>
   <data name="LabelNotification" xml:space="preserve">
     <value>Notification</value>
   </data>
@@ -174,8 +189,20 @@
   <data name="LabelOTPVerified" xml:space="preserve">
     <value>OTP verified</value>
   </data>
+  <data name="LabelProductInvoiceDate" xml:space="preserve">
+    <value>*Product Invoice Date</value>
+  </data>
+  <data name="LabelProductName" xml:space="preserve">
+    <value>*Product Name</value>
+  </data>
   <data name="LabelProductRegistration" xml:space="preserve">
     <value>Product Registration</value>
+  </data>
+  <data name="LabelProductSerialNumber" xml:space="preserve">
+    <value>Product Serial number</value>
+  </data>
+  <data name="LabelProductType" xml:space="preserve">
+    <value>*Product Type</value>
   </data>
   <data name="LabelResendOTP" xml:space="preserve">
     <value>Resend OTP -</value>
@@ -183,11 +210,20 @@
   <data name="LabelReview" xml:space="preserve">
     <value>Review</value>
   </data>
+  <data name="LabelSelectTheProduct" xml:space="preserve">
+    <value>Select the Product</value>
+  </data>
   <data name="LabelServiceRequest" xml:space="preserve">
     <value>Service Request</value>
   </data>
+  <data name="LabelStarProductSerialNumber" xml:space="preserve">
+    <value>*Product Serial number</value>
+  </data>
   <data name="LabelSuccessful" xml:space="preserve">
     <value>successful</value>
+  </data>
+  <data name="LabelTypeOfProblem" xml:space="preserve">
+    <value>Type of problem</value>
   </data>
   <data name="LabelVerifyOTP" xml:space="preserve">
     <value>*Verify  (OTP)</value>
@@ -210,8 +246,17 @@
   <data name="TitleLanguagePage" xml:space="preserve">
     <value>Select your App language</value>
   </data>
+  <data name="TitleNewServiceRequest" xml:space="preserve">
+    <value>New Service Request</value>
+  </data>
+  <data name="TitleProductRegistration" xml:space="preserve">
+    <value>Product Registration</value>
+  </data>
   <data name="TitleRegistrationPage" xml:space="preserve">
     <value>Registration Page</value>
+  </data>
+  <data name="TitleServiceRequest" xml:space="preserve">
+    <value>Service Request</value>
   </data>
   <data name="WelcomeToRAJA" xml:space="preserve">
     <value>Welcome to RAJA</value>

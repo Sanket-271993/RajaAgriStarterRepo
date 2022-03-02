@@ -20,7 +20,7 @@ namespace RajaAgriApp
            // SetUpLang();
 
            MainPage = new AppShell();
-           //MainPage = new DealerPage();
+          // MainPage = new ServiceRequestPage();
         }
 
 

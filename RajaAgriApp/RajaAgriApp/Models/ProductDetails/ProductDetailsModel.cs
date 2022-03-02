@@ -16,6 +16,7 @@ namespace RajaAgriApp.Models
     {
         public int ItemID { get; set; }
         public string ItemName { get; set; }
+        public bool IsCheckBoxItem { get; set; } = false;
         private bool _isSelectedItem;
         public bool  IsSelectedItem 
         {

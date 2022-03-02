@@ -69,6 +69,12 @@
             <Setter Property="TextColor" Value="{DynamicResource peacockGreen}"/>
             <Setter Property="FontFamily" Value="SiemensBold"/>
         </Style>
+        <Style x:Key="MediamOrangeBoldLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="{DynamicResource Orange}"/>
+            <Setter Property="FontFamily" Value="SiemensBold"/>
+        </Style>
 
 
         <Style x:Key="LargeGreenSiemensSlabBoldLabelStyle" TargetType="Label">
@@ -87,8 +93,12 @@
             <Setter Property="TextColor" Value="{DynamicResource RoyalBlue}"/>
             <Setter Property="FontFamily" Value="SiemensRoman"/>
         </Style>
+        <Style x:Key="LargeLightPurpalRomanLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="{DynamicResource LightPurpal}"/>
+            <Setter Property="FontFamily" Value="SiemensRoman"/>
+        </Style>
 
-        
         <Style x:Key="MediumGrayRomanLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="TextColor" Value="{DynamicResource LightGrayTextColor}"/>
