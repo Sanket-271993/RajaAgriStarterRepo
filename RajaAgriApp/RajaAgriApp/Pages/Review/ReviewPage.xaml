@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Page:BaseView  xmlns:Page="clr-namespace:RajaAgriApp.Pages" 
+                xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="White"
+                x:Name="ratingPage"
+                xmlns:control="clr-namespace:RajaAgriApp.CustomControl"
+             xmlns:resources="clr-namespace:RajaAgriApp.Resources" xmlns:models="clr-namespace:RajaAgriApp.Models" xmlns:converter="clr-namespace:RajaAgriApp.Converter" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels"
+                x:Class="RajaAgriApp.Pages.ReviewPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:RatingConverter x:Key="RatingConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Grid RowDefinitions="100"
+                  Margin="0,10"
+                  ColumnSpacing="0"
+                  x:DataType="viewmodels:ReviewViewModel"
+                  ColumnDefinitions="100,*">
+                <Image Source="ic_product_wid_pro" 
+                           Grid.Row="0" 
+                           Grid.Column="0"/>
+
+                <StackLayout Grid.Row="0"
+                             Orientation="Vertical"
+                                 Grid.Column="1">
+                    <Label Text="FASD2 Starter" 
+                           
+                           VerticalOptions="Center"
+                              HorizontalOptions="Start"
+                              Style="{StaticResource MediumRoyalBlueBoldLabelStyle}"/>
+
+                    <StackLayout Orientation="Horizontal" 
+                                 VerticalOptions="Center" 
+                                 Padding="0,15">
+                        <Path Data="M11.714,1.783 L8.623,9.075 0.714,9.747l6.006,5.2L4.914,22.683 11.714,18.583l6.8,4.1L16.714,14.95l6,-5.2 -7.909,-0.672Z"
+                              Aspect="Uniform"
+                              Fill="{Binding IsStarOne , Converter={StaticResource RatingConverter}}"
+                              HeightRequest="40"
+                              WidthRequest="40"
+                              HorizontalOptions="Start" >
+                            <Path.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OnStarOneCommand}"/>
+                            </Path.GestureRecognizers>
+                        </Path>
+                        <Path Data="M11.714,1.783 L8.623,9.075 0.714,9.747l6.006,5.2L4.914,22.683 11.714,18.583l6.8,4.1L16.714,14.95l6,-5.2 -7.909,-0.672Z"
+                              Aspect="Uniform"
+                              Fill="{Binding IsStarTwo , Converter={StaticResource RatingConverter}}"
+                              HeightRequest="40"
+                              WidthRequest="40"
+                              HorizontalOptions="Start">
+                            <Path.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OnStarTwoCommand}"/>
+                            </Path.GestureRecognizers>
+                        </Path>
+                        <Path Data="M11.714,1.783 L8.623,9.075 0.714,9.747l6.006,5.2L4.914,22.683 11.714,18.583l6.8,4.1L16.714,14.95l6,-5.2 -7.909,-0.672Z"
+                              Aspect="Uniform"
+                              Fill="{Binding IsStarThree , Converter={StaticResource RatingConverter}}"
+                              HeightRequest="40"
+                              WidthRequest="40"
+                              HorizontalOptions="Start">
+                            <Path.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OnStarThreeCommand}"/>
+                            </Path.GestureRecognizers>
+                        </Path>
+                        <Path Data="M11.714,1.783 L8.623,9.075 0.714,9.747l6.006,5.2L4.914,22.683 11.714,18.583l6.8,4.1L16.714,14.95l6,-5.2 -7.909,-0.672Z"
+                              Aspect="Uniform"
+                              Fill="{Binding IsStarFour , Converter={StaticResource RatingConverter}}"
+                              HeightRequest="40"
+                              WidthRequest="40"
+                              HorizontalOptions="Start">
+                            <Path.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OnStarFourCommand}"/>
+                            </Path.GestureRecognizers>
+                        </Path>
+                        <Path Data="M11.714,1.783 L8.623,9.075 0.714,9.747l6.006,5.2L4.914,22.683 11.714,18.583l6.8,4.1L16.714,14.95l6,-5.2 -7.909,-0.672Z"
+                              Aspect="Uniform"
+                              Fill="{Binding IsStarFive , Converter={StaticResource RatingConverter}}"
+                              HeightRequest="40"
+                              WidthRequest="40"
+                              HorizontalOptions="Start">
+                            <Path.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OnStarFiveCommand}"/>
+                            </Path.GestureRecognizers>
+                        </Path>
+
+
+                    </StackLayout>
+
+                </StackLayout>
+            </Grid>
+            <StackLayout Margin="0,20">
+                <StackLayout Spacing="0" 
+                         x:Name="addharStackLayout"
+                         Padding="0"  
+                         
+                         BackgroundColor="{StaticResource ExtraTransprentGreen}">
+                    <Label Margin="10"
+                           x:Name="AadharCardlabel"
+                           Text="{x:Static resources:AppResource.LabelAadharCardAddress}" 
+                           Style="{StaticResource SmallPurpalRomanLabelStyle}" 
+                           HorizontalOptions="Start" 
+                           VerticalOptions="Center"/>
+
+                    <Editor 
+                        
+                           x:Name="adharCardAddressEditor"
+                           HeightRequest="149"
+                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                           Margin="0,0,0,-2"
+                           HorizontalOptions="FillAndExpand"/>
+
+                    <Frame Padding="0"
+                           BackgroundColor="{StaticResource White}"
+                           HasShadow="False"
+                           CornerRadius="0"
+                           Margin="0,-5"
+                           HeightRequest="7"
+                           VerticalOptions="EndAndExpand"
+                           HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                <StackLayout  HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="EndAndExpand" 
+                                      Padding="20"
+                                      Margin="0,20,0,0"
+                                      BackgroundColor="{StaticResource LightGreen}" >
+                    <Label Text="{x:Static resources:AppResource.ButtonSubmit}"
+                                   HorizontalTextAlignment="Center" 
+                                   Style="{StaticResource LargeBoldLabelStyle}"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnSubmitCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</Page:BaseView>

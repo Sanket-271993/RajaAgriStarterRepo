@@ -19,8 +19,8 @@ namespace RajaAgriApp
             ProjectSetup.Instance.AppSetup();
            // SetUpLang();
 
-           MainPage = new AppShell();
-          // MainPage = new ServiceRequestPage();
+          // MainPage = new AppShell();
+           MainPage = new ReviewPage();
         }
 
 
