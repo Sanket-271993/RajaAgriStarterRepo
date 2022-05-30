@@ -8,5 +8,11 @@
         public static readonly string INVALID_USER = "Invalid User";
         public static readonly string USER_ID = "UserId";
 
+
+        /// SecureStorage 
+        /// 
+        public static readonly string Access_Token = "access_token";
+        public static readonly string FarmerMobileNumber = "farmer_mobile_number";
+
     }
 }

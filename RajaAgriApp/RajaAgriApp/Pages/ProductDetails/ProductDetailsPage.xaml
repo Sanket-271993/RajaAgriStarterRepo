@@ -116,7 +116,11 @@
                                  Margin="0,20,50,0">
                                 <Label Text="{x:Static resource:AppResource.LabelReview}" 
                                Style="{StaticResource MediumSkyBlueBoldLabelStyle}"
-                               HorizontalOptions="Start" />
+                               HorizontalOptions="Start" >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding OnReviewCommand}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
                                 <StackLayout HorizontalOptions="EndAndExpand" 
                                  Orientation="Vertical"
                                  WidthRequest="200"

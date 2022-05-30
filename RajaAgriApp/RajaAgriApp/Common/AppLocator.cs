@@ -36,8 +36,9 @@ namespace RajaAgriApp.Common
             builder.RegisterType<LoginService>().As<ILoginService>();
             builder.RegisterType<LoginController>().As<ILoginController>();
 
-
-
+            builder.RegisterType<FarmerRegisterService>().As<IFarmerRegisterService>();
+            builder.RegisterType<FarmerRegisterController>().As<IFarmerRegisterController>();
+            
 
             // builder.RegisterType<CompanyDbRepo>().AsSelf();
 

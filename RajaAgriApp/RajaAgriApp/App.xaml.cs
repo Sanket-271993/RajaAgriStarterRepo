@@ -14,13 +14,13 @@ namespace RajaAgriApp
         public App()
         {
             InitializeComponent();
-
+            XF.Material.Forms.Material.Init(this);
             DependencyService.Get<IStatusBarColor>().SetColoredStatusBar("#00feb9");
             ProjectSetup.Instance.AppSetup();
            // SetUpLang();
 
-          // MainPage = new AppShell();
-           MainPage = new ReviewPage();
+           MainPage = new AppShell();
+          // MainPage = new ReviewPage();
         }
 
 

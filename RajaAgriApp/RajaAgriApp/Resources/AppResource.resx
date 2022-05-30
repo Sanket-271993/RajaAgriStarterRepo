@@ -138,6 +138,9 @@
   <data name="LabelEnterPinCode" xml:space="preserve">
     <value>*Enter Pin code</value>
   </data>
+  <data name="LabelEnterYourComments" xml:space="preserve">
+    <value>Enter your Comments</value>
+  </data>
   <data name="LabelEnterYourMobileNo" xml:space="preserve">
     <value>*Enter your mobile NO</value>
   </data>
@@ -233,6 +236,9 @@
   </data>
   <data name="PlaceHolderInput" xml:space="preserve">
     <value>Input</value>
+  </data>
+  <data name="PopUpTitleRegistration" xml:space="preserve">
+    <value>Registration</value>
   </data>
   <data name="TitleBack" xml:space="preserve">
     <value>Back</value>

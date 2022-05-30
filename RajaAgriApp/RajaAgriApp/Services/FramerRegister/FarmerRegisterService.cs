@@ -1,6 +1,5 @@
 ﻿using RajaAgriApp.Common;
 using RajaAgriApp.Models;
-using RajaAgriApp.Models.CommonResponse;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -9,27 +8,26 @@ using System.Threading.Tasks;
 
 namespace RajaAgriApp.Services
 {
-
-    public class LoginService : ILoginService
+    public class FarmerRegisterService : IFarmerRegisterService
     {
         private readonly IApiHelper _apiHelper;
-        private readonly string BaseApiURL = ServiceUrl.Token;
+        private readonly string BaseApiURL = ServiceUrl.FarmerRegister;
 
-        public LoginService(IApiHelper apiHelper)
+        public FarmerRegisterService(IApiHelper apiHelper)
         {
             _apiHelper = apiHelper;
         }
 
-        public async Task<LoginResponseModel> GetLogin(LoginRequestModel loginRequest)
+        public async Task<FarmerRegisterResponseModel> PostFarmerRegister(RegisterRequestModel registerRequestModel)
         {
-            LoginResponseModel response = new LoginResponseModel();
+            FarmerRegisterResponseModel response = new FarmerRegisterResponseModel();
             try
             {
-                var loginRequestParm = SetLoginParams(loginRequest.MobileNo);
-                HttpResponseMessage responseMessage = await _apiHelper.GetOAuthAccessLoginToken(BaseApiURL, loginRequestParm);
+                
+                HttpResponseMessage responseMessage = await _apiHelper.InvokePostAPI(BaseApiURL, registerRequestModel);
                 if (responseMessage.IsSuccessStatusCode)
                 {
-                    response = await ResponseContent<LoginResponseModel>.ResponseContentAsync(responseMessage);
+                    response = await ResponseContent<FarmerRegisterResponseModel>.ResponseContentAsync(responseMessage);
                 }
                 else
                 {
@@ -44,13 +42,12 @@ namespace RajaAgriApp.Services
             return response;
         }
 
-        public FormUrlEncodedContent SetLoginParams(string userName)
+        public FormUrlEncodedContent SetFarmerRegisterParams(string phoneNumber)
         {
 
             var keyValues = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("UserName", userName),
-                new KeyValuePair<string, string>("grant_type", "password"),
+                new KeyValuePair<string, string>("PhoneNumber", phoneNumber),
             };
 
             return new FormUrlEncodedContent(keyValues);

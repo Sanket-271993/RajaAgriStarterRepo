@@ -1,11 +1,7 @@
 ﻿using NavistarOCCApp.Common;
-using Plugin.FilePicker;
-using Plugin.FilePicker.Abstractions;
 using RajaAgriApp.Pages;
 using RajaAgriApp.Resources;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;

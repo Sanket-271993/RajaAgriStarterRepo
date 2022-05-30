@@ -52,6 +52,8 @@ namespace RajaAgriApp.ViewModels
         public ICommand OnLeftArrowCommand { get; set; }
         public ICommand OnGetDealerCommand { get; set; }
 
+        public ICommand OnReviewCommand { get; set; }
+
         public ProductDetailsViewModel()
         {
             InitCommand();
@@ -67,6 +69,12 @@ namespace RajaAgriApp.ViewModels
             OnRightArrowCommand = new Command(OnRightArrowClick);
             OnLeftArrowCommand = new Command(OnLeftArrowClick);
             OnGetDealerCommand = new Command(OnGetDealerClick);
+            OnReviewCommand = new Command(OnReviewClick);
+        }
+
+        private async void OnReviewClick(object obj)
+        {
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(ReviewPage)}");
         }
 
         private async  void OnGetDealerClick(object obj)

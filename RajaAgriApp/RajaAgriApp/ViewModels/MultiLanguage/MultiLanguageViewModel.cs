@@ -115,7 +115,15 @@ namespace RajaAgriApp.ViewModels
       
         private async void OnSubmitClicked()
         {
-            await ShellRoutingService.Instance.NavigateTo($"{nameof(LoginPage)}");
+            if(IsLoginNavigation)
+            {
+                IsLoginNavigation = false;
+                await ShellRoutingService.Instance.NavigateTo($"{nameof(LoginPage)}");
+            }
+            else
+            {
+                await ShellRoutingService.Instance.GoBack();
+            }
         }
     }
 }

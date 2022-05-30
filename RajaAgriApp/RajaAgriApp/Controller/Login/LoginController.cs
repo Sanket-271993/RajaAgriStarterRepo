@@ -1,4 +1,6 @@
-﻿using RajaAgriApp.Models;
+﻿using NavistarOCCApp.Common;
+using RajaAgriApp.Common;
+using RajaAgriApp.Models;
 using RajaAgriApp.Models.CommonResponse;
 using RajaAgriApp.Services;
 using System;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 namespace RajaAgriApp.Controller
 {
 
-    public class LoginController:ILoginController
+    public class LoginController : ILoginController
     {
         private ILoginService _loginService;
         public LoginController(ILoginService loginService)
@@ -17,10 +19,19 @@ namespace RajaAgriApp.Controller
             _loginService = loginService;
         }
 
-        public async Task<Response<LoginResponseModel>> GetLoginAsync(LoginRequestModel loginRequest)
+        public async Task<LoginResponseModel> GetLoginAsync(LoginRequestModel loginRequest)
         {
-            var response = await _loginService.GetLogin(loginRequest);
+            LoginResponseModel response = await _loginService.GetLogin(loginRequest);
+            SaveToken(response);
             return response;
+        }
+
+        private void SaveToken(LoginResponseModel loginResponse)
+        {
+            if (loginResponse != null && !string.IsNullOrEmpty(loginResponse.access_token))
+            {
+                StorageServiceProvider.Instance.Write(AppConstant.Access_Token, loginResponse.access_token, true);
+            }
         }
     }
 }

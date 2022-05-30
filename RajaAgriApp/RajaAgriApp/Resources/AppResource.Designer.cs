@@ -124,6 +124,15 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter your Comments.
+        /// </summary>
+        public static string LabelEnterYourComments {
+            get {
+                return ResourceManager.GetString("LabelEnterYourComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to *Enter your mobile NO.
         /// </summary>
         public static string LabelEnterYourMobileNo {
@@ -408,6 +417,15 @@ namespace RajaAgriApp.Resources {
         public static string PlaceHolderInput {
             get {
                 return ResourceManager.GetString("PlaceHolderInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration.
+        /// </summary>
+        public static string PopUpTitleRegistration {
+            get {
+                return ResourceManager.GetString("PopUpTitleRegistration", resourceCulture);
             }
         }
         

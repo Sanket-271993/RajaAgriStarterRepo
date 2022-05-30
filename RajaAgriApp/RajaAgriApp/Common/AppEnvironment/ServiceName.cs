@@ -2,6 +2,7 @@
 {
     public class ServiceName
     {
-        public static readonly string Login = "/Login";
+        public static readonly string RegisterFarmer = "RegisterFarmer";
+        public static readonly string Token = "token";
     }
 }

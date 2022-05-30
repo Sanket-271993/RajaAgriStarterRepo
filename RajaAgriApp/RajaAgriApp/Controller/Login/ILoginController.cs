@@ -6,6 +6,6 @@ namespace RajaAgriApp.Controller
 {
     public interface ILoginController
     {
-        Task<Response<LoginResponseModel>> GetLoginAsync(LoginRequestModel loginRequest);
+        Task<LoginResponseModel> GetLoginAsync(LoginRequestModel loginRequest);
     }
 }

@@ -1,4 +1,7 @@
 ﻿using NavistarOCCApp.Common;
+using RajaAgriApp.Common;
+using RajaAgriApp.Controller;
+using RajaAgriApp.Models;
 using RajaAgriApp.Pages;
 using RajaAgriApp.PopUpPages;
 using RajaAgriApp.Resources;
@@ -11,6 +14,7 @@ namespace RajaAgriApp.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        private ILoginController _loginController;
         private System.Timers.Timer _timer;
         private int _countSeconds=30;
         private string _recentOTP;
@@ -29,8 +33,8 @@ namespace RajaAgriApp.ViewModels
             set { SetProperty(ref _isPhoneNumber, value); }
         }
 
-        private int _phoneNumber = -1;
-        public int PhoneNumber
+        private string _phoneNumber = String.Empty;
+        public string PhoneNumber
         {
             get { return _phoneNumber; }
             set { SetProperty(ref _phoneNumber, value); }
@@ -57,7 +61,13 @@ namespace RajaAgriApp.ViewModels
         {
             Title = AppResource.LoginTitle;
             InitCommand();
+            InitController();
             SetdefultAsLogin();
+        }
+
+        private void InitController()
+        {
+            _loginController= AppLocator.Instance.GetInstance<ILoginController>();
         }
 
         private void InitCommand()
@@ -69,7 +79,7 @@ namespace RajaAgriApp.ViewModels
         {
             IsOTPVerify = false;
             IsPhoneNumber = true;
-            PhoneNumber =-1;
+            PhoneNumber = String.Empty;
             OTP = -1;
         }
 
@@ -79,16 +89,46 @@ namespace RajaAgriApp.ViewModels
         /// <param name="obj"></param>
         private void OnGetOTPClick(object obj)
         {
-            if(!IsOTPVerify)
-            {
-                GetOTP();
-            }
-            else
-            {
-                VerifyOTP();
-            }
-           
+            SetTokenServiceCall();
+            //if(!IsOTPVerify)
+            //{
+            //    GetOTP();
+            //}
+            //else
+            //{
+            //    VerifyOTP();
+            //}
+
         }
+
+        private async void SetTokenServiceCall()
+        {
+            if(IsConnected)
+            {
+                LoginRequestModel loginRequestModel = new LoginRequestModel()
+                {
+                    MobileNo = PhoneNumber.ToString()
+                };
+                var response = await _loginController.GetLoginAsync(loginRequestModel);
+
+                if(response!=null && !string.IsNullOrEmpty(response.access_token))
+                {
+                    SaveFarmerMobileNumber(PhoneNumber);
+                    GoToRegistrationPage();
+                }
+
+            }
+        }
+
+
+        private void SaveFarmerMobileNumber(string MobileNumber)
+        {
+            if (!string.IsNullOrEmpty(MobileNumber))
+            {
+                StorageServiceProvider.Instance.Write(AppConstant.FarmerMobileNumber, MobileNumber, true);
+            }
+        }
+
         public void GetOTP()
         {
             IsOTPVerify = true;
@@ -103,7 +143,7 @@ namespace RajaAgriApp.ViewModels
         {
             if(_recentOTP==OTP.ToString())
             {
-                PhoneNumber = -1;
+                PhoneNumber = String.Empty;
                 SetOTPSuccessFullPopup();
             }
             else
@@ -115,7 +155,7 @@ namespace RajaAgriApp.ViewModels
 
         private async void SetOTPSuccessFullPopup()
         {
-            var popup = new OTPSuccessPage();
+            var popup = new OTPSuccessPage(AppResource.LabelOTPVerified);
             popup.OkClick += Popup_OkClick;
             await PopupNavigation.Instance.PushAsync(popup);
         }
@@ -124,6 +164,13 @@ namespace RajaAgriApp.ViewModels
         {
             await ShellRoutingService.Instance.NavigateTo($"{nameof(RegistrationPage)}");
         }
+
+
+        private async void GoToRegistrationPage()
+        {
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(RegistrationPage)}");
+        }
+
 
         private void GenreateOTP()
         {

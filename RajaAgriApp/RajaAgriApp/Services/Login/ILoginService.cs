@@ -6,6 +6,6 @@ namespace RajaAgriApp.Services
 {
     public interface ILoginService
     {
-        Task<Response<LoginResponseModel>> GetLogin(LoginRequestModel loginRequest);
+        Task<LoginResponseModel> GetLogin(LoginRequestModel loginRequest);
     }
 }

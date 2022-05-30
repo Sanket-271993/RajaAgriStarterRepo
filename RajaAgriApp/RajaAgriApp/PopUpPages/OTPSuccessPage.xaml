@@ -16,7 +16,7 @@
         HorizontalOptions="FillAndExpand">
             
             <StackLayout>
-                <Label Text="{x:Static resources:AppResource.LabelOTPVerified}"
+                <Label Text="{Binding PopupTitle}"
                        Margin="0,10"
                    HorizontalOptions="CenterAndExpand"
                    TextTransform="Uppercase"

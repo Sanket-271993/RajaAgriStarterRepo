@@ -7,10 +7,12 @@ namespace RajaAgriApp.Common
     public class AppEnvironment
     {
         //New Url
-        public readonly static string BASE_API_URL_DEV = "";//dev
+        public readonly static string BASE_API_URL_DEV = "https://www.payrec.siemens.co.in/RajaAgriAPI/api/data/";//dev
         //QA
-        public readonly static string BASE_API_URL_QA = "";//Qa
+        public readonly static string BASE_API_URL_QA = "https://www.payrec.siemens.co.in/RajaAgriAPI/api/data/";//Qa
         //New Prod
-        public readonly static string BASE_API_URL_PROD = "";//prod
+        public readonly static string BASE_API_URL_PROD = "https://www.payrec.siemens.co.in/RajaAgriAPI/api/data/";//prod
+
+        public readonly static string BASE_API_URL_Token = "https://www.payrec.siemens.co.in/RajaAgriAPI/";//prod
     }
 }

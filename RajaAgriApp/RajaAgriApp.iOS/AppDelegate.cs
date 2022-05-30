@@ -25,7 +25,8 @@ namespace RajaAgriApp.iOS
             Rg.Plugins.Popup.Popup.Init();
             global::Xamarin.Forms.Forms.Init();
             CachedImageRenderer.Init();
-          //  CachedImageRenderer.InitImageSourceHandler();
+            XF.Material.iOS.Material.Init();
+            //  CachedImageRenderer.InitImageSourceHandler();
             LoadApplication(new App());
             app.StatusBarStyle = UIStatusBarStyle.LightContent;
             return base.FinishedLaunching(app, options);

@@ -62,6 +62,8 @@ namespace RajaAgriApp.ViewModels
         
         public ReviewViewModel()
         {
+            Title = "Review";
+            IsTranslateVisable = true;
             SetProductDetails();
             InitCommand();
         }
