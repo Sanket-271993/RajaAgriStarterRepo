@@ -13,10 +13,18 @@ namespace RajaAgriApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+        HomeViewModel _homeViewModel;
         public HomePage()
         {
             InitializeComponent();
-            this.BindingContext = new HomeViewModel();
+            _homeViewModel=new HomeViewModel();
+            this.BindingContext = _homeViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            _homeViewModel.SetHomeServiceCall();
+            base.OnAppearing();
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)

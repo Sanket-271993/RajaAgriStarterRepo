@@ -1,4 +1,6 @@
 ﻿using NavistarOCCApp.Common;
+using RajaAgriApp.Common;
+using RajaAgriApp.Controller;
 using RajaAgriApp.Models;
 using RajaAgriApp.Pages;
 using RajaAgriApp.Resources;
@@ -13,7 +15,14 @@ namespace RajaAgriApp.ViewModels
 {
     public class HomeViewModel:BaseViewModel
     {
-        public ObservableCollection<ProductModel> Products{ get; set; }
+        private ObservableCollection<ProductModel> _products;
+        public ObservableCollection<ProductModel> Products
+        { 
+            get { return _products; }
+            set { SetProperty(ref _products, value); } 
+        }
+
+        private IHomeController _homeController;
 
         public ICommand SearchCommand { get; set; }
         public ICommand NotificationCommand { get; set; }
@@ -25,7 +34,8 @@ namespace RajaAgriApp.ViewModels
         {
             SetMenuAndTitle();
             InitCommand();
-            GetProductData();
+            ControlerInit();
+          //  GetProductData();
         }
 
         private void SetMenuAndTitle()
@@ -43,14 +53,20 @@ namespace RajaAgriApp.ViewModels
             OnMenuCommand = new Command<ProductModel>(OnMenuClick);
         }
 
+        private void ControlerInit()
+        {
+            _homeController= AppLocator.Instance.GetInstance<IHomeController>();
+
+        }
+
         private async void OnMenuClick(ProductModel obj)
         {
             await ShellRoutingService.Instance.NavigateTo(nameof(ProfilePage));
         }
 
-        private async void OnItemClick(ProductModel  product)
+        private async void OnItemClick(ProductModel product)
         {
-           await ShellRoutingService.Instance.NavigateTo(nameof(ProductDetailsPage));
+           await ShellRoutingService.Instance.NavigateTo($"{ nameof(ProductDetailsPage)}?ProductIdParameter={product.ProductID}");
         }
 
         private void OnNotificationClick(object obj)
@@ -63,17 +79,47 @@ namespace RajaAgriApp.ViewModels
             ShellRoutingService.Instance.NavigateTo(nameof(SearchPage));
         }
 
-        private void GetProductData()
+        //private void GetProductData()
+        //{
+        //    List<ProductResponseModel> _products = new List<ProductResponseModel>();
+        //    _products.Add(new ProductResponseModel() { ProductID = 1, ProductName = "AS ADOL Starter", ImageName = "ic_product_wid_pro" });
+        //    _products.Add(new ProductResponseModel() { ProductID = 2, ProductName = "DOL controller", ImageName = "ic_product_wide" });
+        //    _products.Add(new ProductResponseModel() { ProductID = 3, ProductName = "FASD1 Starter", ImageName = "ic_product_wid_pro" });
+        //    _products.Add(new ProductResponseModel() { ProductID = 4, ProductName = "RAJA+ DOL", ImageName = "ic_product_port" });
+        //    _products.Add(new ProductResponseModel() { ProductID = 5, ProductName = "FASD2 Starter", ImageName = "ic_product_port" });
+        //    _products.Add(new ProductResponseModel() { ProductID = 6, ProductName = "FASD3 Starter", ImageName = "ic_product_port" });
+        //    _products.Add(new ProductResponseModel() { ProductID = 7, ProductName = "FASD2 Starter", ImageName = "ic_product_port" });
+        //    Products = new ObservableCollection<ProductResponseModel>(_products);
+        //}
+
+
+        public async void SetHomeServiceCall()
         {
-            List<ProductModel> _products = new List<ProductModel>();
-            _products.Add(new ProductModel() { ProductID = 1, ProductName = "AS ADOL Starter", ImageName = "ic_product_wid_pro" });
-            _products.Add(new ProductModel() { ProductID = 2, ProductName = "DOL controller", ImageName = "ic_product_wide" });
-            _products.Add(new ProductModel() { ProductID = 3, ProductName = "FASD1 Starter", ImageName = "ic_product_wid_pro" });
-            _products.Add(new ProductModel() { ProductID = 4, ProductName = "RAJA+ DOL", ImageName = "ic_product_port" });
-            _products.Add(new ProductModel() { ProductID = 5, ProductName = "FASD2 Starter", ImageName = "ic_product_port" });
-            _products.Add(new ProductModel() { ProductID = 6, ProductName = "FASD3 Starter", ImageName = "ic_product_port" });
-            _products.Add(new ProductModel() { ProductID = 7, ProductName = "FASD2 Starter", ImageName = "ic_product_port" });
-            Products = new ObservableCollection<ProductModel>(_products);
+            try
+            {
+                if (IsConnected)
+                {
+
+                    AppIndicater.Instance.Show();
+                    var response = await _homeController.GetHome();
+                     AppIndicater.Instance.Dismiss();
+                    if (response != null && response.Products?.Count > 0)
+                    {
+                      
+                        Products = new ObservableCollection<ProductModel>(response.Products);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                AppIndicater.Instance.Dismiss();
+            }
         }
+
     }
 }

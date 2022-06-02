@@ -38,8 +38,15 @@ namespace RajaAgriApp.Common
 
             builder.RegisterType<FarmerRegisterService>().As<IFarmerRegisterService>();
             builder.RegisterType<FarmerRegisterController>().As<IFarmerRegisterController>();
-            
 
+
+            builder.RegisterType<HomeService>().As<IHomeService>();
+            builder.RegisterType<HomeController>().As<IHomeController>();
+
+            builder.RegisterType<ProductDetailsService>().As<IProductDetailsService>();
+            builder.RegisterType<ProductDetailsController>().As<IProductDetailsController>();
+
+            
             // builder.RegisterType<CompanyDbRepo>().AsSelf();
 
 

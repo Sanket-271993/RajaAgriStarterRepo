@@ -103,20 +103,31 @@ namespace RajaAgriApp.ViewModels
 
         private async void SetTokenServiceCall()
         {
-            if(IsConnected)
+            try
             {
-                LoginRequestModel loginRequestModel = new LoginRequestModel()
-                {
-                    MobileNo = PhoneNumber.ToString()
-                };
-                var response = await _loginController.GetLoginAsync(loginRequestModel);
 
-                if(response!=null && !string.IsNullOrEmpty(response.access_token))
+
+                if (IsConnected)
                 {
-                    SaveFarmerMobileNumber(PhoneNumber);
-                    GoToRegistrationPage();
+                    LoginRequestModel loginRequestModel = new LoginRequestModel()
+                    {
+                        MobileNo = PhoneNumber.ToString()
+                    };
+                    AppIndicater.Instance.Show();
+                    var response = await _loginController.GetLoginAsync(loginRequestModel);
+                    AppIndicater.Instance.Dismiss();
+                    if (response != null && !string.IsNullOrEmpty(response.access_token))
+                    {
+                        SaveFarmerMobileNumber(PhoneNumber);
+                        GoToRegistrationPage();
+                    }
+
                 }
 
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 

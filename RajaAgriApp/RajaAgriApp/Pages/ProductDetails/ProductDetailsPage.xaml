@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:models="clr-namespace:RajaAgriApp.Models"
              x:Class="RajaAgriApp.Pages.ProductDetailsPage"
-             xmlns:resource="clr-namespace:RajaAgriApp.Resources"
+             xmlns:resource="clr-namespace:RajaAgriApp.Resources" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" x:DataType="viewmodels:ProductDetailsViewModel"
              x:Name="productDetailsPage"
              Title="Details"
              BackgroundColor="White">
@@ -14,7 +14,7 @@
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="FillAndExpand"
                     Padding="20,0,20,0" 
-                    x:DataType="models:ProductDetailsModel">
+                    x:DataType="models:ProductImageData">
                     <Image Source="{Binding ImageName}"
                            HeightRequest="250"
                            WidthRequest="250"
@@ -68,6 +68,7 @@
                                Padding="10"
                                HasShadow="False"
                                Margin="20,0,0,0"
+                               IsVisible="{Binding IsArrowVisable}"
                                BackgroundColor="{StaticResource LightGreen}"
                                CornerRadius="25"
                                HorizontalOptions="Start" 
@@ -86,6 +87,7 @@
                                WidthRequest="20"
                                Padding="10"
                                HasShadow="False"
+                               IsVisible="{Binding IsArrowVisable}"
                                Margin="0,0,20,0"
                                BackgroundColor="{StaticResource LightGreen}"
                                CornerRadius="25"

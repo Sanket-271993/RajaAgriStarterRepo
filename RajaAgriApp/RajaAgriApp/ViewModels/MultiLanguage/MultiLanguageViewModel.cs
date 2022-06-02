@@ -86,30 +86,35 @@ namespace RajaAgriApp.ViewModels
         {
             SetAllLanguageFalse();
             IsPanjabi = true;
+            LanguageID = 4;
         }
 
         private void OnGujaratiClick(object obj)
         {
             SetAllLanguageFalse();
             IsGujarati = true;
+            LanguageID = 3;
         }
 
         private void OnMarathiClick(object obj)
         {
             SetAllLanguageFalse();
             IsMarathi = true;
+            LanguageID = 2;
         }
 
         private void OnHindiClick(object obj)
         {
             SetAllLanguageFalse();
             IsHindi = true;
+            LanguageID = 1;
         }
 
         private void OnEnglishClick(object obj)
         {
             SetAllLanguageFalse();
             IsEnglish = true;
+            LanguageID = 0;
         }
 
       

@@ -131,6 +131,7 @@ namespace RajaAgriApp.ViewModels
                     var requestData = GetRequestData();
                     AppIndicater.Instance.Show();
                     var response =await _farmerRegisterController.PostFarmerRegister(requestData);
+                    AppIndicater.Instance.Dismiss();
                     if (response != null && response.IsRegistered)
                     {
                         SetOTPSuccessFullPopup();
@@ -139,16 +140,16 @@ namespace RajaAgriApp.ViewModels
                     {
                         // App Close
                     }
-
-                  
                 }
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
+            finally
+            {
+                AppIndicater.Instance.Dismiss();
+            }
         }
 
         private RegisterRequestModel GetRequestData()
@@ -168,11 +169,6 @@ namespace RajaAgriApp.ViewModels
 
         }
 
-
-       
-
-    
-
         private async void SetOTPSuccessFullPopup()
         {
             var popup = new OTPSuccessPage(AppResource.PopUpTitleRegistration);
@@ -183,6 +179,7 @@ namespace RajaAgriApp.ViewModels
         private async void Popup_OkClick(object sender, EventArgs e)
         {
             await ShellRoutingService.Instance.NavigateTo($"{nameof(HomePage)}");
+            AppIndicater.Instance.Dismiss();
         }
 
 
@@ -198,7 +195,6 @@ namespace RajaAgriApp.ViewModels
             try
             {
                 await PickAndShow(PickOptions.Images);
-
             }
             catch (Exception e)
             {

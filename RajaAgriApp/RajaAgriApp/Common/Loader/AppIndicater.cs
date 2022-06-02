@@ -3,6 +3,8 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace RajaAgriApp.Common
@@ -19,6 +21,7 @@ namespace RajaAgriApp.Common
             }
         }
 
+        
      
         public async void Show()
         {
@@ -27,10 +30,12 @@ namespace RajaAgriApp.Common
              _loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: "Loading");
         }
 
-        public async void Dismiss()
+        public void Dismiss()
         {
+
+            Device.BeginInvokeOnMainThread(async() => await _loadingDialog.DismissAsync());
             // await PopupNavigation.Instance.PopAsync();
-            await _loadingDialog.DismissAsync();
+            
         }
     }
 }

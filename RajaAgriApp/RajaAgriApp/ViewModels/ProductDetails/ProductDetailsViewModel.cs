@@ -1,22 +1,39 @@
 ﻿using NavistarOCCApp.Common;
+using RajaAgriApp.Common;
+using RajaAgriApp.Controller;
 using RajaAgriApp.Models;
 using RajaAgriApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace RajaAgriApp.ViewModels
 {
+    [QueryProperty("ProductId", "ProductIdParameter")]
     public class ProductDetailsViewModel:BaseViewModel
     {
+
+        private IProductDetailsController _productDetailsController;
+
         private string _productName;   
         public string ProductName
         {
             get { return _productName; }
             set { SetProperty(ref _productName, value); }   
+        }
+
+        private string _productId;
+        public string ProductId
+        {
+            get { return _productId; }
+            set { 
+                SetProperty(ref _productId, value);
+                SetProductDetailsServiceCall();
+            }
         }
 
         private string _productDescription;
@@ -26,7 +43,14 @@ namespace RajaAgriApp.ViewModels
             set { SetProperty(ref _productDescription, value); }
         }
 
-        private bool _isDropDownOpen=false;
+        private bool _isArrowVisable = false;
+        public bool IsArrowVisable
+        {
+            get { return _isArrowVisable; }
+            set { SetProperty(ref _isArrowVisable, value); }
+        }
+
+        private bool _isDropDownOpen = false;
         public bool IsDropDownOpen
         {
             get { return _isDropDownOpen; }
@@ -41,8 +65,11 @@ namespace RajaAgriApp.ViewModels
             set { SetProperty(ref _postion, value); }
         }
 
-
-        public ObservableCollection<ProductDetailsModel> Products { get; set; }
+        private ObservableCollection<ProductImageData> _products;
+        public ObservableCollection<ProductImageData> Products 
+        { get { return _products; }
+            set { SetProperty(ref _products, value); } 
+        }
         public ObservableCollection<DropDownModel> DropDownDataList { get; set; }
 
         public ICommand OnDropDownCommand { get; set; }
@@ -57,8 +84,9 @@ namespace RajaAgriApp.ViewModels
         public ProductDetailsViewModel()
         {
             InitCommand();
-            GetProductImages();
-            SetProductDetails();
+            //  GetProductImages();
+            // SetProductDetails();
+            InitController();
             SetDropDownData();
         }
 
@@ -71,6 +99,12 @@ namespace RajaAgriApp.ViewModels
             OnGetDealerCommand = new Command(OnGetDealerClick);
             OnReviewCommand = new Command(OnReviewClick);
         }
+
+        private void InitController()
+        {
+            _productDetailsController=AppLocator.Instance.GetInstance<IProductDetailsController>();
+        }
+
 
         private async void OnReviewClick(object obj)
         {
@@ -117,22 +151,30 @@ namespace RajaAgriApp.ViewModels
             IsDropDownOpen=!IsDropDownOpen;
         }
 
-        private void GetProductImages()
+        private void GetProductImages(ProductDetailsModel productDetailsModel)
         {
-             List<ProductDetailsModel> _productDetails = new List<ProductDetailsModel>();
-            _productDetails.Add(new ProductDetailsModel() { Id = 1, ProductName = "AS ADOL Starter", ImageName = "ic_product_wid_pro" });
-            _productDetails.Add(new ProductDetailsModel() { Id = 2, ProductName = "DOL controller", ImageName = "ic_product_wide" });
-            _productDetails.Add(new ProductDetailsModel() { Id = 3, ProductName = "FASD1 Starter", ImageName = "ic_product_wid_pro" });
-
-            Products = new ObservableCollection<ProductDetailsModel>(_productDetails);
+            List<ProductImageData> _productImages = new List<ProductImageData>();
+            if (!string.IsNullOrEmpty(productDetailsModel.Image1))
+            {
+                _productImages.Add(new ProductImageData() { ProductID = 1, ImageName = GetImage(productDetailsModel.Image1) });
+            }
+            if (!string.IsNullOrEmpty(productDetailsModel.Image2))
+            {
+                _productImages.Add(new ProductImageData() { ProductID = 1, ImageName = GetImage(productDetailsModel.Image2) });
+            }
+            if (!string.IsNullOrEmpty(productDetailsModel.Image3))
+            {
+                _productImages.Add(new ProductImageData() { ProductID = 1, ImageName = GetImage(productDetailsModel.Image3) });
+            }
+            if (_productImages?.Count>0)
+            {
+                IsArrowVisable = true;
+                Products = new ObservableCollection<ProductImageData>(_productImages);
+            }
         }
 
 
-        private void SetProductDetails()
-        {
-            ProductName = "FASD2 Starter";
-            ProductDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ornare quis tellus efficitur elementum. Cras varius augue tortor, vel mattis quam posuere eu. Etiam luctus nisi at mauris faucibus, sit amet imperdiet nunc porta. Maecenas a felis ut velit tempor aliquam nec tincidunt dui. Sed sit amet finibus nulla. Nulla tristique metus vel nulla venenatis,";
-        }
+        
 
 
         private void SetDropDownData()
@@ -142,6 +184,57 @@ namespace RajaAgriApp.ViewModels
             _dropDowns.Add(new DropDownModel() { ItemID = 2, ItemName = "Manual" });
             _dropDowns.Add(new DropDownModel() { ItemID = 3, ItemName = "Brochure" });
             DropDownDataList = new ObservableCollection<DropDownModel>(_dropDowns);
+        }
+
+        public async void SetProductDetailsServiceCall()
+        {
+            try
+            {
+                if (IsConnected)
+                {
+                    var requestModel = new ProductDetailsRequestModel() 
+                    { ProductId = Convert.ToInt32(ProductId), LanguageId = LanguageID };
+                    AppIndicater.Instance.Show();
+                    var response = await _productDetailsController.GetProductDetails(requestModel);
+                    AppIndicater.Instance.Dismiss();
+                    if (response != null && response.Products?.Count > 0)
+                    {
+                        var productDeatils = response.Products[0];
+                        SetProductDetails(productDeatils);
+                        GetProductImages(productDeatils);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                AppIndicater.Instance.Dismiss();
+            }
+        }
+
+
+        private ImageSource GetImage(string image)
+        {
+
+            ImageSource _productImage;
+
+            _productImage = ImageSource.FromStream(
+                () => new MemoryStream(Convert.FromBase64String(image)));
+
+            return _productImage;
+        }
+
+        private void SetProductDetails(ProductDetailsModel productDetails)
+        {
+            if(productDetails!=null)
+            {
+                ProductName = productDetails.ProductName;
+                ProductDescription = productDetails.Description;
+            }
         }
     }
 }

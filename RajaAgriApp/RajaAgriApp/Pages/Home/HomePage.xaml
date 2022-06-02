@@ -3,8 +3,8 @@
                  xmlns="http://xamarin.com/schemas/2014/forms"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                  xmlns:resources="clr-namespace:RajaAgriApp.Resources" 
-                 xmlns:models="clr-namespace:RajaAgriApp.Models"
-                 x:Class="RajaAgriApp.Pages.HomePage"
+                 xmlns:models="clr-namespace:RajaAgriApp.Models" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" x:DataType="viewmodels:HomeViewModel"
+             x:Class="RajaAgriApp.Pages.HomePage"
                  Shell.NavBarIsVisible="False"
                  BackgroundColor="White" 
                  x:Name="homePage">
@@ -18,8 +18,10 @@
                              WidthRequest="160"
                              Padding="12"
                              BackgroundColor="{StaticResource TransprentSkyBlue}">
-                        <Image Source="{Binding ImageName}"
-                            Aspect="AspectFit"/>
+                        <Image Source="{Binding ProductImage}"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="FillAndExpand"
+                               Aspect="AspectFill"/>
                     </StackLayout>
                     <Label 
                         Margin="0,10,0,0"
@@ -27,7 +29,8 @@
                         Text="{Binding ProductName}"
                         Style="{StaticResource MediumRoyalBlueRomanLabelStyle}"/>
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding BindingContext.ItemCommand,
+                        <TapGestureRecognizer 
+                            Command="{Binding BindingContext.ItemCommand,
                             Source={x:Reference homePage} }" CommandParameter="{Binding .}"/>
                         
                     </StackLayout.GestureRecognizers>
