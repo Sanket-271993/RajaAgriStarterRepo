@@ -7,6 +7,7 @@ using RajaAgriApp.PopUpPages;
 using RajaAgriApp.Resources;
 using Rg.Plugins.Popup.Services;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -105,8 +106,6 @@ namespace RajaAgriApp.ViewModels
         {
             try
             {
-
-
                 if (IsConnected)
                 {
                     LoginRequestModel loginRequestModel = new LoginRequestModel()
@@ -119,7 +118,7 @@ namespace RajaAgriApp.ViewModels
                     if (response != null && !string.IsNullOrEmpty(response.access_token))
                     {
                         SaveFarmerMobileNumber(PhoneNumber);
-                        GoToRegistrationPage();
+                        CheckUserIsRegister();
                     }
 
                 }
@@ -181,8 +180,33 @@ namespace RajaAgriApp.ViewModels
         {
             await ShellRoutingService.Instance.NavigateTo($"{nameof(RegistrationPage)}");
         }
+        private async void GoToHomePage()
+        {
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(HomePage)}");
+        }
+
+        private async Task<bool> GetIsFarmerRegister()
+        {
+
+            string result=await StorageServiceProvider.Instance.Read(AppConstant.IsRegistered, false);
+            bool isRegister=Convert.ToBoolean(result);
+
+            return isRegister;
+        }
 
 
+        private async void CheckUserIsRegister()
+        {
+            var result = await GetIsFarmerRegister();
+            if(result)
+            {
+                GoToHomePage();
+            }
+            else
+            {
+                GoToRegistrationPage();
+            }
+        }
         private void GenreateOTP()
         {
             //Random generator = new Random();

@@ -54,6 +54,10 @@ namespace RajaAgriApp.ViewModels
         }
 
 
+        private string  _userImageBase64 ;
+
+       
+
         private ImageSource _imageSource = "ic_camera";
 
         public ImageSource FileUplodeImageSource
@@ -134,6 +138,7 @@ namespace RajaAgriApp.ViewModels
                     AppIndicater.Instance.Dismiss();
                     if (response != null && response.IsRegistered)
                     {
+                        SaveFarmerRegister(true);
                         SetOTPSuccessFullPopup();
                     }
                     else
@@ -152,6 +157,14 @@ namespace RajaAgriApp.ViewModels
             }
         }
 
+
+        private void SaveFarmerRegister(bool isRegistered)
+        {
+           
+           StorageServiceProvider.Instance.Write(AppConstant.IsRegistered, isRegistered.ToString(), false);
+            
+        }
+
         private RegisterRequestModel GetRequestData()
         {
 
@@ -162,7 +175,7 @@ namespace RajaAgriApp.ViewModels
                 Pincode = PinCode,
                 Landmark = LandMark,
                 FarmerName = Name,
-                Image = ""
+                Image = _userImageBase64
             };
 
             return registerRequest;
@@ -214,7 +227,9 @@ namespace RajaAgriApp.ViewModels
                         result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
                     {
                         var stream = await result.OpenReadAsync();
-                        // UserImage = ImageSource.FromStream(() => stream);
+                     //   _userImageBase64 = Convert.ToBase64String(stream);
+                           // 
+                        FileUplodeImageSource = ImageSource.FromStream(() => stream);
                         System.Console.WriteLine("File name chosen: " + fileName);
                         System.Console.WriteLine("File data: " + stream);
                     }

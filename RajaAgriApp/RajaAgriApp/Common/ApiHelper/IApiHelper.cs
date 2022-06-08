@@ -9,6 +9,7 @@ namespace RajaAgriApp.Common
         Task<HttpResponseMessage> InvokePutAPI<T>(string apiName, T body);
         Task<HttpResponseMessage> InvokePostAPI<T>(string apiName, T body);
         Task<HttpResponseMessage> InvokeDeleteAPI(string apiName);
+        Task<HttpResponseMessage> GetOAuthAccessToken(string apiName, FormUrlEncodedContent body);
         Task<HttpResponseMessage> GetOAuthAccessLoginToken(string apiName, FormUrlEncodedContent body);
         string GetAPIResponseStatusCodeMessage(HttpResponseMessage responseMessage);
     }

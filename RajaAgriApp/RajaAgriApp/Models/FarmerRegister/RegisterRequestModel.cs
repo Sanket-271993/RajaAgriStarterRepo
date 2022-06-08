@@ -24,7 +24,7 @@ namespace RajaAgriApp.Models
             public string AadhaarCardAddress { get; set; }
 
             [JsonProperty("image")]
-            public object Image { get; set; }
+            public string Image { get; set; }
         
     }
 

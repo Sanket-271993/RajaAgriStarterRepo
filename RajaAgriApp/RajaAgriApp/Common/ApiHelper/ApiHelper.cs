@@ -11,7 +11,7 @@ namespace RajaAgriApp.Common
 {
 
 
-    public class ApiHelper: IApiHelper
+    public class ApiHelper : IApiHelper
     {
         private readonly IClientHelper _clientHelper;
         public ApiHelper(IClientHelper clientHelper)
@@ -59,13 +59,22 @@ namespace RajaAgriApp.Common
 
         public async Task<HttpResponseMessage> GetOAuthAccessToken(string apiName, FormUrlEncodedContent body)
         {
-            using (var client = new HttpClient())
+            HttpResponseMessage response=new HttpResponseMessage();
+            try
             {
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
-                var response = await client.PostAsync(apiName, body);
-                return response;
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+                    response = await client.PostAsync(apiName, body);
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return response;
         }
 
         public async Task<HttpResponseMessage> GetOAuthAccessLoginToken(string apiName, FormUrlEncodedContent body)

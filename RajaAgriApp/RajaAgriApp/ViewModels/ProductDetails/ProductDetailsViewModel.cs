@@ -3,12 +3,17 @@ using RajaAgriApp.Common;
 using RajaAgriApp.Controller;
 using RajaAgriApp.Models;
 using RajaAgriApp.Pages;
+using RajaAgriApp.PopUpPages;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace RajaAgriApp.ViewModels
@@ -16,7 +21,7 @@ namespace RajaAgriApp.ViewModels
     [QueryProperty("ProductId", "ProductIdParameter")]
     public class ProductDetailsViewModel:BaseViewModel
     {
-
+        private ProductDetailsModel productDeatils;
         private IProductDetailsController _productDetailsController;
 
         private string _productName;   
@@ -149,6 +154,15 @@ namespace RajaAgriApp.ViewModels
         private void OnDropDownClick(object obj)
         {
             IsDropDownOpen=!IsDropDownOpen;
+
+            SetDropDown();
+        }
+
+        private async void SetDropDown()
+        {
+            var dropDown = new DownloadPopUpPage(_dropDowns);
+            //dropDown.ItemSelectionClick += DropDown_ItemSelectionClick;
+            await PopupNavigation.Instance.PushAsync(dropDown, false);
         }
 
         private void GetProductImages(ProductDetailsModel productDetailsModel)
@@ -174,18 +188,19 @@ namespace RajaAgriApp.ViewModels
         }
 
 
-        
+         private  List<DropDownModel> _dropDowns;
 
 
         private void SetDropDownData()
         {
-            List<DropDownModel> _dropDowns = new List<DropDownModel>();
+             _dropDowns = new List<DropDownModel>();
             _dropDowns.Add(new DropDownModel() { ItemID = 1, ItemName = "Catlog" });
             _dropDowns.Add(new DropDownModel() { ItemID = 2, ItemName = "Manual" });
             _dropDowns.Add(new DropDownModel() { ItemID = 3, ItemName = "Brochure" });
             DropDownDataList = new ObservableCollection<DropDownModel>(_dropDowns);
         }
 
+        
         public async void SetProductDetailsServiceCall()
         {
             try
@@ -199,7 +214,7 @@ namespace RajaAgriApp.ViewModels
                     AppIndicater.Instance.Dismiss();
                     if (response != null && response.Products?.Count > 0)
                     {
-                        var productDeatils = response.Products[0];
+                         productDeatils = response.Products[0];
                         SetProductDetails(productDeatils);
                         GetProductImages(productDeatils);
                     }
@@ -235,6 +250,31 @@ namespace RajaAgriApp.ViewModels
                 ProductName = productDetails.ProductName;
                 ProductDescription = productDetails.Description;
             }
+        }
+
+
+        private async Task<string> DownloadPdfFileAsync(string fileUrl,string fileName)
+        {
+            var filePath = Path.Combine(FileSystem.AppDataDirectory, "test.pdf");
+
+            if (File.Exists(filePath))
+                return filePath;
+
+            var httpClient = new HttpClient();
+            var pdfBytes = await httpClient.GetByteArrayAsync("ENTER YOUR URL TO THE PDF FILE HERE");
+
+            try
+            {
+                File.WriteAllBytes(filePath, pdfBytes);
+
+                return filePath;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
+            }
+
+            return null;
         }
     }
 }

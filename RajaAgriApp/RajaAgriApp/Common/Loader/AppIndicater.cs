@@ -25,17 +25,19 @@ namespace RajaAgriApp.Common
      
         public async void Show()
         {
-          //  var loader = new LoadingPopupPage();
-          //  await PopupNavigation.Instance.PushAsync(loader);
-             _loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: "Loading");
+            //  var loader = new LoadingPopupPage();
+            //  await PopupNavigation.Instance.PushAsync(loader);
+            _loadingDialog.Dispose();
+            _loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync(message: "Loading");
         }
 
         public void Dismiss()
         {
 
             Device.BeginInvokeOnMainThread(async() => await _loadingDialog.DismissAsync());
+            _loadingDialog.Dispose();
             // await PopupNavigation.Instance.PopAsync();
-            
+
         }
     }
 }

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<page:PopupPage  xmlns:page="http://rotorgames.com" 
+                 xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:models="clr-namespace:RajaAgriApp.Models"
+             x:Class="RajaAgriApp.PopUpPages.DownloadPopUpPage"
+             x:Name="downloadPopUp"
+             CloseWhenBackgroundIsClicked="False"
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="DropDownItemTemplate">
+                <StackLayout Spacing="0"
+                    Padding="20,10,20,10" 
+                    x:DataType="models:DropDownModel">
+                    <Label Text="{Binding ItemName}" 
+                           Style="{StaticResource MediumRoyalBlueRomanLabelStyle}"
+                           HorizontalOptions="Start"  />
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" 
+                                     Binding="{Binding IsSelectedItem}" 
+                                     Value="True">
+                            <Setter Property="BackgroundColor" Value="{StaticResource ExtraLightGreen}"/>
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" 
+                                              CommandParameter="{Binding .}" />
+                    </StackLayout.GestureRecognizers>
+
+                </StackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+
+        <StackLayout HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="Center"
+                                             Margin="30,0,30,0"
+                                             IsVisible="true"
+                                             Spacing="0"
+                                             BackgroundColor="{StaticResource TransprentGreen}"
+                                             BindableLayout.ItemsSource="{Binding DropDownDataList, Source={x:Reference downloadPopUp}}"
+                                             BindableLayout.ItemTemplate="{StaticResource DropDownItemTemplate}"/>
+
+    </ContentPage.Content>
+</page:PopupPage>
