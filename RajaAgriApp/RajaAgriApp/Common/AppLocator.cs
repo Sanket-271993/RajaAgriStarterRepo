@@ -46,7 +46,14 @@ namespace RajaAgriApp.Common
             builder.RegisterType<ProductDetailsService>().As<IProductDetailsService>();
             builder.RegisterType<ProductDetailsController>().As<IProductDetailsController>();
 
-            
+
+            builder.RegisterType<DealerService>().As<IDealerService>();
+            builder.RegisterType<DealerController>().As<IDealerController>();
+
+            builder.RegisterType<ReviewService>().As<IReviewService>();
+            builder.RegisterType<ReviewController>().As<IReviewController>();
+
+
             // builder.RegisterType<CompanyDbRepo>().AsSelf();
 
 

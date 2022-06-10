@@ -26,6 +26,8 @@ namespace RajaAgriApp.Models
             get { return _isSelectedItem; }
             set { SetProperty(ref _isSelectedItem, value); }
         }
+
+        public string Link { get; set; }
     }
 
 
@@ -110,7 +112,7 @@ namespace RajaAgriApp.Models
 
 
         [JsonProperty("YoutubeLink")]
-        public object YoutubeLink { get; set; }
+        public string YoutubeLink { get; set; }
 
         [JsonProperty("ProductLink")]
         public string ProductLink { get; set; }
@@ -157,11 +159,12 @@ namespace RajaAgriApp.Models
         [JsonProperty("ProductID")]
         public int ProductID { get; set; }
 
-        private ImageSource _imageName;
-        public ImageSource ImageName 
-        { get { return _imageName; }
-            set { SetProperty(ref _imageName, value); }
-        }
+        public ImageSource ImageName { get; set; }
+        //private ImageSource _imageName;
+        //public ImageSource ImageName 
+        //{ get { return _imageName; }
+        //    set { SetProperty(ref _imageName, value); }
+        //}
        
     }
 

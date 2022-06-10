@@ -18,6 +18,7 @@
                     <Image Source="{Binding ImageName}"
                            HeightRequest="250"
                            WidthRequest="250"
+                           Aspect="AspectFill"
                            HorizontalOptions="CenterAndExpand"
                            VerticalOptions="FillAndExpand"/>
                 </StackLayout>
@@ -115,10 +116,10 @@
                             <!--Review And DropDown-->
                             <StackLayout 
                                 Orientation="Horizontal"
-                                 Margin="0,20,50,0">
+                                 Margin="0,20,0,0">
                                 <Label Text="{x:Static resource:AppResource.LabelReview}" 
-                               Style="{StaticResource MediumSkyBlueBoldLabelStyle}"
-                               HorizontalOptions="Start" >
+                                       Style="{StaticResource MediumSkyBlueBoldLabelStyle}"
+                                       HorizontalOptions="Start" >
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding OnReviewCommand}" />
                                     </Label.GestureRecognizers>
@@ -180,9 +181,9 @@
                                              BindableLayout.ItemsSource="{Binding DropDownDataList}"
                                              BindableLayout.ItemTemplate="{StaticResource DropDownItemTemplate}">
                                 <StackLayout.Triggers>
-                                    <DataTrigger TargetType="StackLayout" Binding="{Binding IsDropDownOpen}" Value="True">
+                                   <!-- <DataTrigger TargetType="StackLayout" Binding="{Binding IsDropDownOpen}" Value="True">
                                         <Setter Property="IsVisible" Value="True"/>
-                                    </DataTrigger>
+                                    </DataTrigger>-->
                                 </StackLayout.Triggers>
                             </StackLayout>
                         </Grid>

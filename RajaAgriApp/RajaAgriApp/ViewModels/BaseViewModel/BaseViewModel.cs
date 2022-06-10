@@ -78,6 +78,8 @@ namespace RajaAgriApp.ViewModels
             set { SetProperty(ref _languageID, value); }
         }
 
+
+         public static  ProductDetailsModel ProductDetails { get; set; }
         public ICommand MultiLanguageCommand { get; set; }
 
         public BaseViewModel()

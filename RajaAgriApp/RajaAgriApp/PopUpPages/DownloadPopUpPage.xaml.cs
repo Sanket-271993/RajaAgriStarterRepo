@@ -17,7 +17,7 @@ namespace RajaAgriApp.PopUpPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DownloadPopUpPage : PopupPage
     {
-        public event EventHandler ItemSelectionClick;
+        public event EventHandler<DropDownEventArg> ItemSelectionClick;
         private ObservableCollection<DropDownModel> _dropDownDataList;
         public ObservableCollection<DropDownModel> DropDownDataList
         {

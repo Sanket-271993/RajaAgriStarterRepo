@@ -21,7 +21,7 @@ namespace RajaAgriApp.ViewModels
     [QueryProperty("ProductId", "ProductIdParameter")]
     public class ProductDetailsViewModel:BaseViewModel
     {
-        private ProductDetailsModel productDeatils;
+        private ProductDetailsModel productDetails=null;
         private IProductDetailsController _productDetailsController;
 
         private string _productName;   
@@ -83,7 +83,6 @@ namespace RajaAgriApp.ViewModels
         public ICommand OnRightArrowCommand { get; set; }
         public ICommand OnLeftArrowCommand { get; set; }
         public ICommand OnGetDealerCommand { get; set; }
-
         public ICommand OnReviewCommand { get; set; }
 
         public ProductDetailsViewModel()
@@ -92,7 +91,7 @@ namespace RajaAgriApp.ViewModels
             //  GetProductImages();
             // SetProductDetails();
             InitController();
-            SetDropDownData();
+           
         }
 
         private void InitCommand()
@@ -113,7 +112,12 @@ namespace RajaAgriApp.ViewModels
 
         private async void OnReviewClick(object obj)
         {
-            await ShellRoutingService.Instance.NavigateTo($"{nameof(ReviewPage)}");
+            if(productDetails!=null)
+            {
+                ProductDetails = productDetails;
+                await ShellRoutingService.Instance.NavigateTo($"{nameof(ReviewPage)}");
+            }
+            
         }
 
         private async  void OnGetDealerClick(object obj)
@@ -121,7 +125,9 @@ namespace RajaAgriApp.ViewModels
             await ShellRoutingService.Instance.NavigateTo($"{nameof(DealerPage)}");
         }
 
-        private void OnLeftArrowClick(object obj)
+
+        
+       private void OnLeftArrowClick(object obj)
         {
             if(Postion!=0)
             {
@@ -140,7 +146,8 @@ namespace RajaAgriApp.ViewModels
         private void OnDropDownItemClick(DropDownModel DropDownItem)
         {
             SetAllUnSelected();
-            DropDownItem.IsSelectedItem = !DropDownItem.IsSelectedItem;
+          //  DropDownItem.IsSelectedItem = !DropDownItem.IsSelectedItem;
+           
             IsDropDownOpen = false;
         }
 
@@ -161,10 +168,39 @@ namespace RajaAgriApp.ViewModels
         private async void SetDropDown()
         {
             var dropDown = new DownloadPopUpPage(_dropDowns);
-            //dropDown.ItemSelectionClick += DropDown_ItemSelectionClick;
+            dropDown.ItemSelectionClick += DropDown_ItemSelectionClick;
             await PopupNavigation.Instance.PushAsync(dropDown, false);
         }
 
+        
+
+        private void DropDown_ItemSelectionClick(object sender, DropDownEventArg e)
+        {
+            DropDownModel data=e.SelectedData as DropDownModel;
+            if (data != null)
+            {
+                if(!string.IsNullOrEmpty(data.Link))
+                {
+                    OpenBrowser(data.Link);
+                }
+                else
+                {
+                    SetAlertPopup("Link not avaiable!");
+                }
+            }
+        }
+
+        public async void OpenBrowser(string uri)
+        {
+            try
+            {
+                await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+            }
+            catch (Exception ex)
+            {
+                // An unexpected error occured. No browser may be installed on the device.
+            }
+        }
         private void GetProductImages(ProductDetailsModel productDetailsModel)
         {
             List<ProductImageData> _productImages = new List<ProductImageData>();
@@ -182,7 +218,11 @@ namespace RajaAgriApp.ViewModels
             }
             if (_productImages?.Count>0)
             {
-                IsArrowVisable = true;
+                IsArrowVisable = _productImages?.Count==1?false:true;
+                if(Products!=null)
+                {
+                    Products.Clear();
+                }
                 Products = new ObservableCollection<ProductImageData>(_productImages);
             }
         }
@@ -191,12 +231,15 @@ namespace RajaAgriApp.ViewModels
          private  List<DropDownModel> _dropDowns;
 
 
-        private void SetDropDownData()
+        private void SetDropDownData(ProductDetailsModel productDetails)
         {
              _dropDowns = new List<DropDownModel>();
-            _dropDowns.Add(new DropDownModel() { ItemID = 1, ItemName = "Catlog" });
-            _dropDowns.Add(new DropDownModel() { ItemID = 2, ItemName = "Manual" });
-            _dropDowns.Add(new DropDownModel() { ItemID = 3, ItemName = "Brochure" });
+            
+            _dropDowns.Add(new DropDownModel() { ItemID = 1, ItemName = "YoutubeLink",Link= productDetails.YoutubeLink });
+            _dropDowns.Add(new DropDownModel() { ItemID = 1, ItemName = "ProductLink", Link = productDetails.ProductLink });
+            _dropDowns.Add(new DropDownModel() { ItemID = 1, ItemName = "Catlog" , Link = productDetails.Catalog });
+            _dropDowns.Add(new DropDownModel() { ItemID = 2, ItemName = "Manual", Link = productDetails.Manual });
+            _dropDowns.Add(new DropDownModel() { ItemID = 3, ItemName = "Brochure" , Link = productDetails.Brochure });
             DropDownDataList = new ObservableCollection<DropDownModel>(_dropDowns);
         }
 
@@ -207,16 +250,18 @@ namespace RajaAgriApp.ViewModels
             {
                 if (IsConnected)
                 {
-                    var requestModel = new ProductDetailsRequestModel() 
+                    var requestModel = new ProductDetailsRequestModel()
                     { ProductId = Convert.ToInt32(ProductId), LanguageId = LanguageID };
                     AppIndicater.Instance.Show();
                     var response = await _productDetailsController.GetProductDetails(requestModel);
                     AppIndicater.Instance.Dismiss();
                     if (response != null && response.Products?.Count > 0)
                     {
-                         productDeatils = response.Products[0];
-                        SetProductDetails(productDeatils);
-                        GetProductImages(productDeatils);
+                        productDetails = response.Products[0];
+                        ProductDetails = productDetails;
+                        SetProductDetails(productDetails);
+                        GetProductImages(productDetails);
+                        SetDropDownData(productDetails);
                     }
                 }
 

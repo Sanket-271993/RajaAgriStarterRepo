@@ -13,10 +13,20 @@ namespace RajaAgriApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DealerPage : BaseView
     {
+        DealerViewModel dealerViewModel;
         public DealerPage()
         {
             InitializeComponent();
-            this.BindingContext = new DealerViewModel();
+            dealerViewModel = new DealerViewModel();
+            this.BindingContext = dealerViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            dealerViewModel.GetDealerServiceCall();
+            base.OnAppearing();
         }
     }
+
+
 }

@@ -29,7 +29,7 @@ namespace RajaAgriApp.Models
         }
 
         [JsonProperty("ProductTypeId")]
-        public int ProductTypeId { get; set; }
+        public object ProductTypeId { get; set; }
 
         [JsonProperty("Subtitle")]
         public string Subtitle { get; set; }

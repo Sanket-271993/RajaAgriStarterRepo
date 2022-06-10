@@ -1,4 +1,6 @@
-﻿using RajaAgriApp.Models;
+﻿using RajaAgriApp.Common;
+using RajaAgriApp.Controller;
+using RajaAgriApp.Models;
 using RajaAgriApp.Resources;
 using System;
 using System.Collections.Generic;
@@ -9,15 +11,24 @@ using Xamarin.Forms;
 
 namespace RajaAgriApp.ViewModels
 {
-    public class DealerViewModel:BaseViewModel
+    public class DealerViewModel : BaseViewModel
     {
-       public ObservableCollection<DealerModel> Dealers { get; set; }
-       public ICommand OnItemCommand { get; set; }
+        private IDealerController _dealerController;
+
+        private ObservableCollection<DealerModel> _dealers;
+        public ObservableCollection<DealerModel> Dealers
+        { 
+            get { return _dealers; } 
+            set { SetProperty(ref _dealers, value); } 
+        }
+        public ICommand OnItemCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
         public DealerViewModel()
         {
             SetTitle();
+            InitController();
             InitCommand();
-            GetDealerDetails();
+            //GetDealerDetails();
         }
 
         private void SetTitle()
@@ -29,6 +40,17 @@ namespace RajaAgriApp.ViewModels
         private void InitCommand()
         {
             OnItemCommand = new Command<DealerModel>(OnItemClick);
+            SearchCommand = new Command(OnSearchClick);
+        }
+
+        private void OnSearchClick(object obj)
+        {
+           //
+        }
+
+        private void InitController()
+        {
+            _dealerController = AppLocator.Instance.GetInstance<IDealerController>();
         }
 
         private void OnItemClick(DealerModel obj)
@@ -46,6 +68,31 @@ namespace RajaAgriApp.ViewModels
             _dealerModels.Add(new DealerModel() { DealerId = 5, DealerName = "Suraj Kumar", PhoneNumber = "1234567890", Rating = 1 });
 
             Dealers = new ObservableCollection<DealerModel>(_dealerModels);
+        }
+
+        
+
+        public async void GetDealerServiceCall()
+        {
+            try
+            {
+                if (IsConnected)
+                {
+
+                    AppIndicater.Instance.Show();
+                    var response = await _dealerController.GetDealer();
+                     AppIndicater.Instance.Dismiss();
+                    if (response != null && response.Distributors?.Count > 0)
+                    {
+                        Dealers = new ObservableCollection<DealerModel>(response.Distributors);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
     }
 }

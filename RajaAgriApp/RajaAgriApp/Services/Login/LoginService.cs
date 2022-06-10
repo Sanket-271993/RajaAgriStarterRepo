@@ -26,7 +26,7 @@ namespace RajaAgriApp.Services
             try
             {
                 var loginRequestParm = SetLoginParams(loginRequest.MobileNo);
-                HttpResponseMessage responseMessage = await _apiHelper.GetOAuthAccessToken(BaseApiURL, loginRequestParm);
+                HttpResponseMessage responseMessage = await _apiHelper.GetOAuthAccessLoginToken(BaseApiURL, loginRequestParm);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     response = await ResponseContent<LoginResponseModel>.ResponseContentAsync(responseMessage);

@@ -9,5 +9,8 @@ namespace RajaAgriApp.Common
         public static readonly string FarmerRegister = URLEnvironment.Connection + ServiceName.RegisterFarmer;
         public static readonly string Home = URLEnvironment.Connection + ServiceName.Home;
         public static readonly string ProductDetail = URLEnvironment.Connection + ServiceName.ProductDetail;
+        public static readonly string Dealer = URLEnvironment.Connection + ServiceName.Dealer;
+        public static readonly string ProductRating = URLEnvironment.Connection + ServiceName.ProductRating;
+        
     }
 }

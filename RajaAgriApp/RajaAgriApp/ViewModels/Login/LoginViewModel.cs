@@ -187,9 +187,13 @@ namespace RajaAgriApp.ViewModels
 
         private async Task<bool> GetIsFarmerRegister()
         {
-
+            bool isRegister = false;
             string result=await StorageServiceProvider.Instance.Read(AppConstant.IsRegistered, false);
-            bool isRegister=Convert.ToBoolean(result);
+            if(!string.IsNullOrEmpty(result))
+            {
+                isRegister = Convert.ToBoolean(result);
+            }
+            
 
             return isRegister;
         }

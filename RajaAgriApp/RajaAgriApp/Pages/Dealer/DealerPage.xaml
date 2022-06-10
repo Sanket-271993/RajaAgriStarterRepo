@@ -5,7 +5,7 @@
                 xmlns:resources="clr-namespace:RajaAgriApp.Resources" 
                 xmlns:models="clr-namespace:RajaAgriApp.Models"
                 xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"  
-                xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" x:DataType="viewmodels:DealerViewModel"
                 BackgroundColor="White"
                 x:Name="dealerPage"
                 x:Class="RajaAgriApp.Pages.DealerPage">
@@ -14,10 +14,11 @@
             <DataTemplate x:Key="DealerTemplete">
                 <Grid ColumnDefinitions="Auto,*" 
                       Margin="10,15,10,0"
+                      x:DataType="models:DealerModel"
                       RowDefinitions="Auto,1">
                     <StackLayout Grid.Column="0" 
                                  Grid.Row="0">
-                        <ff:CachedImage Source="ic_defult_user" 
+                        <ff:CachedImage Source="{Binding UserProfile}" 
                                         HorizontalOptions="Start"
                                         WidthRequest="80" >
                             <ff:CachedImage.Transformations>
@@ -28,20 +29,20 @@
                     <StackLayout Grid.Column="1" 
                                  Spacing="5">
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="RamKumar" 
+                            <Label Text="{Binding DealerName}" 
                                    HorizontalOptions="Start"
                                    Style="{StaticResource MediumRoyalBlueBoldLabelStyle}"/>
-                            <Label Text="23/KM" 
+                            <Label Text="{Binding Region}" 
                                    HorizontalOptions="EndAndExpand"
                                    Style="{StaticResource SmallPeacockGreenRomanLabelStyle}"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="+91 9902632148" 
+                            <Label Text="{Binding PhoneNumber}" 
                                    HorizontalOptions="Start"
                                    Style="{StaticResource MediumLightGrayRomanLabelStyle}"/>
-                            <Label Text="RamKumar" 
+                           <!-- <Label Text="RamKumar" 
                                    HorizontalOptions="EndAndExpand"
-                                   Style="{StaticResource SmallPeacockGreenRomanLabelStyle}"/>
+                                   Style="{StaticResource SmallPeacockGreenRomanLabelStyle}"/>-->
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" 
                                      Padding="20,10,0,10"

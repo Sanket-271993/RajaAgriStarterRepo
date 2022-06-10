@@ -1,22 +1,77 @@
 ﻿using NavistarOCCApp.Common;
+using RajaAgriApp.Common;
+using RajaAgriApp.Controller;
+using RajaAgriApp.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace RajaAgriApp.ViewModels
 {
+    
+   
     public class ReviewViewModel : BaseViewModel
     {
+        private IReviewController _reviewController;
+
+
+        private string _productImageBase64;
+        public string ProductImageBase64
+        {
+            get { return _productImageBase64; }
+            set { 
+                SetProperty(ref _productImageBase64, value);
+              //  _productImage = GetImage(value);
+            }
+        }
+
+        private ImageSource _productImage;
+        public ImageSource ProductImage
+        {
+            get { return _productImage; }
+            set
+            {
+              
+                SetProperty(ref _productImage, value);
+               
+            }
+        }
+
+        private int _productId;
+        public int ProductId
+        {
+            get { return _productId; }
+            set { SetProperty(ref _productId, value); }
+        }
+
+
+        private int _productRating;
+        public int ProductRating
+        {
+            get { return _productRating; }
+            set { SetProperty(ref _productRating, value); }
+        }
 
         private string _productName;
-
         public string ProductName
         {
             get { return _productName; }
-            set { SetProperty(ref _productName,value); }
+            set { SetProperty(ref _productName, value); }
         }
+
+
+        private string _comments;
+        public string Comments
+        {
+            get { return _comments; }
+            set { SetProperty(ref _comments, value); }
+        }
+
+        
 
         private bool _isStarOne;
         public bool IsStarOne
@@ -59,37 +114,48 @@ namespace RajaAgriApp.ViewModels
         public ICommand OnStarFourCommand { get; set; }
         public ICommand OnStarFiveCommand { get; set; }
         public ICommand OnSubmitCommand { get; set; }
-        
+
         public ReviewViewModel()
         {
             Title = "Review";
             IsTranslateVisable = true;
             SetProductDetails();
+            InitController();
             InitCommand();
         }
 
         private void InitCommand()
         {
             OnStarOneCommand = new Command(OnStarOneClick);
-            OnStarTwoCommand= new Command(OnStarTwoClick);
+            OnStarTwoCommand = new Command(OnStarTwoClick);
             OnStarThreeCommand = new Command(OnStarThreeClick);
             OnStarFourCommand = new Command(OnStarFourClick);
             OnStarFiveCommand = new Command(OnStarFiveClick);
             OnSubmitCommand = new Command(OnSubmitClick);
         }
 
-        private async void OnSubmitClick(object obj)
+        private void InitController()
         {
-            await ShellRoutingService.Instance.GoBack();
+            _reviewController = AppLocator.Instance.GetInstance<IReviewController>();
+        }
+
+        private void OnSubmitClick(object obj)
+        {
+            
+            SetProductReviewSubmitServiceCall();
+            
         }
 
         private void OnStarFiveClick(object obj)
         {
+           
             IsStarFive = !IsStarFive;
             IsStarFour = IsStarFive;
             IsStarThree = IsStarFive;
             IsStarTwo = IsStarFive;
             IsStarOne = IsStarFive;
+
+            ProductRating = 5;
         }
 
         private void OnStarFourClick(object obj)
@@ -99,6 +165,7 @@ namespace RajaAgriApp.ViewModels
             IsStarThree = IsStarFour;
             IsStarTwo = IsStarFour;
             IsStarOne = IsStarFour;
+            ProductRating = 4;
         }
 
         private void OnStarThreeClick(object obj)
@@ -107,6 +174,8 @@ namespace RajaAgriApp.ViewModels
             IsStarThree = !IsStarThree;
             IsStarTwo = IsStarThree;
             IsStarOne = IsStarThree;
+
+            ProductRating = 3;
         }
 
         private void OnStarTwoClick(object obj)
@@ -114,19 +183,17 @@ namespace RajaAgriApp.ViewModels
             SetAllStarUnselected();
             IsStarTwo = !IsStarTwo;
             IsStarOne = IsStarTwo;
+            ProductRating = 2;
         }
 
         private void OnStarOneClick(object obj)
         {
             SetAllStarUnselected();
             IsStarOne = !IsStarOne;
+            ProductRating = 1;
         }
 
-        private void SetProductDetails()
-        {
-            ProductName = "FASD2 Starter";
-        }
-
+        
         private void SetAllStarUnselected()
         {
             IsStarOne = false;
@@ -136,13 +203,87 @@ namespace RajaAgriApp.ViewModels
             IsStarFive = false;
         }
 
-        private void SetAllStarSelected()
+       
+
+        private void SetProductDetails()
         {
-            IsStarOne = true;
-            IsStarTwo = true;
-            IsStarThree = true;
-            IsStarFour = true;
-            IsStarFive = true;
+            if(ProductDetails!=null)
+            {
+                ProductId = ProductDetails.ProductID;
+                ProductName = ProductDetails.ProductName;
+                ProductImage = GetImage(ProductDetails.Image1);
+            }
+        }
+
+        private async void SetProductReviewSubmitServiceCall()
+        {
+            try
+            {
+                if (IsConnected)
+                {
+                    bool isValid = Validate();
+                    if (isValid)
+                    {
+                        var requestModel = GetReviewRequsetModel();
+                        AppIndicater.Instance.Show();
+                        var response = await _reviewController.PostSubmitProductRating(requestModel);
+                        AppIndicater.Instance.Dismiss();
+                        if (response != null && response.IsSubmitted)
+                        {
+                         
+                            SetSnackBarMessage(response.Message);
+                             await Task.Delay(3000);
+                            await ShellRoutingService.Instance.GoBack();
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(response.Message))
+                            {
+                                SetAlertPopup(response.Message);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private ImageSource GetImage(string image)
+        {
+
+            ImageSource _productImage;
+
+            _productImage = ImageSource.FromStream(
+                () => new MemoryStream(Convert.FromBase64String(image)));
+
+            return _productImage;
+        }
+
+        private ReviewRequestModel GetReviewRequsetModel()
+        {
+            var requestModel = new ReviewRequestModel()
+            {
+                ProductId = ProductId,
+                ProductRating = ProductRating,
+                Comments = Comments,
+                RatingDate = DateTime.Now
+            };
+            return requestModel;
+        }
+
+        private bool Validate()
+        {
+            // perform test for each field on page
+            if (ProductRating==0)
+            {
+                SetAlertPopup("Please give  the Product Rating !");
+                return false;
+            }
+            
+            return true;
         }
     }
 }
