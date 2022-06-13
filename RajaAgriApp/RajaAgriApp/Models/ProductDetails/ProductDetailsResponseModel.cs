@@ -28,6 +28,7 @@ namespace RajaAgriApp.Models
         }
 
         public string Link { get; set; }
+        public string SerialNumber { get; set; }
     }
 
 

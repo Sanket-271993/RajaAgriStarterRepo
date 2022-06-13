@@ -1,12 +1,15 @@
 ﻿using NavistarOCCApp.Common;
 using RajaAgriApp.Common;
+using RajaAgriApp.Controller;
 using RajaAgriApp.Models;
+using RajaAgriApp.Pages;
 using RajaAgriApp.PopUpPages;
 using RajaAgriApp.Resources;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,7 +20,9 @@ namespace RajaAgriApp.ViewModels
 {
     public class ProductRegistrationViewModel : BaseViewModel
     {
-        public List<DropDownModel> Products { get; set; }
+        private IProductRegisterController _productRegisterController;
+
+        public List<ProductModel> Products { get; set; }
         private bool _isProductNameDDOpen;
         public bool IsProductNameDDOpen
         {
@@ -38,6 +43,7 @@ namespace RajaAgriApp.ViewModels
             get { return _isElectricalShopsDDOpen; }
             set { SetProperty(ref _isElectricalShopsDDOpen, value); }
         }
+        private int _productID;
         private string _productName;
         public string ProductName
         {
@@ -45,6 +51,7 @@ namespace RajaAgriApp.ViewModels
             set { SetProperty(ref _productName, value); }
         }
 
+        private int _productTypeID;
         private string _productType;
         public string ProductType
         {
@@ -52,6 +59,7 @@ namespace RajaAgriApp.ViewModels
             set { SetProperty(ref _productType, value); }
         }
 
+        private int _dealerID;
         private string _electricalShops;
         public string ElectricalShops
         {
@@ -80,6 +88,9 @@ namespace RajaAgriApp.ViewModels
             get { return _serialNumber; }
             set { SetProperty(ref _serialNumber, value); }
         }
+
+        private string InvoiceImageBase64;
+
         public ICommand OnProductNameDropDownCommand { get; set; }
         public ICommand OnProductTypeDropDownCommand { get; set; }
         public ICommand OnElectricalShopsDropDownCommand { get; set; }
@@ -91,7 +102,8 @@ namespace RajaAgriApp.ViewModels
         public ProductRegistrationViewModel()
         {
             InitCommand();
-            SetDropDownData();
+            InitController();
+            
             SetDropDownDefultValue();
         }
 
@@ -107,6 +119,12 @@ namespace RajaAgriApp.ViewModels
             
         }
 
+        private void InitController()
+        {
+            _productRegisterController = AppLocator.Instance.GetInstance<IProductRegisterController>();
+
+        }
+
         private void InitCommand()
         {
 
@@ -118,10 +136,134 @@ namespace RajaAgriApp.ViewModels
             OnSubmitCommand = new Command(OnSubmitClick);
         }
 
-
-        private async void OnSubmitClick(object obj)
+        public async void GetProductNameServiceCall()
         {
-            await ShellRoutingService.Instance.GoBack();
+            try
+            {
+                if (IsConnected)
+                {
+                    AppIndicater.Instance.Show();
+                    var response = await _productRegisterController.GetHome();
+                   // AppIndicater.Instance.Dismiss();
+                    if (response != null && response.Products?.Count > 0)
+                    {
+                        SetProductNameDropDownData(response.Products);
+                        GetProductTypeServiceCall();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+               // AppIndicater.Instance.Dismiss();
+            }
+        }
+
+        public async void GetProductTypeServiceCall()
+        {
+            try
+            {
+                if (IsConnected)
+                {
+                   // AppIndicater.Instance.Show();
+                    var response = await _productRegisterController.GetProductType();
+                   // AppIndicater.Instance.Dismiss();
+                    if (response != null && response.ProductTypes?.Count > 0)
+                    {
+                        SetProductTypeDropDownData(response.ProductTypes);
+                        GetDealerServiceCall();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+               // AppIndicater.Instance.Dismiss();
+            }
+        }
+
+        public async void GetDealerServiceCall()
+        {
+            try
+            {
+                if (IsConnected)
+                {
+
+                   // AppIndicater.Instance.Show();
+                    var response = await _productRegisterController.GetDealer();
+                    AppIndicater.Instance.Dismiss();
+                    if (response != null && response.Distributors?.Count > 0)
+                    {
+                        SetElecticShopsDropDownData(response.Distributors);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                AppIndicater.Instance.Dismiss();
+            }
+
+        }
+
+        private  void OnSubmitClick(object obj)
+        {
+            ProductRegisterServiceCall();
+        }
+
+        private async void ProductRegisterServiceCall()
+        {
+            try
+            {
+                if (IsConnected)
+                {
+                    bool isValid = IsValidData();
+                    if (isValid)
+                    {
+                        AppIndicater.Instance.Show();
+                        var request = GetRequestModel();
+
+                        var response = await _productRegisterController.PostProductRegistration(request);
+                        AppIndicater.Instance.Dismiss();
+                        if (response != null && response.IsRegistered)
+                        {
+                            SetSnackBarMessage(response.Message);
+                            await Task.Delay(3000);
+
+                            await ShellRoutingService.Instance.GoBack();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+               // AppIndicater.Instance.Dismiss();
+            }
+        }
+
+        private ProductRegistrationRequestModel GetRequestModel()
+        {
+            var request= new ProductRegistrationRequestModel();
+            request.ProductType = _productTypeID;
+            request.ProductId=_productID;
+            request.DistributorId = _dealerID;
+            request.SerialNumber= _serialNumber;
+            request.InvoiceDate = InvoiceDate;
+            request.InvoiceImage = InvoiceImageBase64;
+            return request;
         }
 
         private void FilePickerClick(object obj)
@@ -159,6 +301,10 @@ namespace RajaAgriApp.ViewModels
                         result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
                     {
                         var stream = await result.OpenReadAsync();
+                        //var stream = file.GetStream();
+                        var bytes = new byte[stream.Length];
+                        await stream.ReadAsync(bytes, 0, (int)stream.Length);
+                        InvoiceImageBase64 = System.Convert.ToBase64String(bytes);
                         //UserImage = ImageSource.FromStream(() => stream);
                     }
                 }
@@ -186,7 +332,14 @@ namespace RajaAgriApp.ViewModels
 
             IsProductNameDDOpen = false;
             IsProductNameDDOpen = false;
-            SetDropDown(DropDownType.ElectricSghop);
+            SetDropDownElectricalShops(_electicShopsDropDowns, DropDownType.ElectricSghop);
+        }
+
+        private async void SetDropDownElectricalShops(List<DropDownModel> electricalShopsDropDowns, DropDownType dropdowntype)
+        {
+            var dropDown = new DropDownPage(electricalShopsDropDowns, dropdowntype);
+            dropDown.ItemSelectionClick += DropDown_ItemSelectionClick;
+            await PopupNavigation.Instance.PushAsync(dropDown, false);
         }
 
         private void OnProductTypeDropDownClick(object obj)
@@ -194,18 +347,25 @@ namespace RajaAgriApp.ViewModels
             IsProductTypeDDOpen = !IsProductTypeDDOpen;
             IsProductNameDDOpen = false;
             IsElectricalShopsDDOpen = false;
-            SetDropDown(DropDownType.ProductType);
+            SetDropDownProductTypeName(_productTypeDropDowns,DropDownType.ProductType);
+        }
+
+        private async void SetDropDownProductTypeName(List<DropDownModel> productTypeDropDowns, DropDownType dropdowntype)
+        {
+            var dropDown = new DropDownPage(productTypeDropDowns, dropdowntype);
+            dropDown.ItemSelectionClick += DropDown_ItemSelectionClick;
+            await PopupNavigation.Instance.PushAsync(dropDown, false);
         }
 
         private void OnProductNameDropDownClick(Object obj)
         {
             IsProductNameDDOpen = !IsProductNameDDOpen;
-            SetDropDown(DropDownType.ProductName);
+            SetDropDownProductName(_productNameDropDowns,DropDownType.ProductName);
         }
 
-        private async void SetDropDown(DropDownType dropdowntype)
+        private async void SetDropDownProductName(List<DropDownModel> productNameDropDowns, DropDownType dropdowntype)
         {
-            var dropDown = new DropDownPage(Products,dropdowntype);
+            var dropDown = new DropDownPage(productNameDropDowns,dropdowntype);
             dropDown.ItemSelectionClick += DropDown_ItemSelectionClick;
             await PopupNavigation.Instance.PushAsync(dropDown, false);
         }
@@ -219,36 +379,96 @@ namespace RajaAgriApp.ViewModels
                 {
                     case DropDownType.ProductName:
                         ProductName = dropEventArgs.SelectedData.ItemName;
+                        _productID = dropEventArgs.SelectedData.ItemID;
                         IsProductNameDDOpen = false;
                         break;
                     case DropDownType.ProductType:
                         ProductType = dropEventArgs.SelectedData.ItemName;
+                        _productTypeID = dropEventArgs.SelectedData.ItemID;
                         IsProductTypeDDOpen = false;
                         break;
                     case DropDownType.ElectricSghop:
                         ElectricalShops = dropEventArgs.SelectedData.ItemName;
+                        _dealerID = dropEventArgs.SelectedData.ItemID;
                         IsElectricalShopsDDOpen = false;
                         break;
                 }
             }
-
         }
 
-        private void SetAllUnSelected()
-        {
-            foreach (DropDownModel item in Products)
-            {
-                item.IsSelectedItem = false;
-            }
-        }
+    
 
-        private void SetDropDownData()
+        private List<DropDownModel> _productNameDropDowns;
+        private void SetProductNameDropDownData(List<ProductModel> products)
         {
             List<DropDownModel> _dropDowns = new List<DropDownModel>();
-            _dropDowns.Add(new DropDownModel() { ItemID = 1, ItemName = "Catlog" });
-            _dropDowns.Add(new DropDownModel() { ItemID = 2, ItemName = "Manual" });
-            _dropDowns.Add(new DropDownModel() { ItemID = 3, ItemName = "Brochure" });
-            Products = new List<DropDownModel>(_dropDowns);
+            _dropDowns.Add(new DropDownModel() { ItemID = 0, ItemName = AppResource.LabelProductName });
+            foreach (var product in products)
+            {
+                _dropDowns.Add(new DropDownModel() { ItemID = product.ProductID, ItemName = product.ProductName });
+            }
+           
+            _productNameDropDowns = new List<DropDownModel>(_dropDowns);
+        }
+
+        private List<DropDownModel> _productTypeDropDowns;
+        private void SetProductTypeDropDownData(List<ProductTypeModel> productTypes)
+        {
+            List<DropDownModel> _dropDowns = new List<DropDownModel>();
+            _dropDowns.Add(new DropDownModel() { ItemID = 0, ItemName = AppResource.LabelProductType });
+            foreach (var product in productTypes)
+            {
+                _dropDowns.Add(new DropDownModel() { ItemID = product.ProductTypeID, ItemName = product.ProductType });
+            }
+            _productTypeDropDowns = new List<DropDownModel>(_dropDowns);
+        }
+
+        private List<DropDownModel> _electicShopsDropDowns;
+        private void SetElecticShopsDropDownData(List<DealerModel> electicShops)
+        {
+            List<DropDownModel> _dropDowns = new List<DropDownModel>();
+            _dropDowns.Add(new DropDownModel() { ItemID = 0, ItemName = AppResource.LabelElectricalShops });
+            foreach (var product in electicShops)
+            {
+                _dropDowns.Add(new DropDownModel() { ItemID = product.DealerId, ItemName = product.DealerName });
+            }
+            _electicShopsDropDowns = new List<DropDownModel>(_dropDowns);
+        }
+
+        private bool IsValidData()
+        {
+            if (!string.IsNullOrEmpty(ProductName) && ProductName.Equals(AppResource.LabelProductName))
+            {
+                SetAlertPopup("Please Select Product Name");
+                return false;
+            }
+            else if (!string.IsNullOrEmpty(ProductType) && ProductName.Equals(AppResource.LabelProductType))
+            {
+                SetAlertPopup("Please Select Product Type");
+                return false;
+            }
+            else if (!string.IsNullOrEmpty(ElectricalShops) && ProductName.Equals(AppResource.LabelElectricalShops))
+            {
+                SetAlertPopup("Please Select Product Type");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(SerialNumber))
+            {
+                SetAlertPopup("Please enter Serial Number");
+                return false;
+            }
+            else if(InvoiceSelectedDate.Equals(DateTime.MinValue))
+            {
+                SetAlertPopup("Please select invoice date");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(InvoiceImageBase64))
+            {
+                SetAlertPopup("Please select invoice image");
+                return false;
+            }
+
+            return true;
         }
     }
 }

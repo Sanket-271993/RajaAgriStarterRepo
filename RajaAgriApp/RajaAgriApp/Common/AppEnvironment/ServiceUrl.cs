@@ -11,6 +11,10 @@ namespace RajaAgriApp.Common
         public static readonly string ProductDetail = URLEnvironment.Connection + ServiceName.ProductDetail;
         public static readonly string Dealer = URLEnvironment.Connection + ServiceName.Dealer;
         public static readonly string ProductRating = URLEnvironment.Connection + ServiceName.ProductRating;
-        
+        public static readonly string RegisterProduct = URLEnvironment.Connection + ServiceName.RegisterProduct;
+        public static readonly string ProductType = URLEnvironment.Connection + ServiceName.ProductType;
+        public static readonly string RequestStatus = URLEnvironment.Connection + ServiceName.RequestStatus;
+        public static readonly string CreateNewServiceRequest = URLEnvironment.Connection + ServiceName.CreateNewServiceRequest;
+        public static readonly string ProblemTypes = URLEnvironment.Connection + ServiceName.ProblemTypes;
     }
 }

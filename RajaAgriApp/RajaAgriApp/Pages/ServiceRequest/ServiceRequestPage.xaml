@@ -2,13 +2,14 @@
 <Page:BaseView  xmlns:Page="clr-namespace:RajaAgriApp.Pages" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BackgroundColor="White"
-             xmlns:resources="clr-namespace:RajaAgriApp.Resources" xmlns:models="clr-namespace:RajaAgriApp.Models"
-             x:Class="RajaAgriApp.Pages.ServiceRequestPage">
+             xmlns:resources="clr-namespace:RajaAgriApp.Resources" xmlns:models="clr-namespace:RajaAgriApp.Models" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" x:DataType="viewmodels:ServiceRequestViewModel"
+                x:Class="RajaAgriApp.Pages.ServiceRequestPage">
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="ExistingRequestTemplete">
                 <Grid RowDefinitions="100"
                       Margin="0,10"
+                      RowSpacing="0"
                       x:DataType="models:ServiceRequestModel"
                       ColumnDefinitions="100,*">
                     <Image Source="ic_product_wid_pro" 
@@ -27,7 +28,7 @@
                                 <FormattedString>
                                     <Span Text="{Binding ProductName}"/>
                                     <Span Text=" - "/>
-                                    <Span Text="{Binding ProductProblem}"/>
+                                    <Span Text="{Binding ProblemTypeName}"/>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
@@ -55,13 +56,13 @@
                                 </Label.FormattedText>
                             </Label>
                             <Label
-                                Text="{Binding RequestTime}"
+                                Text="{Binding RequestDate}"
                               HorizontalOptions="EndAndExpand"
                               Style="{StaticResource MediumGrayRomanLabelStyle}"/>
 
 
                         </StackLayout>
-                        <Label Text="{Binding RequestStatus} " 
+                        <Label Text="{Binding Status} " 
                               HorizontalOptions="Start"
                               Style="{StaticResource MediamOrangeBoldLabelStyle}"/>
                     </StackLayout>
@@ -70,7 +71,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Padding="20">
+        <StackLayout Padding="20" Orientation="Vertical">
                 <Frame Padding="40,30,40,30"
                        HasShadow="False"
                        BorderColor="{StaticResource DarkSkyBlue}"
@@ -102,11 +103,13 @@
                        Style="{StaticResource LargeBoldLabelStyle}"/>
                 <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{StaticResource LightGrayLineColor}"/>
             </StackLayout>
-            <StackLayout IsVisible="False">
+            <StackLayout IsVisible="{Binding IsExistingRequestShow}">
                 <Image Source="ic_new_request"/>
             </StackLayout>
-            <StackLayout >
+            <StackLayout  VerticalOptions="StartAndExpand">
                 <CollectionView ItemsSource="{Binding ServiceRequests}"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
                                 ItemTemplate="{StaticResource ExistingRequestTemplete}"/>
             </StackLayout>
         </StackLayout>

@@ -227,11 +227,13 @@ namespace RajaAgriApp.ViewModels
                         result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
                     {
                         var stream = await result.OpenReadAsync();
-                     //   _userImageBase64 = Convert.ToBase64String(stream);
-                           // 
+                       
+                        var bytes = new byte[stream.Length];
+                        await stream.ReadAsync(bytes, 0, (int)stream.Length);
+                        _userImageBase64 = System.Convert.ToBase64String(bytes);
+
                         FileUplodeImageSource = ImageSource.FromStream(() => stream);
-                        System.Console.WriteLine("File name chosen: " + fileName);
-                        System.Console.WriteLine("File data: " + stream);
+                      
                     }
                 }
 
@@ -244,5 +246,7 @@ namespace RajaAgriApp.ViewModels
 
             return null;
         }
+
+
     }
 }

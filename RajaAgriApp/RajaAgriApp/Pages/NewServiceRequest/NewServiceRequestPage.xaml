@@ -108,7 +108,7 @@
                                    Grid.Column="0"
                                    Grid.Row="0"
                                     Margin="0,10"
-                                   Aspect="AspectFit"
+                                   Aspect="AspectFill"
                                    HorizontalOptions="StartAndExpand" 
                                   HeightRequest="150">
                                 <Image.GestureRecognizers>
@@ -116,6 +116,7 @@
                                 </Image.GestureRecognizers>
                             </Image>
                             <Image Source="{Binding ImageTwo}"
+                                   Aspect="AspectFit"
                                    Grid.Column="1"
                            Margin="0,10"
                            HorizontalOptions="FillAndExpand" 
@@ -126,6 +127,7 @@
                             </Image>
                             <Image Source="{Binding ImageThree}"
                                    Grid.Column="2"
+                                   Aspect="Fill"
                            Margin="0,10"
                            HorizontalOptions="FillAndExpand" 
                            HeightRequest="150">

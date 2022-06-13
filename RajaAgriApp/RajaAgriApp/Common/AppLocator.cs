@@ -53,7 +53,19 @@ namespace RajaAgriApp.Common
             builder.RegisterType<ReviewService>().As<IReviewService>();
             builder.RegisterType<ReviewController>().As<IReviewController>();
 
+            builder.RegisterType<ProductTypeService>().As<IProductTypeService>();
+            builder.RegisterType<ProductRegisterService>().As<IProductRegisterService>();
+            builder.RegisterType<ProductRegisterController>().As<IProductRegisterController>();
 
+
+            
+            builder.RegisterType<NewServiceRequestService>().As<INewServiceRequestService>();
+            builder.RegisterType<TypeOfProblemService>().As<ITypeOfProblemService>();
+            builder.RegisterType<NewServicRequestController>().As<INewServicRequestController>();
+
+            builder.RegisterType<ServiceRequestService>().As<IServiceRequestService>();
+            builder.RegisterType<ServicRequestController>().As<IServicRequestController>();
+            
             // builder.RegisterType<CompanyDbRepo>().AsSelf();
 
 

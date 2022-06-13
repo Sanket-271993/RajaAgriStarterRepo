@@ -37,6 +37,10 @@ namespace RajaAgriApp.Models
         [JsonProperty("Description")]
         public string Description { get; set; }
 
+        [JsonProperty("SerialNumber")]
+        public string SerialNumber { get; set; }
+        
+
         private string _image;
 
         [JsonProperty("Image")]

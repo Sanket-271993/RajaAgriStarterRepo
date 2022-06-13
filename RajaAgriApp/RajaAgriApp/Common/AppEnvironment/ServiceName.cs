@@ -8,6 +8,12 @@
         public static readonly string ProductDetail = "GetProductDetail";
         public static readonly string Dealer = "GetDistributors";
         public static readonly string ProductRating = "SubmitProductRating";
+        public static readonly string RegisterProduct = "RegisterProduct";
+        public static readonly string ProductType = "GetProductTypes";
+        public static readonly string RequestStatus = "GetRequestStatus";
+        public static readonly string ProblemTypes = "GetProblemTypes";
+        public static readonly string CreateNewServiceRequest = "CreateNewServiceRequest";
         
+
     }
 }

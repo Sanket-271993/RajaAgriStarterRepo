@@ -13,11 +13,19 @@ namespace RajaAgriApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ServiceRequestPage : BaseView
     {
+        ServiceRequestViewModel serviceRequestViewModel;
         public ServiceRequestPage()
         {
             InitializeComponent();
 
-            this.BindingContext = new ServiceRequestViewModel();
+            serviceRequestViewModel= new ServiceRequestViewModel();
+            this.BindingContext = serviceRequestViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            serviceRequestViewModel.GetServicRequestServiceCall();
+            base.OnAppearing();
         }
     }
 }

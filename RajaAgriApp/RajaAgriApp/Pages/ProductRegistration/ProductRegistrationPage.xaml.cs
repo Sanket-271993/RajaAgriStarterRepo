@@ -13,15 +13,24 @@ namespace RajaAgriApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductRegistrationPage : BaseView
     {
+        ProductRegistrationViewModel productRegistrationViewModel;
         public ProductRegistrationPage()
         {
             InitializeComponent();
-            this.BindingContext = new ProductRegistrationViewModel();
+            productRegistrationViewModel= new ProductRegistrationViewModel();
+            this.BindingContext = productRegistrationViewModel;
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             invoiceDatePicker.Focus();
+        }
+
+        protected override void OnAppearing()
+        {
+            productRegistrationViewModel.GetProductNameServiceCall();
+           // productRegistrationViewModel.GetProductTypeServiceCall();
+            base.OnAppearing();
         }
     }
 }

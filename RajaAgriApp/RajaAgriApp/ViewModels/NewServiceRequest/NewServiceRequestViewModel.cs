@@ -1,5 +1,6 @@
 ﻿using NavistarOCCApp.Common;
 using RajaAgriApp.Common;
+using RajaAgriApp.Controller;
 using RajaAgriApp.Models;
 using RajaAgriApp.PopUpPages;
 using RajaAgriApp.Resources;
@@ -7,7 +8,6 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -17,10 +17,18 @@ namespace RajaAgriApp.ViewModels
 {
     public class NewServiceRequestViewModel:BaseViewModel
     {
+
+        private INewServicRequestController _newServicRequestController;
         public ObservableCollection<DropDownModel> Products { get; set; }
         List<DropDownModel> _products;
         List<DropDownModel> _ProductProblems;
-         
+
+        private string ImageOneBase64;
+        private string ImageTwoBase64;
+        private string ImageThreeBase64;
+        private int _productID;
+        private int _ProblemTypeID;
+
         private bool IsImageOne;
         private bool IsImageTwo;
         private bool IsImageThree;
@@ -107,8 +115,7 @@ namespace RajaAgriApp.ViewModels
         {
             InitCommand();
             SetDropDownDefultValue();
-            SetProductName();
-            SetProductProblem();
+        
         }
 
         private void SetDropDownDefultValue()
@@ -120,7 +127,7 @@ namespace RajaAgriApp.ViewModels
         }
         private void InitCommand()
         {
-
+            _newServicRequestController = AppLocator.Instance.GetInstance<INewServicRequestController>();
             OnProductNameDropDownCommand = new Command(OnProductNameDropDownClick);
             OnProblemTypeDropDownCommand = new Command(OnProblemTypeDropDownClick);
 
@@ -178,27 +185,9 @@ namespace RajaAgriApp.ViewModels
             await PopupNavigation.Instance.PushAsync(dropDown, false);
         }
       
-        private void SetProductName()
-        {
-            _products = new List<DropDownModel>
-            {
-                new DropDownModel() { ItemID = 1, ItemName = "FASD1 Starter ",IsCheckBoxItem=false },
-                new DropDownModel() { ItemID = 1, ItemName = "FASD2 Starter",IsCheckBoxItem=false }
-            };
-        }
+        
        
-        private void SetProductProblem()
-        {
-            _ProductProblems = new List<DropDownModel>
-            {
-                new DropDownModel() { ItemID = 1, ItemName = "Coil Burnt" ,IsCheckBoxItem=true},
-                new DropDownModel() { ItemID = 1, ItemName = "Weld" ,IsCheckBoxItem=true},
-                new DropDownModel() { ItemID = 1, ItemName = "Burnt" ,IsCheckBoxItem=true },
-                new DropDownModel() { ItemID = 1, ItemName = "Nuisance tripping" ,IsCheckBoxItem=true},
-                new DropDownModel() { ItemID = 1, ItemName = "Accessories Fitment" ,IsCheckBoxItem=true},
-                new DropDownModel() { ItemID = 1, ItemName = "Other problem" ,IsCheckBoxItem=true}
-            };
-        }
+     
 
         private void DropDown_ItemSelectionClick(object sender, EventArgs e)
         {
@@ -209,11 +198,13 @@ namespace RajaAgriApp.ViewModels
                 {
                     case DropDownType.SelectedProduct:
                         ProductName = dropEventArgs.SelectedData.ItemName;
-                        ProductSerialNumber = "0202020202";
+                        ProductSerialNumber = dropEventArgs.SelectedData.SerialNumber;
+                        _productID = dropEventArgs.SelectedData.ItemID;
                         IsProductNameDDOpen = false;
                         break;
                     case DropDownType.TypeProblem:
                         ProblemType = dropEventArgs.SelectedData.ItemName;
+                        _ProblemTypeID = dropEventArgs.SelectedData.ItemID;
                         IsProblemTypeDDOpen = false;
                         break;
                  
@@ -221,19 +212,79 @@ namespace RajaAgriApp.ViewModels
             }
         }
 
-        private async void OnSubmitClick(object obj)
+        private  void OnSubmitClick(object obj)
         {
-            await ShellRoutingService.Instance.GoBack();
+            NewRequestServiceCall();
         }
 
-       
+        private async void NewRequestServiceCall()
+        {
+            try
+            {
+                if (IsConnected)
+                {
+                    bool isValid = IsValidData();
+                    if (isValid)
+                    {
+                        AppIndicater.Instance.Show();
+                        var request = GetRequestModel();
+
+                        var response = await _newServicRequestController.PostProductRegistration(request);
+                        AppIndicater.Instance.Dismiss();
+                        if (response != null && response.IsNew)
+                        {
+                            SetSnackBarMessage(response.Message);
+                            await Task.Delay(3000);
+
+                            await ShellRoutingService.Instance.GoBack();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                // AppIndicater.Instance.Dismiss();
+            }
+        }
+        private NewServiceRequestModel GetRequestModel()
+        {
+            var request = new NewServiceRequestModel();
+            request.ProductRegistrationId = _productID;
+            request.TypeofProblem = _ProblemTypeID;
+            request.Image1 = ImageOneBase64;
+            request.Image2 = ImageTwoBase64;
+            request.Image3 = ImageThreeBase64;
+            
+            return request;
+        }
+
+        private bool IsValidData()
+        {
+            if (!string.IsNullOrEmpty(ProductName) && ProductName.Equals(AppResource.LabelSelectTheProduct))
+            {
+                SetAlertPopup("Please Select Product Name");
+                return false;
+            }
+            else if (!string.IsNullOrEmpty(ProblemType) && ProductName.Equals(AppResource.LabelTypeOfProblem))
+            {
+                SetAlertPopup("Please Select Type of problem");
+                return false;
+            }
+           
+
+            return true;
+        }
 
         private async void SetFilePicker()
         {
             await PickAndShow();
         }
+       
 
-    
         private async Task<FileResult> PickAndShow()
         {
             try
@@ -249,21 +300,27 @@ namespace RajaAgriApp.ViewModels
                              result.FileName.EndsWith("pdf", StringComparison.OrdinalIgnoreCase))
                     {
                         var stream = await result.OpenReadAsync();
+                        var bytes = new byte[stream.Length];
+                        await stream.ReadAsync(bytes, 0, (int)stream.Length);
 
-                        if(IsImageOne)
+                        if (IsImageOne)
                         {
                             ImageOne = ImageSource.FromStream(() => stream);
+                            ImageOneBase64= System.Convert.ToBase64String(bytes);
                         }
                         else if(IsImageTwo)
                         {
                             ImageTwo = ImageSource.FromStream(() => stream);
+                            ImageTwoBase64 = System.Convert.ToBase64String(bytes);
                         }
                         else if(IsImageThree)
                         {
                             ImageThree = ImageSource.FromStream(() => stream);
+                            ImageThreeBase64 = System.Convert.ToBase64String(bytes);
                         }
                         
                        
+
                     }
                 }
 
@@ -292,6 +349,83 @@ namespace RajaAgriApp.ViewModels
                 FileTypes = customFileType,
             };
             return options;
+        }
+
+        public async void SetProductServiceCall()
+        {
+            try
+            {
+                if (IsConnected)
+                {
+
+                    AppIndicater.Instance.Show();
+                    var response = await _newServicRequestController.GetHome();
+                    
+                    if (response != null && response.Products?.Count > 0)
+                    {
+
+                        SetProductName(response.Products);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+              //  AppIndicater.Instance.Dismiss();
+            }
+        }
+
+        private void SetProductName(List<ProductModel> products)
+        {
+            _products = new List<DropDownModel>();
+            foreach (var product in products)
+            {
+                _products.Add(new DropDownModel() { ItemID = product.ProductID,SerialNumber= product.SerialNumber,
+                    ItemName = product.ProductName, IsCheckBoxItem = false });
+            }
+            
+            
+        }
+
+        public async void SetProblemTypeServiceCall()
+        {
+            try
+            {
+                if (IsConnected)
+                {
+
+                    
+                    var response = await _newServicRequestController.GetTypeOfProblem();
+                    AppIndicater.Instance.Dismiss();
+                    if (response != null && response.TypeOfProblems?.Count > 0)
+                    {
+
+                        SetProductProblem(response.TypeOfProblems);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+               AppIndicater.Instance.Dismiss();
+            }
+        }
+        private void SetProductProblem(List<TypeOfProblemModel> typeOfProblems)
+        {
+            _ProductProblems = new List<DropDownModel>();
+            foreach (var problem in typeOfProblems)
+            {
+                _ProductProblems.Add(new DropDownModel() { ItemID = problem.TypeOfProblemID, ItemName = problem.TypeOfProblem, IsCheckBoxItem = true });
+            }
+            
         }
     }
 
