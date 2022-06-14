@@ -56,8 +56,6 @@ namespace RajaAgriApp.Common
             builder.RegisterType<ProductTypeService>().As<IProductTypeService>();
             builder.RegisterType<ProductRegisterService>().As<IProductRegisterService>();
             builder.RegisterType<ProductRegisterController>().As<IProductRegisterController>();
-
-
             
             builder.RegisterType<NewServiceRequestService>().As<INewServiceRequestService>();
             builder.RegisterType<TypeOfProblemService>().As<ITypeOfProblemService>();
@@ -65,6 +63,9 @@ namespace RajaAgriApp.Common
 
             builder.RegisterType<ServiceRequestService>().As<IServiceRequestService>();
             builder.RegisterType<ServicRequestController>().As<IServicRequestController>();
+
+            builder.RegisterType<OrderHistoryService>().As<IOrderHistoryService>();
+            builder.RegisterType<OrderHistoryController>().As<IOrderHistoryController>();
             
             // builder.RegisterType<CompanyDbRepo>().AsSelf();
 

@@ -16,5 +16,7 @@ namespace RajaAgriApp.Common
         public static readonly string RequestStatus = URLEnvironment.Connection + ServiceName.RequestStatus;
         public static readonly string CreateNewServiceRequest = URLEnvironment.Connection + ServiceName.CreateNewServiceRequest;
         public static readonly string ProblemTypes = URLEnvironment.Connection + ServiceName.ProblemTypes;
+        public static readonly string OrderHistory = URLEnvironment.Connection + ServiceName.OrderHistory;
+
     }
 }

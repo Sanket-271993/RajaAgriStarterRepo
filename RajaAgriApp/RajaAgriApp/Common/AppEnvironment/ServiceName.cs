@@ -13,6 +13,7 @@
         public static readonly string RequestStatus = "GetRequestStatus";
         public static readonly string ProblemTypes = "GetProblemTypes";
         public static readonly string CreateNewServiceRequest = "CreateNewServiceRequest";
+        public static readonly string OrderHistory = "GetOrderHistory";
         
 
     }
