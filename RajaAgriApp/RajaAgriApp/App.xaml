@@ -48,6 +48,11 @@
             <Setter Property="TextColor" Value="{DynamicResource RoyalBlue}"/>
             <Setter Property="FontFamily" Value="SiemensBold"/>
         </Style>
+        <Style x:Key="LightGrayBlueBoldLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextColor" Value="{DynamicResource LightGrayTextColor}"/>
+            <Setter Property="FontFamily" Value="SiemensBold"/>
+        </Style>
         <Style x:Key="MediumSkyBlueBoldLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="TextColor" Value="{DynamicResource Skyblue}"/>

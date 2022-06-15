@@ -129,6 +129,9 @@
   <data name="LabelDownload" xml:space="preserve">
     <value>*Download</value>
   </data>
+  <data name="LabelDownloadYourBillCopy" xml:space="preserve">
+    <value>Download your bill copy</value>
+  </data>
   <data name="LabelEdit" xml:space="preserve">
     <value>Edit</value>
   </data>
@@ -254,6 +257,9 @@
   </data>
   <data name="TitleNewServiceRequest" xml:space="preserve">
     <value>New Service Request</value>
+  </data>
+  <data name="TitleOrderHistory" xml:space="preserve">
+    <value>Order History</value>
   </data>
   <data name="TitleProductRegistration" xml:space="preserve">
     <value>Product Registration</value>

@@ -14,7 +14,8 @@
         public static readonly string ProblemTypes = "GetProblemTypes";
         public static readonly string CreateNewServiceRequest = "CreateNewServiceRequest";
         public static readonly string OrderHistory = "GetOrderHistory";
+        public static readonly string UpdateFarmerImage = "UpdateFarmerImage";
+        public static readonly string Profile = "GetFarmer";
         
-
     }
 }

@@ -1,4 +1,7 @@
 ﻿using NavistarOCCApp.Common;
+using RajaAgriApp.Common;
+using RajaAgriApp.Controller;
+using RajaAgriApp.Models;
 using RajaAgriApp.Pages;
 using RajaAgriApp.Resources;
 using System;
@@ -11,6 +14,9 @@ namespace RajaAgriApp.ViewModels
 {
     public class ProfileViewModel:BaseViewModel
     {
+        private IProfileController _profileController;
+        private string ProfileImageBase64;
+
         private ImageSource _userImage = "ic_defult_user";
 
         public ImageSource UserImage
@@ -76,6 +82,8 @@ namespace RajaAgriApp.ViewModels
             OnFAQCommand = new Command(OnFAQClick);
             OnServiceRequestCommand = new Command(OnServiceRequestClick);
             OnLogOutCommand = new Command(OnLogOutClick);
+
+            _profileController = AppLocator.Instance.GetInstance<IProfileController>();
         }
 
         private void OnLogOutClick(object obj)
@@ -93,9 +101,9 @@ namespace RajaAgriApp.ViewModels
            
         }
 
-        private void OnOrderHistoryClick(object obj)
+        private async void OnOrderHistoryClick(object obj)
         {
-            
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(OrderHistoryPage)}");
         }
 
         private void OnLanguageClick(object obj)
@@ -115,6 +123,56 @@ namespace RajaAgriApp.ViewModels
         private void OnProfilePicEditClick(object obj)
         {
             SetFilePicker();
+        }
+
+        public async void GetProfileServiceCall()
+        {
+            try
+            {
+                if (IsConnected)
+                {
+
+                    AppIndicater.Instance.Show();
+                    var response = await _profileController.GetProfile();
+                    AppIndicater.Instance.Dismiss();
+                    //if (response != null && response.Distributors?.Count > 0)
+                    //{
+                    //    Dealers = new ObservableCollection<DealerModel>(response.Distributors);
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+
+        public async void SetProfileUpdateServiceCall()
+        {
+            try
+            {
+                if (IsConnected)
+                {
+                    var request = new ProfileImageRequstModel()
+                    {
+                        Image = ProfileImageBase64,
+                    };
+
+                    AppIndicater.Instance.Show();
+                    var response = await _profileController.PostProfileImageUpdate(request);
+                    AppIndicater.Instance.Dismiss();
+                    //if (response != null && response.Distributors?.Count > 0)
+                    //{
+                    //    Dealers = new ObservableCollection<DealerModel>(response.Distributors);
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
 
         private void SetUserDetails()
@@ -140,7 +198,14 @@ namespace RajaAgriApp.ViewModels
                         result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
                     {
                         var stream = await result.OpenReadAsync();
-                        UserImage  = ImageSource.FromStream(() => stream);
+                        UserImage = ImageSource.FromStream(() => stream);
+
+                        var bytes = new byte[stream.Length];
+                        await stream.ReadAsync(bytes, 0, (int)stream.Length);
+                        ProfileImageBase64 = System.Convert.ToBase64String(bytes);
+                        SetProfileUpdateServiceCall();
+
+
                     }
                 }
 

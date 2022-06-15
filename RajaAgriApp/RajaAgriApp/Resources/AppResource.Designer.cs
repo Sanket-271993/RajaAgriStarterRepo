@@ -97,6 +97,15 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download your bill copy.
+        /// </summary>
+        public static string LabelDownloadYourBillCopy {
+            get {
+                return ResourceManager.GetString("LabelDownloadYourBillCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string LabelEdit {
@@ -471,6 +480,15 @@ namespace RajaAgriApp.Resources {
         public static string TitleNewServiceRequest {
             get {
                 return ResourceManager.GetString("TitleNewServiceRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order History.
+        /// </summary>
+        public static string TitleOrderHistory {
+            get {
+                return ResourceManager.GetString("TitleOrderHistory", resourceCulture);
             }
         }
         

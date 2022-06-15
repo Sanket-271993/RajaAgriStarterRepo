@@ -21,7 +21,7 @@ namespace RajaAgriApp
             Routing.RegisterRoute(nameof(NewServiceRequestPage), typeof(NewServiceRequestPage));
             Routing.RegisterRoute(nameof(ServiceRequestPage), typeof(ServiceRequestPage));
             Routing.RegisterRoute(nameof(ReviewPage), typeof(ReviewPage));
-            
+            Routing.RegisterRoute(nameof(OrderHistoryPage), typeof(OrderHistoryPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

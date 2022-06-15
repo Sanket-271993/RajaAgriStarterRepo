@@ -1,68 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:models="clr-namespace:RajaAgriApp.Models"
+               xmlns:resources="clr-namespace:RajaAgriApp.Resources" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" x:DataType="viewmodels:OrderHistoryViewModel"
+             BackgroundColor="White"
+             x:Name="orderhistoryPage"
              x:Class="RajaAgriApp.Pages.OrderHistoryPage">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="ExistingRequestTemplete">
-                <Grid RowDefinitions="100"
+            <DataTemplate x:Key="OrderHistoryTemplete">
+                <Grid RowDefinitions="150"
                       Margin="0,10"
                       RowSpacing="0"
-                      x:DataType="models:ServiceRequestModel"
+                      x:DataType="models:HistoryOrderModel"
                       ColumnDefinitions="100,*">
-                    <Image Source="ic_product_wid_pro" 
-                           Grid.Row="0" 
-                           Grid.Column="0"/>
+                    <StackLayout  Grid.Row="0" 
+                              Grid.Column="0"
+                              HorizontalOptions="FillAndExpand"
+                              VerticalOptions="FillAndExpand">
+                        <Image Source="{Binding OrderProductImage}" 
+                           Aspect="AspectFit"
+                           HeightRequest="150"/>
+                    </StackLayout>
+
 
                     <StackLayout Grid.Row="0"
-                                 Grid.Column="1">
+                             Padding="10"
+                             Grid.Column="1">
                         <Label Text="{Binding ProductName}" 
-                              HorizontalOptions="Start"
-                              Style="{StaticResource MediumRoyalBlueBoldLabelStyle}"/>
-                        <Label
-                              HorizontalOptions="Start"
-                              Style="{StaticResource MediumGrayRomanLabelStyle}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Binding ProductName}"/>
-                                    <Span Text=" - "/>
-                                    <Span Text="{Binding ProblemTypeName}"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label
-                              HorizontalOptions="Start"
-                              Style="{StaticResource MediumGrayRomanLabelStyle}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Serial No"/>
-                                    <Span Text=":"/>
-                                    <Span Text="{Binding SerialNumber}"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                           HorizontalOptions="Start"
+                           Style="{StaticResource MediumRoyalBlueBoldLabelStyle}"/>
+
                         <StackLayout Orientation="Horizontal">
                             <Label
                               HorizontalOptions="Start"
-                              Style="{StaticResource MediumGrayRomanLabelStyle}">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Request No "/>
-                                        <Span Text=":"/>
-                                        <Span Text="{Binding RequestNumber}"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                              Text="Warranty"
+                              Style="{StaticResource LightGrayBlueBoldLabelStyle}"/>
                             <Label
-                                Text="{Binding RequestDate}"
+                              Text="02/03/2020"
                               HorizontalOptions="EndAndExpand"
-                              Style="{StaticResource MediumGrayRomanLabelStyle}"/>
-
-
+                              Style="{StaticResource MediumRoyalBlueBoldLabelStyle}"/>
                         </StackLayout>
-                        <Label Text="{Binding Status} " 
-                              HorizontalOptions="Start"
-                              Style="{StaticResource MediamOrangeBoldLabelStyle}"/>
+                        <Label Text="{Binding Description}" 
+                              HorizontalOptions="StartAndExpand"
+                              MaxLines="2"
+                              Style="{StaticResource MediumGrayRomanLabelStyle}"/>
+                        <StackLayout HorizontalOptions="FillAndExpand"
+                                 Margin="0,10,0,0"
+                                 Padding="10"
+                                 Orientation="Horizontal"
+                                 BackgroundColor="#f3f3f0">
+                            <Label
+                              HorizontalOptions="StartAndExpand"
+                              Text="{x:Static resources:AppResource.LabelDownloadYourBillCopy}"
+                              Style="{StaticResource MediumSkyBlueBoldLabelStyle}"/>
+
+                            <Path Data="M4,21v-5h2v3h12v-3h2v5zM5.36,10.77l1.28,-1.54L11,12.87L11,3h2v9.87l4.36,-3.64 1.28,1.54L12,16.3z"
+                              Aspect="Uniform"
+                              Fill="#4c4c68"
+                              VerticalOptions="CenterAndExpand"
+                              HorizontalOptions="EndAndExpand" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.OnInvoiceDownloadCommand,Source={x:Reference orderhistoryPage}}" 
+                                              CommandParameter="{Binding .}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
@@ -70,9 +72,10 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+            <CollectionView ItemsSource="{Binding OrderHistorys}"
+                                ItemTemplate="{StaticResource OrderHistoryTemplete}"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
