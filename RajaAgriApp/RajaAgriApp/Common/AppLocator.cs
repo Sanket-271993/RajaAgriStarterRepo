@@ -66,8 +66,12 @@ namespace RajaAgriApp.Common
 
             builder.RegisterType<OrderHistoryService>().As<IOrderHistoryService>();
             builder.RegisterType<OrderHistoryController>().As<IOrderHistoryController>();
-            
+
+            builder.RegisterType<ProfileService>().As<IProfileService>();
+            builder.RegisterType<ProfileImageUpdateService>().As<IProfileImageUpdateService>();
+            builder.RegisterType<ProfileController>().As<IProfileController>();
             // builder.RegisterType<CompanyDbRepo>().AsSelf();
+            
 
 
             _container = builder.Build();

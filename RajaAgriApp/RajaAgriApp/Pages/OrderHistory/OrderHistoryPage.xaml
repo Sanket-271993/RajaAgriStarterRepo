@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<Page:BaseView  xmlns:Page="clr-namespace:RajaAgriApp.Pages"
+                xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:models="clr-namespace:RajaAgriApp.Models"
                xmlns:resources="clr-namespace:RajaAgriApp.Resources" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" x:DataType="viewmodels:OrderHistoryViewModel"
@@ -78,4 +79,4 @@
 
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</Page:BaseView>

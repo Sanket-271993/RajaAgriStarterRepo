@@ -13,10 +13,18 @@ namespace RajaAgriApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : BaseView
     {
+        ProfileViewModel _profileViewModel;
         public ProfilePage()
         {
             InitializeComponent();
-            this.BindingContext = new ProfileViewModel();
+            _profileViewModel = new ProfileViewModel();
+            this.BindingContext = _profileViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            _profileViewModel.GetProfileServiceCall();
+            base.OnAppearing();
         }
     }
 }

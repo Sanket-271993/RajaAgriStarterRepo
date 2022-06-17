@@ -68,7 +68,7 @@ namespace RajaAgriApp.ViewModels
             Title = AppResource.TitleBack;
             IsTranslateVisable = false;
             InitCommand();
-            SetUserDetails();
+           
         }
 
       
@@ -106,8 +106,9 @@ namespace RajaAgriApp.ViewModels
             await ShellRoutingService.Instance.NavigateTo($"{nameof(OrderHistoryPage)}");
         }
 
-        private void OnLanguageClick(object obj)
+        private async void OnLanguageClick(object obj)
         {
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(MultiLanguage)}");
         }
 
         private async void OnProductRegistrationClick(object obj)
@@ -123,7 +124,10 @@ namespace RajaAgriApp.ViewModels
         private void OnProfilePicEditClick(object obj)
         {
             SetFilePicker();
+            SetProfileUpdateServiceCall();
         }
+
+        private FarmerDetail _farmerDetails;
 
         public async void GetProfileServiceCall()
         {
@@ -135,10 +139,14 @@ namespace RajaAgriApp.ViewModels
                     AppIndicater.Instance.Show();
                     var response = await _profileController.GetProfile();
                     AppIndicater.Instance.Dismiss();
-                    //if (response != null && response.Distributors?.Count > 0)
-                    //{
-                    //    Dealers = new ObservableCollection<DealerModel>(response.Distributors);
-                    //}
+                    if (response != null && response.FarmerDetails?.Count > 0)
+                    {
+                        _farmerDetails = response.FarmerDetails[0];
+                        if(_farmerDetails!=null)
+                        {
+                            SetUserDetails();
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -146,6 +154,13 @@ namespace RajaAgriApp.ViewModels
                 Console.WriteLine(ex.Message);
             }
 
+        }
+        private void SetUserDetails()
+        {
+            UserName = _farmerDetails.FarmerName;
+            PhoneNumber = _farmerDetails.PhoneNumber;
+            Address = _farmerDetails.Location;
+            UserImage = _farmerDetails.UserImage;
         }
 
         public async void SetProfileUpdateServiceCall()
@@ -175,12 +190,7 @@ namespace RajaAgriApp.ViewModels
 
         }
 
-        private void SetUserDetails()
-        {
-            UserName = "Ganesh";
-            PhoneNumber = "+91 1234567890";
-            Address = "Jodhpur";
-        }
+        
         private async void SetFilePicker()
         {
             await  PickAndShow(PickOptions.Images);
@@ -203,7 +213,7 @@ namespace RajaAgriApp.ViewModels
                         var bytes = new byte[stream.Length];
                         await stream.ReadAsync(bytes, 0, (int)stream.Length);
                         ProfileImageBase64 = System.Convert.ToBase64String(bytes);
-                        SetProfileUpdateServiceCall();
+                       
 
 
                     }

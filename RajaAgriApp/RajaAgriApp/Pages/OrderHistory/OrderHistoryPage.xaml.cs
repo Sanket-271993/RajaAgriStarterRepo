@@ -11,7 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace RajaAgriApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OrderHistoryPage : ContentPage
+    public partial class OrderHistoryPage : BaseView
     {
         OrderHistoryViewModel _orderHistoryViewModel;
         public OrderHistoryPage()
