@@ -34,7 +34,7 @@ namespace RajaAgriApp.ViewModels
             set { SetProperty(ref _isPhoneNumber, value); }
         }
 
-        private string _phoneNumber = "7439884478";
+        private string _phoneNumber = string.Empty;
         public string PhoneNumber
         {
             get { return _phoneNumber; }

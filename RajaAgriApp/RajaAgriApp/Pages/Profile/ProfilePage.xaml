@@ -34,7 +34,11 @@
                              Spacing="5" 
                              Grid.Column="1" >
                     <ff:CachedImage Source="{Binding UserImage,FallbackValue='ic_defult_user'}" 
-                                    WidthRequest="80" >
+                                    WidthRequest="80" HeightRequest="80"
+                                    HorizontalOptions="Center"
+                                    DownsampleToViewSize="true"
+                                    Aspect="AspectFit"
+                                    VerticalOptions="Center">
                         <ff:CachedImage.Transformations>
                             <ffTransformations:CircleTransformation />
                         </ff:CachedImage.Transformations>

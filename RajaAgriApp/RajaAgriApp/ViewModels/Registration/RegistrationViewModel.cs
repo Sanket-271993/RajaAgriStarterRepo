@@ -7,6 +7,7 @@ using RajaAgriApp.PopUpPages;
 using RajaAgriApp.Resources;
 using Rg.Plugins.Popup.Services;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -56,10 +57,9 @@ namespace RajaAgriApp.ViewModels
 
         private string  _userImageBase64 ;
 
-       
+
 
         private ImageSource _imageSource = "ic_camera";
-
         public ImageSource FileUplodeImageSource
         {
             get => _imageSource;
@@ -153,7 +153,7 @@ namespace RajaAgriApp.ViewModels
             }
             finally
             {
-                AppIndicater.Instance.Dismiss();
+                //AppIndicater.Instance.Dismiss();
             }
         }
 
@@ -229,10 +229,11 @@ namespace RajaAgriApp.ViewModels
                         var stream = await result.OpenReadAsync();
                        
                         var bytes = new byte[stream.Length];
-                        await stream.ReadAsync(bytes, 0, (int)stream.Length);
+                       var st= await stream.ReadAsync(bytes, 0, (int)stream.Length);
                         _userImageBase64 = System.Convert.ToBase64String(bytes);
-
-                        FileUplodeImageSource = ImageSource.FromStream(() => stream);
+                        FileUplodeImageSource= Xamarin.Forms.ImageSource.FromStream(
+                        () => new MemoryStream(Convert.FromBase64String(_userImageBase64)));
+                      //  FileUplodeImageSource.Source = ImageSource.FromStream(() => stream);
                       
                     }
                 }

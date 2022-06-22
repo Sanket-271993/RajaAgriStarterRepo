@@ -5,6 +5,7 @@ using RajaAgriApp.Resources;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -32,7 +33,7 @@ namespace RajaAgriApp.ViewModels
 
         private void SetTitle()
         {
-            Title = AppResource.TitleDealers;
+            Title = AppResource.TitleOrderHistory;
             IsMenuVisable = false;
             IsTranslateVisable = true;
         }
@@ -42,9 +43,16 @@ namespace RajaAgriApp.ViewModels
            
         }
 
-        private void OnInvoiceDownloadClick(HistoryOrderModel obj)
+        private void OnInvoiceDownloadClick(HistoryOrderModel  historyOrder)
         {
-            //
+            if(!string.IsNullOrEmpty(historyOrder.InvoiceImage))
+            {
+                ConverBase64ToImage(historyOrder.InvoiceImage);
+            }
+            else
+            {
+                SetAlertPopup("Invoice image not available!");
+            }
         }
 
         private void InitController()
@@ -69,6 +77,12 @@ namespace RajaAgriApp.ViewModels
                     {
                         OrderHistorys = new ObservableCollection<HistoryOrderModel>(response.Products);
                     }
+                    else
+                    {
+                        SetAlertPopup("Order History not found!");
+                    }
+
+
                 }
             }
             catch (Exception ex)
@@ -76,6 +90,23 @@ namespace RajaAgriApp.ViewModels
                 Console.WriteLine(ex.Message);
             }
 
+        }
+
+       
+        public void ConverBase64ToImage(string base64BinaryStr)
+        {
+            try
+            {
+                
+                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonPictures);
+                string localFilename = "Product_Invoice.jpg";
+                string localPath = Path.Combine(documentsPath, localFilename);
+                File.WriteAllText(localPath, base64BinaryStr);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
     }

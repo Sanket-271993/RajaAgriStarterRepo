@@ -32,6 +32,8 @@ namespace RajaAgriApp.ViewModels
             set { SetProperty(ref _isConnected, value); }
         }
 
+        public static bool IsBack;
+
         bool isBusy = false;
         public bool IsBusy
         {

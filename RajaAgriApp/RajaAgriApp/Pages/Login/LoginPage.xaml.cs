@@ -1,4 +1,5 @@
-﻿using RajaAgriApp.ViewModels;
+﻿using RajaAgriApp.AppDependencyService;
+using RajaAgriApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,10 @@ namespace RajaAgriApp.Pages
             {
                 loginViewModel.SetdefultAsLogin();
                 return true;
+            }
+            else
+            {
+                DependencyService.Get<ICloseApplication>().CloseApp();
             }
 
             return base.OnBackButtonPressed();

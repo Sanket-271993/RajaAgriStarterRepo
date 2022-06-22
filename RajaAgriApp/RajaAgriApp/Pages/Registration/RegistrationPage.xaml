@@ -52,12 +52,17 @@
                                x:Name="nameEntry"
                                ReturnType="Next"
                                Text="{Binding Name}"
+                               Keyboard="Text"
                                Focused="nameEntry_Focused"
                                Unfocused="nameEntry_Unfocused"
                                Placeholder="{x:Static resources:AppResource.PlaceHolderInput}"
                                Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
                                Margin="0,0,0,-2"
-                               HorizontalOptions="FillAndExpand"/>
+                               HorizontalOptions="FillAndExpand">
+                                <Entry.Behaviors>
+                                    <behavior:EntryTextValidatorBehavior  />
+                                </Entry.Behaviors>
+                            </Entry>
                             <Frame Padding="0"
                                Margin="0,-5,0,0"
                                BackgroundColor="{StaticResource White}"
@@ -89,7 +94,7 @@
                                    Margin="0,0,0,-2"
                                    HorizontalOptions="FillAndExpand">
                                 <Entry.Behaviors>
-                                    <behavior:EntryPinCodeValidator MaxLength="5" />
+                                    <behavior:EntryPinCodeValidator MaxLength="6" />
                                 </Entry.Behaviors>
                             </Entry>
                             <Frame Padding="0"

@@ -35,6 +35,7 @@ namespace RajaAgriApp.ViewModels
             SetMenuAndTitle();
             InitCommand();
             ControlerInit();
+            IsBack = false;
           //  GetProductData();
         }
 
@@ -66,7 +67,8 @@ namespace RajaAgriApp.ViewModels
 
         private async void OnItemClick(ProductModel product)
         {
-           await ShellRoutingService.Instance.NavigateTo($"{ nameof(ProductDetailsPage)}?ProductIdParameter={product.ProductID}");
+            IsBack = false;
+            await ShellRoutingService.Instance.NavigateTo($"{ nameof(ProductDetailsPage)}?ProductIdParameter={product.ProductID}");
         }
 
         private void OnNotificationClick(object obj)

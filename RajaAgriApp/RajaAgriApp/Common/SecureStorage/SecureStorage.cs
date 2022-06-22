@@ -54,5 +54,14 @@ namespace NavistarOCCApp.Common
             }
             return value;
         }
+
+        public void Clear(string key)
+        {
+            if (!string.IsNullOrEmpty(key))
+            {
+                Storage.Remove(key);
+            }
+
+        }
     }
 }

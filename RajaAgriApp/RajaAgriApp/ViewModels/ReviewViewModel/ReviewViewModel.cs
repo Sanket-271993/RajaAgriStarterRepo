@@ -118,6 +118,7 @@ namespace RajaAgriApp.ViewModels
         public ReviewViewModel()
         {
             Title = "Review";
+            IsBack = true;
             IsTranslateVisable = true;
             SetProductDetails();
             InitController();

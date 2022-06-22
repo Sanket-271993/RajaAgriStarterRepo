@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -37,7 +38,11 @@ namespace RajaAgriApp.ViewModels
             get { return _productId; }
             set { 
                 SetProperty(ref _productId, value);
-                SetProductDetailsServiceCall();
+                if(!IsBack)
+                {
+                    SetProductDetailsServiceCall();
+                }
+               
             }
         }
 
@@ -246,14 +251,16 @@ namespace RajaAgriApp.ViewModels
         
         public async void SetProductDetailsServiceCall()
         {
+            ProductDetailsResponseModel response=null;
             try
             {
+
                 if (IsConnected)
                 {
                     var requestModel = new ProductDetailsRequestModel()
                     { ProductId = Convert.ToInt32(ProductId), LanguageId = LanguageID };
                     AppIndicater.Instance.Show();
-                    var response = await _productDetailsController.GetProductDetails(requestModel);
+                     response = await _productDetailsController.GetProductDetails(requestModel);
                     AppIndicater.Instance.Dismiss();
                     if (response != null && response.Products?.Count > 0)
                     {
@@ -262,6 +269,13 @@ namespace RajaAgriApp.ViewModels
                         SetProductDetails(productDetails);
                         GetProductImages(productDetails);
                         SetDropDownData(productDetails);
+                    }
+                    else
+                    {
+                        AppIndicater.Instance.Dismiss();
+                        SetSnackBarMessage("Product Details data not found!");
+                        await Task.Delay(3000);
+                        await ShellRoutingService.Instance.GoBack();
                     }
                 }
 
@@ -272,7 +286,10 @@ namespace RajaAgriApp.ViewModels
             }
             finally
             {
-                AppIndicater.Instance.Dismiss();
+                if (response != null && response.Products?.Count == 0)
+                {
+                    AppIndicater.Instance.Dismiss();
+                }
             }
         }
 

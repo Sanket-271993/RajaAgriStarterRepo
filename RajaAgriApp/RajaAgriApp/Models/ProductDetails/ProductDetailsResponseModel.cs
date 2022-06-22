@@ -160,12 +160,12 @@ namespace RajaAgriApp.Models
         [JsonProperty("ProductID")]
         public int ProductID { get; set; }
 
-        public ImageSource ImageName { get; set; }
-        //private ImageSource _imageName;
-        //public ImageSource ImageName 
-        //{ get { return _imageName; }
-        //    set { SetProperty(ref _imageName, value); }
-        //}
+       // public ImageSource ImageName { get; set; }
+        private ImageSource _imageName;
+        public ImageSource ImageName 
+        { get { return _imageName; }
+           set { SetProperty(ref _imageName, value); }
+        }
        
     }
 

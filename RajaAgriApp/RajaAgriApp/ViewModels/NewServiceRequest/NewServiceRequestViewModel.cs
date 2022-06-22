@@ -8,6 +8,7 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -303,20 +304,22 @@ namespace RajaAgriApp.ViewModels
                         var bytes = new byte[stream.Length];
                         await stream.ReadAsync(bytes, 0, (int)stream.Length);
 
+                        
                         if (IsImageOne)
                         {
-                            ImageOne = ImageSource.FromStream(() => stream);
+                           
                             ImageOneBase64= System.Convert.ToBase64String(bytes);
+                            ImageOne = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(ImageOneBase64)));
                         }
                         else if(IsImageTwo)
                         {
-                            ImageTwo = ImageSource.FromStream(() => stream);
                             ImageTwoBase64 = System.Convert.ToBase64String(bytes);
+                            ImageTwo = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(ImageTwoBase64)));
                         }
                         else if(IsImageThree)
                         {
-                            ImageThree = ImageSource.FromStream(() => stream);
                             ImageThreeBase64 = System.Convert.ToBase64String(bytes);
+                            ImageThree = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(ImageThreeBase64)));
                         }
                         
                        
@@ -345,7 +348,7 @@ namespace RajaAgriApp.ViewModels
                                });
             var options = new PickOptions
             {
-                PickerTitle = "Please select a comic file",
+                PickerTitle = "Please select  file",
                 FileTypes = customFileType,
             };
             return options;

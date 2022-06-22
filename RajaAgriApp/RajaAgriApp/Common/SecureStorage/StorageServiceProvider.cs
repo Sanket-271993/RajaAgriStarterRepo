@@ -58,5 +58,18 @@ namespace NavistarOCCApp.Common
         {
             return shouldStoreInSecureStorage ? await _secureStorage.Read(key) : _preference.Read(key);
         }
+
+        public  void Clear(string key, bool shouldStoreInSecureStorage)
+        {
+            if (shouldStoreInSecureStorage)
+            {
+                 _secureStorage.Clear(key);
+            } 
+            else
+            {
+                _preference.Clear(key);
+            }
+                
+        }
     }
 }

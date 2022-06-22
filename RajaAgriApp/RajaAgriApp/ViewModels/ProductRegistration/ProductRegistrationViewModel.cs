@@ -9,6 +9,7 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +91,14 @@ namespace RajaAgriApp.ViewModels
         }
 
         private string InvoiceImageBase64;
+
+
+        private ImageSource _imageSource = "ic_camera";
+        public ImageSource InvoiceImageSource
+        {
+            get => _imageSource;
+            set => SetProperty(ref _imageSource, value);
+        }
 
         public ICommand OnProductNameDropDownCommand { get; set; }
         public ICommand OnProductTypeDropDownCommand { get; set; }
@@ -306,6 +315,9 @@ namespace RajaAgriApp.ViewModels
                         await stream.ReadAsync(bytes, 0, (int)stream.Length);
                         InvoiceImageBase64 = System.Convert.ToBase64String(bytes);
                         //UserImage = ImageSource.FromStream(() => stream);
+
+                        InvoiceImageSource = Xamarin.Forms.ImageSource.FromStream(
+                       () => new MemoryStream(Convert.FromBase64String(InvoiceImageBase64)));
                     }
                 }
 

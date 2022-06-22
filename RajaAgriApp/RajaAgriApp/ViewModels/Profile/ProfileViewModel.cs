@@ -5,14 +5,17 @@ using RajaAgriApp.Models;
 using RajaAgriApp.Pages;
 using RajaAgriApp.Resources;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
+using XF.Material.Forms.UI.Dialogs.Configurations;
 
 namespace RajaAgriApp.ViewModels
 {
-    public class ProfileViewModel:BaseViewModel
+    public class ProfileViewModel : BaseViewModel
     {
         private IProfileController _profileController;
         private string ProfileImageBase64;
@@ -31,7 +34,7 @@ namespace RajaAgriApp.ViewModels
         public String UserName
         {
             get { return _userName; }
-            set { SetProperty(ref _userName, value); } 
+            set { SetProperty(ref _userName, value); }
         }
 
         private string _phoneNumber;
@@ -68,10 +71,10 @@ namespace RajaAgriApp.ViewModels
             Title = AppResource.TitleBack;
             IsTranslateVisable = false;
             InitCommand();
-           
+
         }
 
-      
+
         private void InitCommand()
         {
             OnProfilePicEditCommand = new Command(OnProfilePicEditClick);
@@ -88,7 +91,7 @@ namespace RajaAgriApp.ViewModels
 
         private void OnLogOutClick(object obj)
         {
-            
+            SetLogouTPopup();
         }
 
         private async void OnServiceRequestClick(object obj)
@@ -98,7 +101,7 @@ namespace RajaAgriApp.ViewModels
 
         private void OnFAQClick(object obj)
         {
-           
+
         }
 
         private async void OnOrderHistoryClick(object obj)
@@ -118,13 +121,13 @@ namespace RajaAgriApp.ViewModels
 
         private void OnNotificationClick(object obj)
         {
-           
+
         }
 
         private void OnProfilePicEditClick(object obj)
         {
             SetFilePicker();
-            SetProfileUpdateServiceCall();
+            //SetProfileUpdateServiceCall();
         }
 
         private FarmerDetail _farmerDetails;
@@ -142,7 +145,7 @@ namespace RajaAgriApp.ViewModels
                     if (response != null && response.FarmerDetails?.Count > 0)
                     {
                         _farmerDetails = response.FarmerDetails[0];
-                        if(_farmerDetails!=null)
+                        if (_farmerDetails != null)
                         {
                             SetUserDetails();
                         }
@@ -153,8 +156,8 @@ namespace RajaAgriApp.ViewModels
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
+
         private void SetUserDetails()
         {
             UserName = _farmerDetails.FarmerName;
@@ -163,7 +166,7 @@ namespace RajaAgriApp.ViewModels
             UserImage = _farmerDetails.UserImage;
         }
 
-        public async void SetProfileUpdateServiceCall()
+        public async void SetProfileUpdateServiceCall(string ProfileImageBase64)
         {
             try
             {
@@ -187,15 +190,14 @@ namespace RajaAgriApp.ViewModels
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
 
-        
+
         private async void SetFilePicker()
         {
-            await  PickAndShow(PickOptions.Images);
+            await PickAndShow(PickOptions.Images);
         }
-        
+
         async Task<FileResult> PickAndShow(PickOptions options)
         {
             try
@@ -208,14 +210,16 @@ namespace RajaAgriApp.ViewModels
                         result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
                     {
                         var stream = await result.OpenReadAsync();
-                        UserImage = ImageSource.FromStream(() => stream);
 
                         var bytes = new byte[stream.Length];
                         await stream.ReadAsync(bytes, 0, (int)stream.Length);
                         ProfileImageBase64 = System.Convert.ToBase64String(bytes);
-                       
 
 
+                        UserImage = ImageSource.FromStream(
+                       () => new MemoryStream(Convert.FromBase64String(ProfileImageBase64)));
+
+                        SetProfileUpdateServiceCall(ProfileImageBase64);
                     }
                 }
 
@@ -227,6 +231,36 @@ namespace RajaAgriApp.ViewModels
             }
 
             return null;
+        }
+
+
+        private async void SetLogOut()
+        {
+            RemoveToken();
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(LoginPage)}");
+        }
+
+        private void RemoveToken()
+        {
+            StorageServiceProvider.Instance.Clear(AppConstant.Access_Token, true);
+        }
+
+        private async void SetLogouTPopup()
+        {
+            MaterialAlertDialogConfiguration configuration = new MaterialAlertDialogConfiguration()
+            {
+                TintColor = Color.LightGreen
+            };
+            var result= await MaterialDialog.Instance.ConfirmAsync(message: "Are you sure you want to Logout?",
+                                    title: "Confirm",
+                                    confirmingText: "Yes",
+                                    dismissiveText: "No", configuration);
+
+            if(result.Value)
+            {
+                SetLogOut();
+            }
+            
         }
     }
 }
