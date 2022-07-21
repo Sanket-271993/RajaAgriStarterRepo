@@ -103,34 +103,39 @@
                         <Label Text="{x:Static resource:AppResource.LabelImages}" 
                                            Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
                                            HorizontalOptions="Start" />
-                        <Grid ColumnDefinitions="*,*" RowDefinitions="100">
+                        <Grid  Margin="5,10,5,0" 
+                               ColumnDefinitions="*,*,*" 
+                               
+                               RowDefinitions="150">
                             <Image Source="{Binding ImageOne}"
                                    Grid.Column="0"
                                    Grid.Row="0"
-                                    Margin="0,10"
-                                   Aspect="AspectFill"
-                                   HorizontalOptions="StartAndExpand" 
-                                  HeightRequest="150">
+                                  
+                                   Aspect="AspectFit"
+                                   
+                                   HeightRequest="150">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding FilePickerImageOneCommand}"/>
                                 </Image.GestureRecognizers>
                             </Image>
                             <Image Source="{Binding ImageTwo}"
-                                   Aspect="AspectFit"
                                    Grid.Column="1"
-                           Margin="0,10"
-                           HorizontalOptions="FillAndExpand" 
-                           HeightRequest="150">
+                                   Grid.Row="0"
+                                  
+                                   Aspect="AspectFit"
+                                  
+                                   HeightRequest="150">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding FilePickerImageTwoCommand}"/>
                                 </Image.GestureRecognizers>
                             </Image>
                             <Image Source="{Binding ImageThree}"
                                    Grid.Column="2"
-                                   Aspect="Fill"
-                           Margin="0,10"
-                           HorizontalOptions="FillAndExpand" 
-                           HeightRequest="150">
+                                   Grid.Row="0"
+                                   
+                                   Aspect="AspectFit"
+                                   
+                                   HeightRequest="150">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding FilePickerImageThreeCommand}"/>
                                 </Image.GestureRecognizers>

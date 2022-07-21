@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.OS;
 using FFImageLoading.Forms.Platform;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Xamarin.Essentials;
 
 namespace RajaAgriApp.Droid
 {
@@ -22,7 +23,7 @@ namespace RajaAgriApp.Droid
             CachedImageRenderer.Init(true);
             XF.Material.Droid.Material.Init(this, savedInstanceState);
             //CachedImageRenderer.InitImageViewHandler();
-
+            VersionTracking.Track();
             LoadApplication(new App());
             App.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
 

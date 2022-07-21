@@ -28,21 +28,32 @@
                            HorizontalOptions="Start"
                            Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"/>
                     </StackLayout>
-                   
+
                 </StackLayout>
                 <StackLayout VerticalOptions="CenterAndExpand" 
                              Spacing="5" 
                              Grid.Column="1" >
-                    <ff:CachedImage Source="{Binding UserImage,FallbackValue='ic_defult_user'}" 
+                    <!--   <ff:CachedImage Source="{Binding UserImage,FallbackValue='ic_defult_user'}" 
                                     WidthRequest="80" HeightRequest="80"
                                     HorizontalOptions="Center"
                                     DownsampleToViewSize="true"
-                                    Aspect="AspectFit"
+                                    
                                     VerticalOptions="Center">
                         <ff:CachedImage.Transformations>
                             <ffTransformations:CircleTransformation />
                         </ff:CachedImage.Transformations>
-                    </ff:CachedImage>
+                    </ff:CachedImage>-->
+                    <Frame CornerRadius="40" 
+                           WidthRequest="80" 
+                           HeightRequest="80"
+                           Padding="0"
+                           HasShadow="False"
+                           IsClippedToBounds="True">
+                        <Image Source="{Binding UserImage,FallbackValue='ic_defult_user'}"
+                               Aspect="AspectFit"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />          
+                    </Frame>
                     <Label Text="{x:Static resources:AppResource.LabelEdit}" 
                            HorizontalOptions="Center"
                            Style="{StaticResource MediumPeacockRomanLabelStyle}">
@@ -50,7 +61,7 @@
                             <TapGestureRecognizer Command="{Binding OnProfilePicEditCommand}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                         
+
                 </StackLayout>
             </Grid>
             <StackLayout>
@@ -145,7 +156,7 @@
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
             </StackLayout>
-                <StackLayout Orientation="Horizontal"
+            <StackLayout Orientation="Horizontal"
                              Spacing="20"
                              Margin="0,0,0,30"
                              VerticalOptions="EndAndExpand"

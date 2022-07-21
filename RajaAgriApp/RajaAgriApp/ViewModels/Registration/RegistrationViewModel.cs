@@ -118,6 +118,11 @@ namespace RajaAgriApp.ViewModels
                 SetAlertPopup("Please enter the PinCode!");
                 return false;
             }
+            else if (PinCode.Length<6)
+            {
+                SetAlertPopup("Please enter the valid PinCode!");
+                return false;
+            }
             else if (string.IsNullOrEmpty(LandMark))
             {
                 SetAlertPopup("Please enter the LandMark!");

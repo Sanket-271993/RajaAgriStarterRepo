@@ -34,5 +34,15 @@
 	<string>RajaAgriApp</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>Privacy - Camera Usage Description</key>
+	<string>Allows  access the device&apos;s camera</string>
+	<key>Privacy - Location Always Usage Description</key>
+	<string>Allows  access the device&apos;s Location</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Allow to access the media</string>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
+	<key>CustomProperty</key>
+	<string></string>
 </dict>
 </plist>

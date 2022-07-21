@@ -16,6 +16,9 @@
         public static readonly string OrderHistory = "GetOrderHistory";
         public static readonly string UpdateFarmerImage = "UpdateFarmerImage";
         public static readonly string Profile = "GetFarmer";
+        public static readonly string FAQ = "GetFAQ";
+        public static readonly string FAQCategory = "GetFAQCategory";
         
+
     }
 }

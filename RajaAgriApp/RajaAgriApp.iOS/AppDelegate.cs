@@ -4,6 +4,7 @@ using System.Linq;
 using FFImageLoading.Forms.Platform;
 using Foundation;
 using UIKit;
+using Xamarin.Essentials;
 
 namespace RajaAgriApp.iOS
 {
@@ -26,6 +27,7 @@ namespace RajaAgriApp.iOS
             global::Xamarin.Forms.Forms.Init();
             CachedImageRenderer.Init();
             XF.Material.iOS.Material.Init();
+            VersionTracking.Track();
             //  CachedImageRenderer.InitImageSourceHandler();
             LoadApplication(new App());
             app.StatusBarStyle = UIStatusBarStyle.LightContent;

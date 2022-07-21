@@ -19,6 +19,8 @@ namespace RajaAgriApp.Common
         public static readonly string OrderHistory = URLEnvironment.Connection + ServiceName.OrderHistory;
         public static readonly string Profile = URLEnvironment.Connection + ServiceName.Profile;
         public static readonly string UpdateFarmerImage = URLEnvironment.Connection + ServiceName.UpdateFarmerImage;
-
+        public static readonly string FAQ = URLEnvironment.Connection + ServiceName.FAQ;
+        public static readonly string FAQCategory = URLEnvironment.Connection + ServiceName.FAQCategory;
+        
     }
 }

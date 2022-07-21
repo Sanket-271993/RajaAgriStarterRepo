@@ -4,6 +4,7 @@ using RajaAgriApp.Pages;
 using RajaAgriApp.Resources;
 using System.Globalization;
 using System.Threading;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace RajaAgriApp
@@ -17,9 +18,9 @@ namespace RajaAgriApp
             XF.Material.Forms.Material.Init(this);
             DependencyService.Get<IStatusBarColor>().SetColoredStatusBar("#00feb9");
             ProjectSetup.Instance.AppSetup();
-           // SetUpLang();
-
-           MainPage = new AppShell();
+            // SetUpLang();
+            VersionTracking.Track();
+            MainPage = new AppShell();
           // MainPage = new ReviewPage();
         }
 
