@@ -70,8 +70,13 @@ namespace RajaAgriApp.Common
             builder.RegisterType<ProfileService>().As<IProfileService>();
             builder.RegisterType<ProfileImageUpdateService>().As<IProfileImageUpdateService>();
             builder.RegisterType<ProfileController>().As<IProfileController>();
+
+            builder.RegisterType<FAQController>().As<IFAQController>();
+            builder.RegisterType<FAQService>().As<IFAQService>();
+            builder.RegisterType<FAQCategoryService>().As<IFAQCategoryService>();
+
             // builder.RegisterType<CompanyDbRepo>().AsSelf();
-            
+
 
 
             _container = builder.Build();

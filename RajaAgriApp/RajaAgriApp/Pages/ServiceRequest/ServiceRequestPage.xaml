@@ -7,9 +7,10 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="ExistingRequestTemplete">
-                <Grid RowDefinitions="100"
+                <Grid 
                       Margin="0,10"
                       RowSpacing="0"
+                      
                       x:DataType="models:ServiceRequestModel"
                       ColumnDefinitions="100,*">
                     <Image Source="ic_product_wid_pro" 
@@ -23,6 +24,8 @@
                               Style="{StaticResource MediumRoyalBlueBoldLabelStyle}"/>
                         <Label
                               HorizontalOptions="Start"
+                              MaxLines="2"
+                              LineBreakMode="TailTruncation"
                               Style="{StaticResource MediumGrayRomanLabelStyle}">
                             <Label.FormattedText>
                                 <FormattedString>

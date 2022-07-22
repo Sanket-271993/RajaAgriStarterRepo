@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Page:BaseView  xmlns:Page="clr-namespace:RajaAgriApp.Pages" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:modles="clr-namespace:RajaAgriApp.Models" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" x:DataType="viewmodels:FAQCategoryViewModel"
+             x:Class="RajaAgriApp.Pages.FAQCategoryPage"
+             x:Name="categoryPage"
+             
+             BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="FAQCategoryTemplate">
+                <StackLayout 
+                    Orientation="Vertical"
+                     x:DataType="modles:Faqcategory"
+                     HorizontalOptions="FillAndExpand" 
+                     VerticalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="FillAndExpand"
+                       Orientation="Horizontal"
+                       Padding="10">
+                        
+                            
+                                <Image Source="ic_faq"
+                               Aspect="AspectFit"
+                               Margin="5"
+                               WidthRequest="50" 
+                               HeightRequest="50"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                            
+                            <Label Text="{Binding FAQCategoryName}" 
+                               Margin="20,0,0,0"
+                               HorizontalOptions="StartAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               Style="{StaticResource ExtraLargeRoyalBlueRomanLabelStyle}"/>
+                            <Path Data="M17.77,3.77l-1.77,-1.77l-10,10l10,10l1.77,-1.77l-8.23,-8.23z"
+                                  Aspect="Uniform"
+                                  HeightRequest="20"
+                                  WidthRequest="15"
+                                  Margin="0,0,15,0"
+                                  Rotation="180"
+                                  VerticalOptions="CenterAndExpand"
+                                  Fill="{StaticResource RoyalBlue}"
+                                  HorizontalOptions="EndAndExpand" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding BindingContext.OnItemClick,
+                                    Source={x:Reference categoryPage} }" CommandParameter="{Binding .}"/>
+                            </StackLayout.GestureRecognizers>
+                        
+                    </StackLayout>
+                    <BoxView HorizontalOptions="FillAndExpand" 
+                             HeightRequest="1" 
+                             BackgroundColor="{StaticResource LightGrayLineColor}"/>
+                </StackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="20,10,20,10" >
+            <CollectionView ItemsSource="{Binding FAQCategories}"
+                            ItemTemplate="{StaticResource FAQCategoryTemplate}">
+
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</Page:BaseView>

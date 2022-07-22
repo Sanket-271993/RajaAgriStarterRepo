@@ -249,6 +249,12 @@
   <data name="TitleDealers" xml:space="preserve">
     <value>Dealers</value>
   </data>
+  <data name="TitleFAQCategories" xml:space="preserve">
+    <value>FAQ Categories</value>
+  </data>
+  <data name="TitleFAQQuestionAndAnswer" xml:space="preserve">
+    <value> FAQ Question &amp; Answer</value>
+  </data>
   <data name="TitleHome" xml:space="preserve">
     <value>Home</value>
   </data>

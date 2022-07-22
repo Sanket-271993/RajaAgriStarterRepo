@@ -99,9 +99,9 @@ namespace RajaAgriApp.ViewModels
             await ShellRoutingService.Instance.NavigateTo($"{nameof(ServiceRequestPage)}");
         }
 
-        private void OnFAQClick(object obj)
+        private async void OnFAQClick(object obj)
         {
-
+            await ShellRoutingService.Instance.NavigateTo($"{nameof(FAQCategoryPage)}");
         }
 
         private async void OnOrderHistoryClick(object obj)

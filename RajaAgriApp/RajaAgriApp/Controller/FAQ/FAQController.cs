@@ -21,7 +21,7 @@ namespace RajaAgriApp.Controller
 
         public Task<FAQResponseModel> GetFAQ(int FAQCategoryId)
         {
-           var response=_fAQService.GetFAQ(FAQCategoryId);
+            var response=_fAQService.GetFAQ(FAQCategoryId);
             return response;
         }
 

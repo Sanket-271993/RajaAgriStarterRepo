@@ -21,7 +21,7 @@ namespace RajaAgriApp
             // SetUpLang();
             VersionTracking.Track();
             MainPage = new AppShell();
-          // MainPage = new ReviewPage();
+           //MainPage = new FAQPage();
         }
 
 

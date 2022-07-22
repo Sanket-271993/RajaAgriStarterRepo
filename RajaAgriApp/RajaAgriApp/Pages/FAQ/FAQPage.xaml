@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Page:BaseView  xmlns:Page="clr-namespace:RajaAgriApp.Pages" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" xmlns:models="clr-namespace:RajaAgriApp.Models" x:DataType="viewmodels:FAQViewModel"
+             x:Class="RajaAgriApp.Pages.FAQPage"
+             
+             BackgroundColor="{StaticResource White}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="FAQTemplate">
+                <StackLayout Margin="10" x:DataType="models:FAQ">
+                    <Frame Padding="10"
+                           BackgroundColor="{StaticResource ExtraTransprentGreen}"
+                           HasShadow="False"
+                           CornerRadius="10">
+                        <StackLayout Spacing="10">
+                            <Label
+                              HorizontalOptions="StartAndExpand"
+                              Text="{Binding Question}"
+                              Style="{StaticResource MediumSkyBlueBoldLabelStyle}"/>
+
+                            <Label
+                              HorizontalOptions="StartAndExpand"
+                              Text="{Binding Answer}"
+                              Style="{StaticResource MediumRoyalBlueRomanLabelStyle}"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="15">
+            <CollectionView ItemsSource="{Binding FAQs}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            ItemTemplate="{StaticResource FAQTemplate}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</Page:BaseView>

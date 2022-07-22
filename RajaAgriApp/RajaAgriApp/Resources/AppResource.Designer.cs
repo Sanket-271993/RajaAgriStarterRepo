@@ -457,6 +457,24 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FAQ Categories.
+        /// </summary>
+        public static string TitleFAQCategories {
+            get {
+                return ResourceManager.GetString("TitleFAQCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  FAQ Question &amp; Answer.
+        /// </summary>
+        public static string TitleFAQQuestionAndAnswer {
+            get {
+                return ResourceManager.GetString("TitleFAQQuestionAndAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string TitleHome {
