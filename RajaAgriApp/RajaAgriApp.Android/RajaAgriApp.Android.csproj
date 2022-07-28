@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="CustomRenderer\TransprentEntryDroid.cs" />
     <Compile Include="DependencyService\CloseApplication.cs" />
+    <Compile Include="DependencyService\MediaService.cs" />
     <Compile Include="DependencyService\StatusBarImplement.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

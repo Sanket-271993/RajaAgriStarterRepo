@@ -144,6 +144,8 @@ namespace RajaAgriApp.ViewModels
 
         public async void SetSnackBarMessage(string Message)
         {
+
+           
             await MaterialDialog.Instance.SnackbarAsync(message: Message,
                                            msDuration: MaterialSnackbar.DurationLong);
         }

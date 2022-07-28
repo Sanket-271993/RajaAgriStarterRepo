@@ -102,7 +102,7 @@
                     <Image Source="ic_checklist"
                            HeightRequest="25"
                            WidthRequest="25"/>
-                    <Label Text="{x:Static resources:AppResource.LabelOrderHistory}" 
+                    <Label Text="{x:Static resources:AppResource.TitlePurchaseHistory}" 
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
                            Style="{StaticResource LargeBlackBoldLabelStyle}" />

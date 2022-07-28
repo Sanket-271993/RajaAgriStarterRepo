@@ -46,7 +46,7 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <StackLayout Orientation="Horizontal">
+                       
                             <Label
                               HorizontalOptions="Start"
                               Style="{StaticResource MediumGrayRomanLabelStyle}">
@@ -60,11 +60,11 @@
                             </Label>
                             <Label
                                 Text="{Binding RequestDate}"
-                              HorizontalOptions="EndAndExpand"
+                              HorizontalOptions="Start"
                               Style="{StaticResource MediumGrayRomanLabelStyle}"/>
 
 
-                        </StackLayout>
+                       
                         <Label Text="{Binding Status} " 
                               HorizontalOptions="Start"
                               Style="{StaticResource MediamOrangeBoldLabelStyle}"/>

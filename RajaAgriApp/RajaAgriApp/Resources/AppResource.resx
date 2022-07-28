@@ -270,6 +270,9 @@
   <data name="TitleProductRegistration" xml:space="preserve">
     <value>Product Registration</value>
   </data>
+  <data name="TitlePurchaseHistory" xml:space="preserve">
+    <value>Purchase History</value>
+  </data>
   <data name="TitleRegistrationPage" xml:space="preserve">
     <value>Registration Page</value>
   </data>

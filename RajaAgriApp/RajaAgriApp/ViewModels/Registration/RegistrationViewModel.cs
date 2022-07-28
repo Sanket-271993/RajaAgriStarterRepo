@@ -144,7 +144,12 @@ namespace RajaAgriApp.ViewModels
                     if (response != null && response.IsRegistered)
                     {
                         SaveFarmerRegister(true);
-                        SetOTPSuccessFullPopup();
+                        // SetOTPSuccessFullPopup();
+
+                        SetRegisterSnackBarMessage("Farmer register has been Succesfully! ");
+
+                        await Task.Delay(3000);
+                        await ShellRoutingService.Instance.NavigateTo($"{nameof(HomePage)}");
                     }
                     else
                     {
@@ -162,8 +167,24 @@ namespace RajaAgriApp.ViewModels
             }
         }
 
+        public async void SetRegisterSnackBarMessage(string Message)
+        {
 
-        private void SaveFarmerRegister(bool isRegistered)
+            MaterialSnackbarConfiguration material = new MaterialSnackbarConfiguration()
+            {
+                Margin = new Thickness(15, 0, 15, 200),
+                BackgroundColor = Color.White,
+                TintColor = Color.Black,
+                 MessageTextColor=Color.Black
+
+                
+            };
+        await MaterialDialog.Instance.SnackbarAsync(message: Message,
+                                       msDuration: MaterialSnackbar.DurationLong,material);
+    }
+
+
+    private void SaveFarmerRegister(bool isRegistered)
         {
            
            StorageServiceProvider.Instance.Write(AppConstant.IsRegistered, isRegistered.ToString(), false);

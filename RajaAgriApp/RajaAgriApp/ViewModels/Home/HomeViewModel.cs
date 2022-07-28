@@ -81,18 +81,7 @@ namespace RajaAgriApp.ViewModels
             ShellRoutingService.Instance.NavigateTo(nameof(SearchPage));
         }
 
-        //private void GetProductData()
-        //{
-        //    List<ProductResponseModel> _products = new List<ProductResponseModel>();
-        //    _products.Add(new ProductResponseModel() { ProductID = 1, ProductName = "AS ADOL Starter", ImageName = "ic_product_wid_pro" });
-        //    _products.Add(new ProductResponseModel() { ProductID = 2, ProductName = "DOL controller", ImageName = "ic_product_wide" });
-        //    _products.Add(new ProductResponseModel() { ProductID = 3, ProductName = "FASD1 Starter", ImageName = "ic_product_wid_pro" });
-        //    _products.Add(new ProductResponseModel() { ProductID = 4, ProductName = "RAJA+ DOL", ImageName = "ic_product_port" });
-        //    _products.Add(new ProductResponseModel() { ProductID = 5, ProductName = "FASD2 Starter", ImageName = "ic_product_port" });
-        //    _products.Add(new ProductResponseModel() { ProductID = 6, ProductName = "FASD3 Starter", ImageName = "ic_product_port" });
-        //    _products.Add(new ProductResponseModel() { ProductID = 7, ProductName = "FASD2 Starter", ImageName = "ic_product_port" });
-        //    Products = new ObservableCollection<ProductResponseModel>(_products);
-        //}
+        
 
 
         public async void SetHomeServiceCall()

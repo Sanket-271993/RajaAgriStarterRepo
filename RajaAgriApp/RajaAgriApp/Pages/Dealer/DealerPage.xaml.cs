@@ -23,9 +23,13 @@ namespace RajaAgriApp.Pages
 
         protected override void OnAppearing()
         {
+            BaseViewModel.IsBack = true;
             dealerViewModel.GetDealerServiceCall();
             base.OnAppearing();
         }
+
+
+        
     }
 
 

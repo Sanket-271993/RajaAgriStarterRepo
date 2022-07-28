@@ -1,4 +1,5 @@
-﻿using RajaAgriApp.Common;
+﻿using RajaAgriApp.AppDependencyService;
+using RajaAgriApp.Common;
 using RajaAgriApp.Controller;
 using RajaAgriApp.Models;
 using RajaAgriApp.Resources;
@@ -7,8 +8,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace RajaAgriApp.ViewModels
 {
@@ -33,7 +37,7 @@ namespace RajaAgriApp.ViewModels
 
         private void SetTitle()
         {
-            Title = AppResource.TitleOrderHistory;
+            Title = AppResource.TitlePurchaseHistory;
             IsMenuVisable = false;
             IsTranslateVisable = true;
         }
@@ -48,10 +52,11 @@ namespace RajaAgriApp.ViewModels
             if(!string.IsNullOrEmpty(historyOrder.InvoiceImage))
             {
                 ConverBase64ToImage(historyOrder.InvoiceImage);
+                SetSnackBarMessage("Download Successfully!");
             }
             else
             {
-                SetAlertPopup("Invoice image not available!");
+                SetAlertPopup("Invoice not available!");
             }
         }
 
@@ -93,20 +98,50 @@ namespace RajaAgriApp.ViewModels
         }
 
        
-        public void ConverBase64ToImage(string base64BinaryStr)
+        public async void ConverBase64ToImage(string base64BinaryStr)
         {
             try
             {
-                
-                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonPictures);
-                string localFilename = "Product_Invoice.jpg";
-                string localPath = Path.Combine(documentsPath, localFilename);
-                File.WriteAllText(localPath, base64BinaryStr);
+                byte[] imageByte = Convert.FromBase64String(base64BinaryStr);
+
+                //  string directory = Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, Android.OS.Environment.DirectoryDownloads);
+
+             // await  DownloadPdfFileAsync(imageByte, "Product_Invoice.jpg");
+                DependencyService.Get<IMediaService>().SaveImageFromByte(imageByte, "Product_Invoice.jpg");
+                //string documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonPictures));
+                //string localFilename = "Product_Invoice.jpg";
+                //string localPath = Path.Combine(documentsPath, localFilename);
+               // File.WriteAllBytes(localPath, imageByte);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
+        }
+
+
+        private async Task<string> DownloadPdfFileAsync(byte[] imageByte, string fileName)
+        {
+            var filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
+
+            if (File.Exists(filePath))
+                return filePath;
+
+            //var httpClient = new HttpClient();
+           // var pdfBytes = await httpClient.GetByteArrayAsync("ENTER YOUR URL TO THE PDF FILE HERE");
+
+            try
+            {
+                File.WriteAllBytes(filePath, imageByte);
+
+                return filePath;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
+            }
+
+            return null;
         }
 
     }

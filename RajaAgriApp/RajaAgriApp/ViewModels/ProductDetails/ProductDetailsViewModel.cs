@@ -177,7 +177,11 @@ namespace RajaAgriApp.ViewModels
             await PopupNavigation.Instance.PushAsync(dropDown, false);
         }
 
-        
+        public async void Dismiss()
+        {
+            await PopupNavigation.Instance.PopAsync();
+        }
+
 
         private void DropDown_ItemSelectionClick(object sender, DropDownEventArg e)
         {

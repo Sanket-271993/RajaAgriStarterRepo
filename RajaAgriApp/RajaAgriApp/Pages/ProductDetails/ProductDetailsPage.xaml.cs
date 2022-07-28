@@ -13,10 +13,19 @@ namespace RajaAgriApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductDetailsPage : ContentPage
     {
+        ProductDetailsViewModel productDetailsViewModel;
         public ProductDetailsPage()
         {
             InitializeComponent();
-            this.BindingContext=new ProductDetailsViewModel();
+            productDetailsViewModel = new ProductDetailsViewModel();
+            this.BindingContext= productDetailsViewModel;
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            productDetailsViewModel.IsDropDownOpen = false;
+            productDetailsViewModel.Dismiss();
+            return base.OnBackButtonPressed();
         }
     }
 }

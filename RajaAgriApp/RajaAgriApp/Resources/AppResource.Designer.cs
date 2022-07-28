@@ -520,6 +520,15 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Purchase History.
+        /// </summary>
+        public static string TitlePurchaseHistory {
+            get {
+                return ResourceManager.GetString("TitlePurchaseHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Registration Page.
         /// </summary>
         public static string TitleRegistrationPage {
