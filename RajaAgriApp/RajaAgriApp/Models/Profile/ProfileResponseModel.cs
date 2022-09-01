@@ -31,12 +31,13 @@ namespace RajaAgriApp.Models
             get { return _image; }
             set
             {
-                if (_userImage == null)
+                SetProperty(ref _image, value);
+                if (_userImage == null && _image != null)
                 {
                     _userImage = Xamarin.Forms.ImageSource.FromStream(
                         () => new MemoryStream(Convert.FromBase64String(Image)));
                 }
-                SetProperty(ref _image, value);
+               
 
             }
         }

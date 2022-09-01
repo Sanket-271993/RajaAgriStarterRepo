@@ -163,7 +163,11 @@ namespace RajaAgriApp.ViewModels
             UserName = _farmerDetails.FarmerName;
             PhoneNumber = _farmerDetails.PhoneNumber;
             Address = _farmerDetails.Location;
-            UserImage = _farmerDetails.UserImage;
+            if(_farmerDetails.Image!=null)
+            {
+                UserImage = _farmerDetails.UserImage;
+            }
+          
         }
 
         public async void SetProfileUpdateServiceCall(string ProfileImageBase64)

@@ -337,4 +337,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_blue_marker.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_new_splash_logo.png" />
+  </ItemGroup>
 </Project>

@@ -129,7 +129,7 @@
                                  WidthRequest="200"
                                  BackgroundColor="{StaticResource TransprentGreen}">
                                     <StackLayout
-                                    Padding="10,20,10,20"
+                                    Padding="10,20,10,10"
                                     Orientation="Horizontal">
                                         <Label Text="{x:Static resource:AppResource.LabelDownload}" 
                                            Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"

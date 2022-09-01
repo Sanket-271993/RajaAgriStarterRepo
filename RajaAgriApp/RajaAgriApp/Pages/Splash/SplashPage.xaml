@@ -9,10 +9,14 @@
             <StackLayout Padding="12,25,12,25"
                          HorizontalOptions="StartAndExpand"
                          BackgroundColor="{StaticResource SmokeyWhite}">
-                <Label Text="SIEMENS" 
+                <!--<Label Text="SIEMENS" 
                        TextTransform="Uppercase"
                        Style="{StaticResource ExtraLargePeacockGreenBoldLabelStyle}"
-                       FontSize="38"/>
+                       FontSize="38"/>-->
+                <Image Source="ic_new_splash_logo" 
+                   WidthRequest="150"
+                   VerticalOptions="StartAndExpand" 
+                   HorizontalOptions="StartAndExpand"/>
             </StackLayout>
 
             <Image Source="ic_splash_logo" 
