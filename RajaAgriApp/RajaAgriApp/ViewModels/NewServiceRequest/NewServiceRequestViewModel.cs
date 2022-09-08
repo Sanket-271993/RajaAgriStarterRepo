@@ -16,7 +16,7 @@ using Xamarin.Forms;
 
 namespace RajaAgriApp.ViewModels
 {
-    public class NewServiceRequestViewModel:BaseViewModel
+    public class NewServiceRequestViewModel : BaseViewModel
     {
 
         private INewServicRequestController _newServicRequestController;
@@ -45,6 +45,20 @@ namespace RajaAgriApp.ViewModels
         {
             get { return _isProblemTypeDDOpen; }
             set { SetProperty(ref _isProblemTypeDDOpen, value); }
+        }
+
+        private bool _isOtherProblemTypeVisable=false;
+        public bool IsOtherProblemTypeVisable
+        {
+            get { return _isOtherProblemTypeVisable; }
+            set { SetProperty(ref _isOtherProblemTypeVisable, value); }
+        }
+
+        private string _otherProblemType;
+        public string OtherProblemType
+        {
+            get { return _otherProblemType; }
+            set { SetProperty(ref _otherProblemType, value); }
         }
 
         private string _productSerialNumber;
@@ -105,6 +119,19 @@ namespace RajaAgriApp.ViewModels
             }
         }
 
+        private string _phoneNumber;
+        public string PhoneNumber
+        {
+            get
+            {
+                return _phoneNumber;
+            }
+            set
+            {
+                SetProperty(ref _phoneNumber, value);
+            }
+        }
+
         public ICommand OnProductNameDropDownCommand { get; set; }
         public ICommand OnProblemTypeDropDownCommand { get; set; }
         public ICommand FilePickerImageOneCommand { get; set; }
@@ -116,7 +143,7 @@ namespace RajaAgriApp.ViewModels
         {
             InitCommand();
             SetDropDownDefultValue();
-        
+
         }
 
         private void SetDropDownDefultValue()
@@ -124,7 +151,7 @@ namespace RajaAgriApp.ViewModels
             Title = AppResource.TitleNewServiceRequest;
             ProductName = AppResource.LabelSelectTheProduct;
             ProblemType = AppResource.LabelTypeOfProblem;
-            ProductSerialNumber= AppResource.LabelProductSerialNumber;
+            ProductSerialNumber = AppResource.LabelProductSerialNumber;
         }
         private void InitCommand()
         {
@@ -143,7 +170,7 @@ namespace RajaAgriApp.ViewModels
             IsImageThree = true;
             IsImageTwo = false;
             IsImageOne = false;
-                
+
             ImageThree = "ic_camera";
             SetFilePicker();
         }
@@ -164,7 +191,7 @@ namespace RajaAgriApp.ViewModels
             IsImageTwo = false;
             IsImageOne = true;
             SetFilePicker();
-            
+
         }
 
         private void OnProblemTypeDropDownClick(object obj)
@@ -181,14 +208,14 @@ namespace RajaAgriApp.ViewModels
 
         private async void SetDropDown(List<DropDownModel> dataSource, DropDownType dropdowntype)
         {
-            var dropDown = new DropDownPage(dataSource,dropdowntype);
+            var dropDown = new DropDownPage(dataSource, dropdowntype);
             dropDown.ItemSelectionClick += DropDown_ItemSelectionClick;
             await PopupNavigation.Instance.PushAsync(dropDown, false);
         }
-      
-        
-       
-     
+
+
+
+
 
         private void DropDown_ItemSelectionClick(object sender, EventArgs e)
         {
@@ -206,14 +233,20 @@ namespace RajaAgriApp.ViewModels
                     case DropDownType.TypeProblem:
                         ProblemType = dropEventArgs.SelectedData.ItemName;
                         _ProblemTypeID = dropEventArgs.SelectedData.ItemID;
+                        IsOtherProblemTypeVisable = false;
+                        if (_ProblemTypeID==10)
+                        {
+                            IsOtherProblemTypeVisable = true;
+                        }
+                        //Set visable other
                         IsProblemTypeDDOpen = false;
                         break;
-                 
+
                 }
             }
         }
 
-        private  void OnSubmitClick(object obj)
+        private void OnSubmitClick(object obj)
         {
             NewRequestServiceCall();
         }
@@ -259,7 +292,8 @@ namespace RajaAgriApp.ViewModels
             request.Image1 = ImageOneBase64;
             request.Image2 = ImageTwoBase64;
             request.Image3 = ImageThreeBase64;
-            
+            request.CustomerPhoneNumber = PhoneNumber;
+            request.Others = OtherProblemType;
             return request;
         }
 
@@ -275,7 +309,22 @@ namespace RajaAgriApp.ViewModels
                 SetAlertPopup("Please Select Type of problem");
                 return false;
             }
-           
+            else if (IsOtherProblemTypeVisable && string.IsNullOrEmpty(OtherProblemType))
+            {
+                SetAlertPopup("Please Enter Other problem");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(PhoneNumber))
+            {
+                SetAlertPopup("Please Enter PhoneNumber");
+                return false;
+            }
+            else if (!string.IsNullOrEmpty(PhoneNumber)&& PhoneNumber.Length<10)
+            {
+                SetAlertPopup("Please Enter valid PhoneNumber");
+                return false;
+            }
+
 
             return true;
         }
@@ -284,7 +333,7 @@ namespace RajaAgriApp.ViewModels
         {
             await PickAndShow();
         }
-       
+
 
         private async Task<FileResult> PickAndShow()
         {
@@ -297,32 +346,32 @@ namespace RajaAgriApp.ViewModels
                 {
                     string fileName = $"File Name: {result.FileName}";
                     if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
-                        result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase)||
+                        result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase) ||
                              result.FileName.EndsWith("pdf", StringComparison.OrdinalIgnoreCase))
                     {
                         var stream = await result.OpenReadAsync();
                         var bytes = new byte[stream.Length];
                         await stream.ReadAsync(bytes, 0, (int)stream.Length);
 
-                        
+
                         if (IsImageOne)
                         {
-                           
-                            ImageOneBase64= System.Convert.ToBase64String(bytes);
+
+                            ImageOneBase64 = System.Convert.ToBase64String(bytes);
                             ImageOne = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(ImageOneBase64)));
                         }
-                        else if(IsImageTwo)
+                        else if (IsImageTwo)
                         {
                             ImageTwoBase64 = System.Convert.ToBase64String(bytes);
                             ImageTwo = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(ImageTwoBase64)));
                         }
-                        else if(IsImageThree)
+                        else if (IsImageThree)
                         {
                             ImageThreeBase64 = System.Convert.ToBase64String(bytes);
                             ImageThree = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(ImageThreeBase64)));
                         }
-                        
-                       
+
+
 
                     }
                 }
@@ -363,7 +412,7 @@ namespace RajaAgriApp.ViewModels
 
                     AppIndicater.Instance.Show();
                     var response = await _newServicRequestController.GetHome();
-                    
+
                     if (response != null && response.Products?.Count > 0)
                     {
 
@@ -378,7 +427,7 @@ namespace RajaAgriApp.ViewModels
             }
             finally
             {
-              //  AppIndicater.Instance.Dismiss();
+                //  AppIndicater.Instance.Dismiss();
             }
         }
 
@@ -387,11 +436,16 @@ namespace RajaAgriApp.ViewModels
             _products = new List<DropDownModel>();
             foreach (var product in products)
             {
-                _products.Add(new DropDownModel() { ItemID = product.ProductID,SerialNumber= product.SerialNumber,
-                    ItemName = product.ProductName, IsCheckBoxItem = false });
+                _products.Add(new DropDownModel()
+                {
+                    ItemID = product.ProductID,
+                    SerialNumber = product.SerialNumber,
+                    ItemName = product.ProductName,
+                    IsCheckBoxItem = false
+                });
             }
-            
-            
+
+
         }
 
         public async void SetProblemTypeServiceCall()
@@ -401,7 +455,7 @@ namespace RajaAgriApp.ViewModels
                 if (IsConnected)
                 {
 
-                    
+
                     var response = await _newServicRequestController.GetTypeOfProblem();
                     AppIndicater.Instance.Dismiss();
                     if (response != null && response.TypeOfProblems?.Count > 0)
@@ -418,7 +472,7 @@ namespace RajaAgriApp.ViewModels
             }
             finally
             {
-               AppIndicater.Instance.Dismiss();
+                AppIndicater.Instance.Dismiss();
             }
         }
         private void SetProductProblem(List<TypeOfProblemModel> typeOfProblems)
@@ -428,9 +482,9 @@ namespace RajaAgriApp.ViewModels
             {
                 _ProductProblems.Add(new DropDownModel() { ItemID = problem.TypeOfProblemID, ItemName = problem.TypeOfProblem, IsCheckBoxItem = true });
             }
-            
+
         }
     }
 
-   
+
 }

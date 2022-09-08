@@ -123,11 +123,11 @@ namespace RajaAgriApp.ViewModels
                 SetAlertPopup("Please enter the valid PinCode!");
                 return false;
             }
-            else if (string.IsNullOrEmpty(LandMark))
-            {
-                SetAlertPopup("Please enter the LandMark!");
-                return false;
-            }
+            //else if (string.IsNullOrEmpty(LandMark))
+            //{
+            //    SetAlertPopup("Please enter the LandMark!");
+            //    return false;
+            //}
             return true;
         }
 

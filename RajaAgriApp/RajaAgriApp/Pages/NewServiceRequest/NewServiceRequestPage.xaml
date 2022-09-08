@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Page:BaseView  xmlns:Page="clr-namespace:RajaAgriApp.Pages" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:resource="clr-namespace:RajaAgriApp.Resources" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" x:DataType="viewmodels:NewServiceRequestViewModel"
+             xmlns:resource="clr-namespace:RajaAgriApp.Resources" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" xmlns:customcontrol="clr-namespace:RajaAgriApp.CustomControl" xmlns:behavior="clr-namespace:RajaAgriApp.Behavior" x:DataType="viewmodels:NewServiceRequestViewModel"
              BackgroundColor="White"
              x:Class="RajaAgriApp.Pages.NewServiceRequestPage">
     <ContentPage.Content>
@@ -97,8 +97,75 @@
                             <TapGestureRecognizer Command="{Binding OnProblemTypeDropDownCommand}" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
-                    <!--End-->
 
+                    <!--Start Other -->
+                    <StackLayout Spacing="0" 
+                        IsVisible="{Binding IsOtherProblemTypeVisable}"
+                                 
+                         BackgroundColor="{StaticResource ExtraTransprentGreen}">
+                        <Label Text="{x:Static resource:AppResource.LabelOtherProblemType}"
+                                        Margin="10,10,0,0"
+                                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                                           HorizontalOptions="Start" />
+                        <customcontrol:TransprantEntry   Keyboard="Text"
+                         
+                         
+                           HeightRequest="45"
+                           Text="{Binding OtherProblemType,Mode=TwoWay}"
+                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                           Margin="10,0,0,-2"
+                           HorizontalOptions="FillAndExpand">
+                           
+                        </customcontrol:TransprantEntry>
+
+                        <Frame Padding="0"
+                           Margin="0,0,0,0"
+                           BackgroundColor="{StaticResource LightPurpal}"
+                           HasShadow="False"
+                           CornerRadius="0"
+                           HeightRequest="1"
+                           HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                    <!--End Phone No-->
+                    <!--End-->
+                   <!--Start Phone No-->
+                    <StackLayout Spacing="0" 
+                         
+                       
+                                 
+                         BackgroundColor="{StaticResource ExtraTransprentGreen}">
+                        <Label Text="{x:Static resource:AppResource.LabelPhoneNumber}"
+                                        Margin="10,10,0,0"
+                                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                                           HorizontalOptions="Start" />
+                        <customcontrol:TransprantEntry   Keyboard="Telephone"
+                          
+                           MaxLength="10"
+                           HeightRequest="45"
+                           Text="{Binding PhoneNumber,Mode=TwoWay}"
+                           Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
+                           Margin="10,0,0,-2"
+                           HorizontalOptions="FillAndExpand">
+                            <Entry.Behaviors>
+                                <behavior:EntryLengthValidator MaxLength="10" />
+                            </Entry.Behaviors>
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry" Binding="{Binding PhoneNumber,Mode=TwoWay}"
+                                             Value="-1">
+                                    <Setter Property="Text" Value=""/>
+                                </DataTrigger>
+                            </Entry.Triggers>
+                        </customcontrol:TransprantEntry>
+
+                        <Frame Padding="0"
+                           Margin="0,0,0,0"
+                           BackgroundColor="{StaticResource LightPurpal}"
+                           HasShadow="False"
+                           CornerRadius="0"
+                           HeightRequest="1"
+                           HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                    <!--End Phone No-->
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Label Text="{x:Static resource:AppResource.LabelImages}" 
                                            Style="{StaticResource LargeRoyalBlueRomanLabelStyle}"
@@ -110,9 +177,7 @@
                             <Image Source="{Binding ImageOne}"
                                    Grid.Column="0"
                                    Grid.Row="0"
-                                  
                                    Aspect="AspectFit"
-                                   
                                    HeightRequest="150">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding FilePickerImageOneCommand}"/>

@@ -73,7 +73,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <Frame  
+        <ScrollView>
+            <Frame  
        
         Margin="{Binding BindingContext.Margin,Converter={StaticResource MarginConverter}}"
         HasShadow="False"
@@ -82,17 +83,20 @@
         VerticalOptions="StartAndExpand"
         HorizontalOptions="FillAndExpand">
 
-            
+
                 <StackLayout  HorizontalOptions="FillAndExpand"
                                              VerticalOptions="Start"
                                              IsVisible="true"
                                              Spacing="0"
+                                             
                                              BackgroundColor="{StaticResource TransprentGreen}"
                                              BindableLayout.ItemsSource="{Binding DropDownDataList}"
                                              BindableLayout.ItemTemplateSelector="{StaticResource dropDownTempleteSelector}">
-                   
+
                 </StackLayout>
-            
-        </Frame>
+
+            </Frame>
+        </ScrollView>
+     
     </ContentPage.Content>
 </page:PopupPage>

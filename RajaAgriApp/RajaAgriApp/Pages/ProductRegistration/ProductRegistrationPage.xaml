@@ -2,7 +2,9 @@
 <Page:BaseView  xmlns:Page="clr-namespace:RajaAgriApp.Pages" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resource="clr-namespace:RajaAgriApp.Resources" 
-             xmlns:models="clr-namespace:RajaAgriApp.Models" xmlns:view="clr-namespace:RajaAgriApp.Views" xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" xmlns:customcontrol="clr-namespace:RajaAgriApp.CustomControl" x:DataType="viewmodels:ProductRegistrationViewModel"
+             xmlns:models="clr-namespace:RajaAgriApp.Models" xmlns:view="clr-namespace:RajaAgriApp.Views" 
+                xmlns:viewmodels="clr-namespace:RajaAgriApp.ViewModels" 
+                xmlns:customcontrol="clr-namespace:RajaAgriApp.CustomControl" x:DataType="viewmodels:ProductRegistrationViewModel"
              x:Name="productRegistrationPage"
              BackgroundColor="White"
              x:Class="RajaAgriApp.Pages.ProductRegistrationPage">
@@ -130,8 +132,7 @@
                     <!--Product Serial number-->
                     <StackLayout Spacing="0" 
                          x:Name="SerialNaumberStackLayout"
-                        
-                                
+                         IsVisible="false"
                          BackgroundColor="{StaticResource ExtraTransprentGreen}">
                        
                         <customcontrol:TransprantEntry  

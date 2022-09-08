@@ -32,5 +32,14 @@ namespace RajaAgriApp.Pages
            // productRegistrationViewModel.GetProductTypeServiceCall();
             base.OnAppearing();
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            productRegistrationViewModel.IsProductTypeDDOpen = false;
+            productRegistrationViewModel.IsProductNameDDOpen = false;
+            productRegistrationViewModel.IsElectricalShopsDDOpen = false;
+            productRegistrationViewModel.Dismiss();
+            return base.OnBackButtonPressed();
+        }
     }
 }

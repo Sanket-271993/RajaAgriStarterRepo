@@ -115,7 +115,7 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to *Electrical shops.
+        ///   Looks up a localized string similar to Electrical shops.
         /// </summary>
         public static string LabelElectricalShops {
             get {
@@ -214,7 +214,7 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to *Landmark:.
+        ///   Looks up a localized string similar to Landmark:.
         /// </summary>
         public static string LabelLandmark {
             get {
@@ -286,11 +286,29 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Other Problem Type.
+        /// </summary>
+        public static string LabelOtherProblemType {
+            get {
+                return ResourceManager.GetString("LabelOtherProblemType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OTP verified.
         /// </summary>
         public static string LabelOTPVerified {
             get {
                 return ResourceManager.GetString("LabelOTPVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PhoneNumber.
+        /// </summary>
+        public static string LabelPhoneNumber {
+            get {
+                return ResourceManager.GetString("LabelPhoneNumber", resourceCulture);
             }
         }
         
@@ -331,7 +349,7 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to *Product Type.
+        ///   Looks up a localized string similar to Product Type.
         /// </summary>
         public static string LabelProductType {
             get {
@@ -547,7 +565,7 @@ namespace RajaAgriApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to RAJA.
+        ///   Looks up a localized string similar to Welcome to RAJA+.
         /// </summary>
         public static string WelcomeToRAJA {
             get {

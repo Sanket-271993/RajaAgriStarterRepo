@@ -12,6 +12,7 @@ namespace RajaAgriApp.Models
         public string SerialNumber { get; set; }
         public string InvoiceImage { get; set; }
         public DateTime InvoiceDate { get; set; }
+       
         
     }
 }

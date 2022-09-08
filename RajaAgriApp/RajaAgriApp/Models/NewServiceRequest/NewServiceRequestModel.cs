@@ -9,10 +9,11 @@ namespace RajaAgriApp.Models
         public int ProductRegistrationId { get; set; }
         public int TypeofProblem { get; set; }
         public int DistributorId { get; set; }
-
+        public string CustomerPhoneNumber { get; set; }
         public string Image1 { get; set; }
         public string Image2 { get; set; }
         public string Image3 { get; set; }
         public string Comments { get; set; }
+        public string Others { get; set; }
     }
 }

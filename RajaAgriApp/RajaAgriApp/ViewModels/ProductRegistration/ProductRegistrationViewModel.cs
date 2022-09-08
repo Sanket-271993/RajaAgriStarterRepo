@@ -271,13 +271,37 @@ namespace RajaAgriApp.ViewModels
             request.DistributorId = _dealerID;
             request.SerialNumber= _serialNumber;
             request.InvoiceDate = InvoiceDate;
+
             request.InvoiceImage = InvoiceImageBase64;
             return request;
         }
 
         private void FilePickerClick(object obj)
         {
+            SetFilePickerOptionPopup();
+        }
+
+
+        private async void SetFilePickerOptionPopup()
+        {
+            var popup = new CameraAndFilePickerPopupPage();
+            popup.CameraClick += Popup_CameraClick;
+            popup.PickerClick += Popup_PickerClick;
+            await PopupNavigation.Instance.PushAsync(popup);
+        }
+
+        private void Popup_PickerClick(object sender, EventArgs e)
+        {
             SetFilePicker();
+        }
+
+        private void Popup_CameraClick(object sender, EventArgs e)
+        {
+            SetCameraPicker();
+        }
+        private async void SetCameraPicker()
+        {
+            await TakePhotoAsync();
         }
 
         private async void SetFilePicker()
@@ -289,6 +313,7 @@ namespace RajaAgriApp.ViewModels
         {
             try
             {
+              
                 var customFileType = new FilePickerFileType
                            (new Dictionary<DevicePlatform, IEnumerable<string>>
                                 {
@@ -301,7 +326,7 @@ namespace RajaAgriApp.ViewModels
                     PickerTitle = "Please select a comic file",
                     FileTypes = customFileType,
                 };
-
+             
                 var result = await FilePicker.PickAsync(options);
                 if (result != null)
                 {
@@ -331,6 +356,53 @@ namespace RajaAgriApp.ViewModels
             return null;
         }
 
+        string PhotoPath;
+        async Task TakePhotoAsync()
+        {
+            try
+            {
+                var photo = await MediaPicker.CapturePhotoAsync();
+                await LoadPhotoAsync(photo);
+                Console.WriteLine($"CapturePhotoAsync COMPLETED: {PhotoPath}");
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Feature is not supported on the device
+            }
+            catch (PermissionException pEx)
+            {
+                // Permissions not granted
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"CapturePhotoAsync THREW: {ex.Message}");
+            }
+        }
+
+        async Task LoadPhotoAsync(FileResult photo)
+        {
+            // canceled
+            if (photo == null)
+            {
+                PhotoPath = null;
+                return;
+            }
+            // save the file into local storage
+            var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+            using (var stream = await photo.OpenReadAsync())
+            using (var newStream = File.OpenWrite(newFile))
+                await stream.CopyToAsync(newStream);
+
+             var streamBase64 = await photo.OpenReadAsync();
+            //var stream = file.GetStream();
+            var bytes = new byte[streamBase64.Length];
+            await streamBase64.ReadAsync(bytes, 0, (int)streamBase64.Length);
+            InvoiceImageBase64 = System.Convert.ToBase64String(bytes);
+            //UserImage = ImageSource.FromStream(() => stream);
+
+            InvoiceImageSource = Xamarin.Forms.ImageSource.FromStream(
+           () => new MemoryStream(Convert.FromBase64String(InvoiceImageBase64)));
+        }
 
 
         private void OnInvoiceDateClick(object obj)
@@ -380,6 +452,11 @@ namespace RajaAgriApp.ViewModels
             var dropDown = new DropDownPage(productNameDropDowns,dropdowntype);
             dropDown.ItemSelectionClick += DropDown_ItemSelectionClick;
             await PopupNavigation.Instance.PushAsync(dropDown, false);
+        }
+
+        public async void Dismiss()
+        {
+            await PopupNavigation.Instance.PopAllAsync();   
         }
 
         private void DropDown_ItemSelectionClick(object sender, EventArgs e)
@@ -454,21 +531,21 @@ namespace RajaAgriApp.ViewModels
                 SetAlertPopup("Please Select Product Name");
                 return false;
             }
-            else if (!string.IsNullOrEmpty(ProductType) && ProductName.Equals(AppResource.LabelProductType))
-            {
-                SetAlertPopup("Please Select Product Type");
-                return false;
-            }
-            else if (!string.IsNullOrEmpty(ElectricalShops) && ProductName.Equals(AppResource.LabelElectricalShops))
-            {
-                SetAlertPopup("Please Select Product Type");
-                return false;
-            }
-            else if (string.IsNullOrEmpty(SerialNumber))
-            {
-                SetAlertPopup("Please enter Serial Number");
-                return false;
-            }
+            //else if (!string.IsNullOrEmpty(ProductType) && ProductName.Equals(AppResource.LabelProductType))
+            //{
+            //    SetAlertPopup("Please Select Product Type");
+            //    return false;
+            //}
+            //else if (!string.IsNullOrEmpty(ElectricalShops) && ProductName.Equals(AppResource.LabelElectricalShops))
+            //{
+            //    SetAlertPopup("Please Select Shop");
+            //    return false;
+            //}
+            //else if (string.IsNullOrEmpty(SerialNumber))
+            //{
+            //    SetAlertPopup("Please enter Serial Number");
+            //    return false;
+            //}
             else if(InvoiceSelectedDate.Equals(DateTime.MinValue))
             {
                 SetAlertPopup("Please select invoice date");

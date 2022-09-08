@@ -41,8 +41,8 @@ namespace RajaAgriApp.Models
         [JsonProperty("ProblemTypeName")]
         public string ProblemTypeName { get; set; }
 
-        
-       
+        public string CustomerPhoneNumber { get; set; }
+
 
         private string _image1;
 

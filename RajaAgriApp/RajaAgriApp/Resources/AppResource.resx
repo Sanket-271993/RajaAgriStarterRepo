@@ -136,7 +136,7 @@
     <value>Edit</value>
   </data>
   <data name="LabelElectricalShops" xml:space="preserve">
-    <value>*Electrical shops</value>
+    <value>Electrical shops</value>
   </data>
   <data name="LabelEnterPinCode" xml:space="preserve">
     <value>*Enter Pin code</value>
@@ -169,7 +169,7 @@
     <value>Kindly enter your mobile number below to get OTP</value>
   </data>
   <data name="LabelLandmark" xml:space="preserve">
-    <value>*Landmark:</value>
+    <value>Landmark:</value>
   </data>
   <data name="LabelLanguage" xml:space="preserve">
     <value>Language</value>
@@ -192,8 +192,14 @@
   <data name="LabelOrderHistory" xml:space="preserve">
     <value>Order History</value>
   </data>
+  <data name="LabelOtherProblemType" xml:space="preserve">
+    <value>Other Problem Type</value>
+  </data>
   <data name="LabelOTPVerified" xml:space="preserve">
     <value>OTP verified</value>
+  </data>
+  <data name="LabelPhoneNumber" xml:space="preserve">
+    <value>PhoneNumber</value>
   </data>
   <data name="LabelProductInvoiceDate" xml:space="preserve">
     <value>*Product Invoice Date</value>
@@ -208,7 +214,7 @@
     <value>Product Serial number</value>
   </data>
   <data name="LabelProductType" xml:space="preserve">
-    <value>*Product Type</value>
+    <value>Product Type</value>
   </data>
   <data name="LabelResendOTP" xml:space="preserve">
     <value>Resend OTP -</value>
@@ -280,6 +286,6 @@
     <value>Service Request</value>
   </data>
   <data name="WelcomeToRAJA" xml:space="preserve">
-    <value>Welcome to RAJA</value>
+    <value>Welcome to RAJA+</value>
   </data>
 </root>

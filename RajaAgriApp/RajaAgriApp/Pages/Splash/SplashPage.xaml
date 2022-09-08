@@ -8,7 +8,7 @@
 
             <StackLayout Padding="12,25,12,25"
                          HorizontalOptions="StartAndExpand"
-                         BackgroundColor="{StaticResource SmokeyWhite}">
+                        >
                 <!--<Label Text="SIEMENS" 
                        TextTransform="Uppercase"
                        Style="{StaticResource ExtraLargePeacockGreenBoldLabelStyle}"

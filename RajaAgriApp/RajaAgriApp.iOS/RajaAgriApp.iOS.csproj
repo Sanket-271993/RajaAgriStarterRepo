@@ -340,4 +340,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_new_splash_logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_file_picker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_camera_picker.png" />
+  </ItemGroup>
 </Project>
